@@ -1,0 +1,8 @@
+{
+  "name": "PostresDeLaAbuela",
+  "app_id": "0c29218a",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
