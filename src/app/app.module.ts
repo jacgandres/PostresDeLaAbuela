@@ -6,25 +6,66 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
+
+//Pipes
+import { ContenidoSeguroPipe } from "../pipes/pipes.module";
+
+//Providers
+import { UsuarioProvider } from '../providers/usuario/usuario';
+import { StorageUsuarioProvider } from '../providers/storage-usuario/storage-usuario';
+
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+import { Facebook } from '@ionic-native/facebook';
+import { IonicStorageModule } from '@ionic/storage';
+
+
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyAYfcqRXUiO3-6AJUUJvozc8Mb2ttukdrY",
+  authDomain: "postresdelaabula.firebaseapp.com",
+  databaseURL: "https://postresdelaabula.firebaseio.com",
+  projectId: "postresdelaabula",
+  storageBucket: "postresdelaabula.appspot.com",
+  messagingSenderId: "266657007622"
+};
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage,
+    ///pipes
+    ContenidoSeguroPipe
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AngularFireAuthModule, AngularFireModule, AngularFireDatabase, AngularFireDatabaseModule,
+    UsuarioProvider,
+    Facebook,
+    StorageUsuarioProvider
+    
+
   ]
 })
 export class AppModule {}

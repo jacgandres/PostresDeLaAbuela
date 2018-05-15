@@ -1,40 +1,87 @@
 {
-  "name": "PostresDeLaAbuela",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
-  "private": true,
-  "scripts": {
-    "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
-  },
-  "dependencies": {
-    "@angular/animations": "5.2.10",
-    "@angular/common": "5.2.10",
-    "@angular/compiler": "5.2.10",
-    "@angular/compiler-cli": "5.2.10",
-    "@angular/core": "5.2.10",
-    "@angular/forms": "5.2.10",
-    "@angular/http": "5.2.10",
-    "@angular/platform-browser": "5.2.10",
-    "@angular/platform-browser-dynamic": "5.2.10",
-    "@ionic-native/core": "4.7.0",
-    "@ionic-native/splash-screen": "4.7.0",
-    "@ionic-native/status-bar": "4.7.0",
-    "@ionic/pro": "1.0.20",
-    "@ionic/storage": "2.1.3",
-    "ionic-angular": "3.9.2",
-    "ionicons": "3.0.0",
-    "rxjs": "5.5.10",
-    "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.26"
-  },
-  "devDependencies": {
-    "@ionic/app-scripts": "3.1.9",
-    "typescript": "~2.6.2"
-  },
-  "description": "An Ionic project"
+    "name": "PostresDeLaAbuela",
+    "version": "0.0.1",
+    "author": "Ionic Framework",
+    "homepage": "http://ionicframework.com/",
+    "private": true,
+    "scripts": {
+        "clean": "ionic-app-scripts clean",
+        "build": "ionic-app-scripts build",
+        "lint": "ionic-app-scripts lint",
+        "ionic:build": "ionic-app-scripts build",
+        "ionic:serve": "ionic-app-scripts serve"
+    },
+    "dependencies": {
+        "@angular/animations": "5.2.9",
+        "@angular/common": "5.2.9",
+        "@angular/compiler": "5.2.9",
+        "@angular/compiler-cli": "5.2.9",
+        "@angular/core": "5.2.9",
+        "@angular/forms": "5.2.9",
+        "@angular/http": "5.2.9",
+        "@angular/platform-browser": "5.2.9",
+        "@angular/platform-browser-dynamic": "5.2.9",
+        "@ionic-native/core": "4.6.0",
+        "@ionic-native/facebook": "^4.7.0",
+        "@ionic-native/google-plus": "^4.7.0",
+        "@ionic-native/splash-screen": "4.6.0",
+        "@ionic-native/status-bar": "4.6.0",
+        "@ionic/storage": "^2.1.3",
+        "angularfire2": "^5.0.0-rc.6.0",
+        "cordova-android": "6.4.0",
+        "cordova-ios": "4.5.4",
+        "cordova-plugin-device": "^2.0.2",
+        "cordova-plugin-facebook4": "^2.1.0",
+        "cordova-plugin-googleplus": "^5.3.0",
+        "cordova-plugin-ionic": "^4.1.7",
+        "cordova-plugin-ionic-keyboard": "^2.0.5",
+        "cordova-plugin-ionic-webview": "^1.2.1",
+        "cordova-plugin-splashscreen": "^5.0.2",
+        "cordova-plugin-statusbar": "^2.4.2",
+        "cordova-plugin-whitelist": "^1.3.3",
+        "cordova-sqlite-storage": "^2.3.1",
+        "firebase": "^4.12.1",
+        "ionic-angular": "3.9.2",
+        "ionicons": "3.0.0",
+        "promise-polyfill": "^7.1.2",
+        "rxjs": "5.5.8",
+        "sw-toolbox": "3.6.0",
+        "zone.js": "0.8.26"
+    },
+    "devDependencies": {
+        "@ionic/app-scripts": "3.1.8",
+        "typescript": "~2.6.2"
+    },
+    "description": "An Ionic project",
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-device": {},
+            "cordova-plugin-splashscreen": {},
+            "cordova-plugin-ionic-webview": {},
+            "cordova-plugin-ionic-keyboard": {},
+            "cordova-plugin-googleplus": {
+                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.159250893155-g4t683r8e8044evqs4cdtva725dv9lp8"
+            },
+            "cordova-plugin-facebook4": {
+                "APP_ID": "1974106809569329",
+                "APP_NAME": "PostresDeLaAbuela",
+                "ANDROID_SDK_VERSION": "4.+"
+            },
+            "cordova-plugin-statusbar": {},
+            "cordova-sqlite-storage": {},
+            "cordova-plugin-ionic": {
+                "APP_ID": "0c29218a",
+                "CHANNEL_NAME": "Production",
+                "UPDATE_METHOD": "background",
+                "WARN_DEBUG": "true",
+                "UPDATE_API": "https://api.ionicjs.com",
+                "MAX_STORE": "2"
+            }
+        },
+        "platforms": [
+            "ios",
+            "android"
+        ]
+    }
 }

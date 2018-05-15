@@ -1,14 +1,40 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-thumbnail item-start>
+                <img src="{{UsuarioAutenticado.imagen}}">
+            </ion-thumbnail>
+            <h2>Bienvenido</h2>
+            <p>{{UsuarioAutenticado.nombre}}</p>
+        </ion-item>
+    </ion-list>
+    <ion-slides pager effect="cube" loop paginationType="progress">
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+        <ion-slide>
+            <ion-list>
+                <ion-item>
+                    <img src="http://www.vanguardia.com/sites/default/files/imagecache/Noticia_600x400/foto_grandes_400x300_noticia/2018/02/05/web_postres_big_ce.jpg">
+                    <h2>Postres con frutos rojos</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat vitae ut eligendi commodi quo eius laudantium cumque natus. Distinctio voluptatibus ea consectetur enim rem dolorem aliquid aut reprehenderit atque quod.</p>
+                </ion-item>
+            </ion-list>
+        </ion-slide>
+
+        <ion-slide>
+            <ion-list>
+                <ion-list-header class="marginTop">
+                    <h1> Postres con frutos rojos</h1>
+                    <button ion-button left>
+                        seleccionar
+                    </button>
+                </ion-list-header>
+                <ion-item>
+                    <img src="http://www.vanguardia.com/sites/default/files/imagecache/Noticia_600x400/foto_grandes_400x300_noticia/2018/02/05/web_postres_big_ce.jpg">
+                </ion-item>
+                <p color="light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat vitae ut eligendi commodi quo eius laudantium cumque natus. Distinctio voluptatibus ea consectetur enim rem dolorem aliquid aut reprehenderit atque quod.</p>
+            </ion-list>
+        </ion-slide>
+
+
+    </ion-slides>
 </ion-content>
