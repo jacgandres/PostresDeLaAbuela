@@ -7,7 +7,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+
+//Pipes
+import { ContenidoSeguroPipe } from "../pipes/pipes.module";
+
+//Providers
 import { UsuarioProvider } from '../providers/usuario/usuario';
+import { StorageUsuarioProvider } from '../providers/storage-usuario/storage-usuario';
 
 
 import { AngularFireModule } from 'angularfire2';
@@ -15,6 +21,8 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { Facebook } from '@ionic-native/facebook';
+import { IonicStorageModule } from '@ionic/storage';
+
 
 
 export const firebaseConfig = {
@@ -30,11 +38,14 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    ///pipes
+    ContenidoSeguroPipe
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule
@@ -51,7 +62,8 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuthModule, AngularFireModule, AngularFireDatabase, AngularFireDatabaseModule,
     UsuarioProvider,
-    Facebook
+    Facebook,
+    StorageUsuarioProvider
     
 
   ]

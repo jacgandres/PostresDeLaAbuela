@@ -8,6 +8,7 @@ import * as firebase from 'firebase/app';
 import { Facebook } from '@ionic-native/facebook';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { HomePage } from '../home/home';
+import { StorageUsuarioProvider } from '../../providers/storage-usuario/storage-usuario';
 
 
 
@@ -22,7 +23,8 @@ export class LoginPage {
     private afAuth: AngularFireAuth,
     private fb: Facebook,
     private platform: Platform,
-    private usuarioProv: UsuarioProvider) {
+    private usuarioProv: UsuarioProvider,
+    private usuarioStorage: StorageUsuarioProvider) {
   }
 
   ionViewDidLoad() {
@@ -55,7 +57,8 @@ export class LoginPage {
                 'facebook'
               );
 
-              console.log(JSON.stringify(this.usuarioProv.usuario));
+              this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario);
+
               this.navCtrl.setRoot(HomePage);
 
 
