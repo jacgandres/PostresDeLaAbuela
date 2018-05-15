@@ -29,7 +29,7 @@ export class MyApp {
         } else {
           this.rootPage = LoginPage;
         }
-      });
+      }); 
 
     });
   }
