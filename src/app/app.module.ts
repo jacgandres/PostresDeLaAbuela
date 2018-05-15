@@ -7,6 +7,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+
+//Pipes
+import { ContenidoSeguroPipe } from "../pipes/pipes.module";
+
+//Providers
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { StorageUsuarioProvider } from '../providers/storage-usuario/storage-usuario';
 
@@ -33,7 +38,9 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    ///pipes
+    ContenidoSeguroPipe
   ],
   imports: [
     BrowserModule,

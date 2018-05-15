@@ -57,7 +57,6 @@ export class LoginPage {
                 'facebook'
               );
 
-              console.log(JSON.stringify(this.usuarioProv.usuario));
               this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario);
 
               this.navCtrl.setRoot(HomePage);

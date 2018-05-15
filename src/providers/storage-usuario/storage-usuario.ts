@@ -31,10 +31,10 @@ export class StorageUsuarioProvider {
       if (this.platform.is('cordova')) {
 
         this.storage.get('credencial').then(val => {
-          console.log("this.storage.get: "+JSON.stringify(val));
+          console.log("this.storage.get: " );
           if (val) {
             this.UsuarioAutenticado = val;
-            console.log(JSON.stringify(val));
+            
             resolve(true);
           } else {
             resolve(false);
