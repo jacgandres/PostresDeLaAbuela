@@ -19,10 +19,10 @@ import { HomePage } from '../home/home';
 export class LoginPage {
 
   constructor(public navCtrl: NavController,
-              private afAuth: AngularFireAuth,
-              private fb: Facebook,
-              private platform: Platform,
-              private usuarioProv:UsuarioProvider) {
+    private afAuth: AngularFireAuth,
+    private fb: Facebook,
+    private platform: Platform,
+    private usuarioProv: UsuarioProvider) {
   }
 
   ionViewDidLoad() {
@@ -36,26 +36,35 @@ export class LoginPage {
   signInWithFacebook() {
 
     if (this.platform.is('cordova')) {
-      this.fb.login(['email', 'public_profile']).then(res => {
-        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-        firebase.auth().signInWithCredential(facebookCredential)
-          .then(user => {
+      console.log("antes de entrar a la primera promesa")
 
-            console.log(user);
+      try {
 
-            this.usuarioProv.cargarUsuario(
-              user.displayName,
-              user.email,
-              user.photoURL,
-              user.uid,
-              'facebook'
-            );
+        this.fb.login(['email', 'public_profile']).then(res => {
+          console.log("entro a la primera promesa")
+          const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+          firebase.auth().signInWithCredential(facebookCredential)
+            .then(user => {
+              console.log("entro a la segunda promesa")
 
-            this.navCtrl.setRoot(HomePage);
+              this.usuarioProv.cargarUsuario(
+                user.displayName,
+                user.email,
+                user.photoURL,
+                user.uid,
+                'facebook'
+              );
+
+              console.log(JSON.stringify(this.usuarioProv.usuario));
+              this.navCtrl.setRoot(HomePage);
 
 
-          }).catch(e => console.log('Error con el login' + JSON.stringify(e)));
-      })
+            }).catch(e => console.log('Error con el login' + JSON.stringify(e)));
+        })
+
+      } catch (error) {
+        console.log(JSON.stringify(error));
+      }
     } else {
       // escritorio
       this.afAuth.auth
