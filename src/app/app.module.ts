@@ -13,7 +13,7 @@ import {LoginPage }from '../pages/login/login';
 import {ContenidoSeguroPipe }from "../pipes/pipes.module"; 
 
 //Providers
-import {UsuarioProvider }from '../providers/usuario/usuario'; 
+import {UsuarioProvider }from '../providers/usuario/UsuarioProvider'; 
 import {StorageUsuarioProvider }from '../providers/storage-usuario/storage-usuario'; 
 
 

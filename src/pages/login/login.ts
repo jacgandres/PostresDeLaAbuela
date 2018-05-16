@@ -6,7 +6,7 @@ import * as firebase from 'firebase/app';
 
 
 import { Facebook } from '@ionic-native/facebook';
-import { UsuarioProvider } from '../../providers/usuario/usuario';
+import { UsuarioProvider } from '../../providers/usuario/UsuarioProvider';
 import { HomePage } from '../home/home';
 import { StorageUsuarioProvider } from '../../providers/storage-usuario/storage-usuario';
 

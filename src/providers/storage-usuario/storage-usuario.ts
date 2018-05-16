@@ -1,49 +1,50 @@
+import {Injectable }from '@angular/core'; 
+import {Platform }from 'ionic-angular'; 
+import {Storage }from '@ionic/storage'; 
 
-import { Injectable } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
-import { Credenciales } from '../usuario/usuario';
+
+import { Usuario} from '../../Modelo/Modelo';
 
 
 @Injectable()
 export class StorageUsuarioProvider {
 
-  UsuarioAutenticado: Credenciales = {}
+  UsuarioAutenticado:Usuario =  {}
 
-  constructor(private platform: Platform,
-    private storage: Storage) {
-    console.log('Hello StorageUsuarioProvider Provider');
+  constructor(private platform:Platform, 
+    private storage:Storage) {
+    console.log('Hello StorageUsuarioProvider Provider'); 
   }
 
 
-  guardarUsuario(credencial: Credenciales) {
+  guardarUsuario(usuario:Usuario) {
     if (this.platform.is('cordova')) {
-      console.log("this.storage: "+JSON.stringify(credencial));
-      this.storage.set("credencial", credencial);
-    } else {
-      localStorage.setItem("credencial", JSON.stringify(credencial));
+      console.log("this.storage: " + JSON.stringify(usuario)); 
+      this.storage.set("usuario", usuario); 
+    }else {
+      localStorage.setItem("usuario", JSON.stringify(usuario)); 
     }
   }
 
-  obtenerUsuario(): Promise<any> {
+  obtenerUsuario():Promise < any >  {
     console.log("obtenerUsuario")
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =>  {
       if (this.platform.is('cordova')) {
 
-        this.storage.get('credencial').then(val => {
-          console.log("this.storage.get: " );
+        this.storage.get('usuario').then(val =>  {
+          console.log("this.storage.get: "); 
           if (val) {
-            this.UsuarioAutenticado = val;
+            this.UsuarioAutenticado = val; 
             
-            resolve(true);
-          } else {
-            resolve(false);
+            resolve(true); 
+          }else {
+            resolve(false); 
           }
 
-        });
+        }); 
 
-      } else {
-        localStorage.getItem("credencial");
+      }else {
+        localStorage.getItem("usuario"); 
       }
     })
   }
