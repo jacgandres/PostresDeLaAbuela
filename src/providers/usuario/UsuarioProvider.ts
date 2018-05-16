@@ -26,7 +26,10 @@ export class UsuarioProvider {
                  uid:string, 
                  provider:string, 
                  estaLogueado:boolean ) {
-
+    
+    console.log("cargarUsuario")
+    this.usuario.credenciales = {};
+                 
     this.usuario.credenciales.nombre = nombre; 
     this.usuario.credenciales.email = email; 
     this.usuario.credenciales.imagen = imagen; 

@@ -2,10 +2,10 @@
     <ion-list>
         <ion-item>
             <ion-thumbnail item-start>
-                <img src="{{UsuarioAutenticado.imagen}}">
+                <img src="{{UsuarioAutenticado.credenciales.imagen}}">
             </ion-thumbnail>
             <h2>Bienvenido</h2>
-            <p>{{UsuarioAutenticado.nombre}}</p>
+            <p>{{UsuarioAutenticado.credenciales.nombre}}</p>
         </ion-item>
     </ion-list>
     <ion-slides pager effect="cube" loop paginationType="progress">
