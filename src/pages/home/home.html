@@ -1,11 +1,27 @@
-<ion-content>
+<ion-menu [content]="mycontent">
+    <ion-content class="marginTop60">
+        <ion-buttons>
+            <button ion-button block color="primary" icon-end>
+                Ver Resumen
+                <ion-icon name="ios-list-box"></ion-icon>
+            </button>
+
+            <button ion-button block color="primary" icon-end class="marginTop40" (click)="salirAplicacion();">
+                Salir
+                <ion-icon name="md-log-out"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-content>
+</ion-menu>
+
+<ion-content #mycontent>
     <ion-list>
         <ion-item>
             <ion-thumbnail item-start>
-                <img src="{{UsuarioAutenticado.credenciales.imagen}}">
+                <img src="{{credencial.imagen}}">
             </ion-thumbnail>
             <h2>Bienvenido</h2>
-            <p>{{UsuarioAutenticado.credenciales.nombre}}</p>
+            <p>{{credencial.nombre}}</p>
         </ion-item>
     </ion-list>
     <ion-slides pager effect="cube" loop paginationType="progress">

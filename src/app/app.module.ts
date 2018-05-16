@@ -6,8 +6,9 @@ import {SplashScreen }from '@ionic-native/splash-screen';
 import {StatusBar }from '@ionic-native/status-bar'; 
 
 import {MyApp }from './app.component'; 
-import {HomePage }from '../pages/home/home'; 
-import {LoginPage }from '../pages/login/login'; 
+
+import { HomePage,PerfilPage,ResumenPage, LoginPage, TabsPage} from "../pages/pages.export";
+ 
 
 //Pipes
 import {ContenidoSeguroPipe }from "../pipes/pipes.module"; 
@@ -40,6 +41,9 @@ export const firebaseConfig =  {
     MyApp, 
     HomePage, 
     LoginPage, 
+    PerfilPage,
+    TabsPage,
+    ResumenPage,
     ///pipes
     ContenidoSeguroPipe
   ], 
@@ -55,7 +59,10 @@ export const firebaseConfig =  {
   entryComponents:[
     MyApp, 
     HomePage, 
-    LoginPage
+    LoginPage, 
+    PerfilPage,
+    TabsPage,
+    ResumenPage
   ], 
   providers:[
     StatusBar, 

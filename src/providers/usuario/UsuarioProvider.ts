@@ -43,6 +43,11 @@ export class UsuarioProvider {
     return this.verificarSiYaSeRegistro(); 
   }
 
+  deslogearUsuario(){
+    console.log("deslogearUsuario: " + this.usuario.credenciales.uid)
+    return this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).update(this.usuario); 
+  }
+
   verificarSiYaSeRegistro() {
 
     return new Promise((assert, reject) =>  {

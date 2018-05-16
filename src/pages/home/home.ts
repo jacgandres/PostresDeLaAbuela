@@ -1,30 +1,46 @@
-import {Component }from '@angular/core'; 
-import {NavController }from 'ionic-angular'; 
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
-import {Usuario}from '../../Modelo/Modelo'; 
+import { StorageUsuarioProvider } from '../../providers/storage-usuario/storage-usuario';
+import { LoginPage } from '../pages.export';
+import { UsuarioProvider } from '../../providers/usuario/UsuarioProvider';
 
-import {StorageUsuarioProvider }from '../../providers/storage-usuario/storage-usuario'; 
-
-@Component( {
-  selector:'page-home', 
-  templateUrl:'home.html'
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
 })
 export class HomePage {
 
-  UsuarioAutenticado:Usuario =  {}
+  public credencial: any = {}
 
-  constructor(public navCtrl:NavController, 
-    private usuarioStorage:StorageUsuarioProvider) {
-
-
+  constructor(public navCtrl: NavController,
+    private usuarioStorage: StorageUsuarioProvider,
+    private usuarioProv: UsuarioProvider) {
+    this.iniciarHome();
   }
 
-  ionViewDidLoad() {
-    console.log("Iniciando ionViewDidLoad"); 
+  iniciarHome() {
+    console.log("Iniciando iniciarHome");
 
-    this.usuarioStorage.obtenerUsuario().then((result) =>  {
-      this.UsuarioAutenticado = this.usuarioStorage.UsuarioAutenticado; 
-      console.log("usuarioStorage.obtenerUsuario2: " + JSON.stringify(this.UsuarioAutenticado)); 
+    this.usuarioStorage.obtenerUsuario().then((result) => {
+      this.credencial = this.usuarioStorage.usuarioAutenticado.credenciales;
+      console.log("iniciarHome obtenerUsuario: " + JSON.stringify(this.credencial));
     })
+  }
+
+
+
+  salirAplicacion() {
+
+    this.usuarioProv.usuario = this.usuarioStorage.usuarioAutenticado;
+    this.usuarioProv.usuario.credenciales.estaLogeado = false;
+
+    this.usuarioProv.deslogearUsuario().then(() => {
+      this.usuarioStorage.salirAplicacion().then((result) => {
+        this.navCtrl.setRoot(LoginPage);
+      })
+    })
+
+
   }
 }

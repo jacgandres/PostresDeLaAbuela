@@ -20,11 +20,12 @@ import { StorageUsuarioProvider } from '../../providers/storage-usuario/storage-
 export class LoginPage {
 
   constructor(public navCtrl: NavController,
-    private afAuth: AngularFireAuth,
-    private fb: Facebook,
-    private platform: Platform,
-    private usuarioProv: UsuarioProvider,
-    private usuarioStorage: StorageUsuarioProvider) {
+              private afAuth: AngularFireAuth,
+              private fb: Facebook,
+              private platform: Platform,
+              private usuarioProv: UsuarioProvider,
+              private navPar : NavParams,
+              private usuarioStorage: StorageUsuarioProvider) {
   }
 
   ionViewDidLoad() {
@@ -62,10 +63,10 @@ export class LoginPage {
               console.log("antes de entrar a la promesa firebase")
               this.usuarioProv.salvarCredencialEnFireBase().then((result)=>{
                 console.log("entro a la  promesa firebase")
-                console.log(JSON.stringify(result));
-                
+               
                 this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario); 
                 this.navCtrl.setRoot(HomePage);
+                
               }); 
 
   
