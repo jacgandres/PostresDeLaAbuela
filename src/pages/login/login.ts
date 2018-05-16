@@ -54,13 +54,21 @@ export class LoginPage {
                 user.email,
                 user.photoURL,
                 user.uid,
-                'facebook'
+                'facebook',
+                true
               );
 
-              this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario);
 
-              this.navCtrl.setRoot(HomePage);
+              console.log("antes de entrar a la promesa firebase")
+              this.usuarioProv.salvarCredencialEnFireBase().then((result)=>{
+                console.log("entro a la  promesa firebase")
+                console.log(JSON.stringify(result));
+                
+                this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario); 
+                this.navCtrl.setRoot(HomePage);
+              }); 
 
+  
 
             }).catch(e => console.log('Error con el login' + JSON.stringify(e)));
         })
@@ -75,6 +83,7 @@ export class LoginPage {
         .then(res => {
 
           console.log(res);
+          debugger;
           let user = res.user;
 
           this.usuarioProv.cargarUsuario(
@@ -82,8 +91,12 @@ export class LoginPage {
             user.email,
             user.photoURL,
             user.uid,
-            'facebook'
+            'facebook',
+            true
           );
+
+          this.usuarioProv.salvarCredencialEnFireBase();
+
 
           this.navCtrl.setRoot(HomePage);
 
