@@ -1,3 +1,4 @@
+import { AngularFireDatabase } from 'angularfire2/database';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -5,19 +6,23 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
+
+import { HomePage, PerfilPage, ResumenPage, LoginPage, 
+         TabsPage, DetalleProductoPage, RegistroUsuarioPage } from "../pages/pages.export";
+
 
 //Pipes
 import { ContenidoSeguroPipe } from "../pipes/pipes.module";
 
 //Providers
-import { UsuarioProvider } from '../providers/usuario/usuario';
-import { StorageUsuarioProvider } from '../providers/storage-usuario/storage-usuario';
+import { ProductosProvider, UsuarioProvider, StorageUsuarioProvider } from "../providers/providers.export";
+
+///plugin
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { Facebook } from '@ionic-native/facebook';
@@ -29,7 +34,7 @@ export const firebaseConfig = {
   apiKey: "AIzaSyAYfcqRXUiO3-6AJUUJvozc8Mb2ttukdrY",
   authDomain: "postresdelaabula.firebaseapp.com",
   databaseURL: "https://postresdelaabula.firebaseio.com",
-  projectId: "postresdelaabula",
+  rojectId: "postresdelaabula",
   storageBucket: "postresdelaabula.appspot.com",
   messagingSenderId: "266657007622"
 };
@@ -37,8 +42,8 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    LoginPage,
+    HomePage, PerfilPage, ResumenPage, LoginPage, 
+    TabsPage, DetalleProductoPage, RegistroUsuarioPage,
     ///pipes
     ContenidoSeguroPipe
   ],
@@ -53,19 +58,15 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    LoginPage
+    HomePage, PerfilPage, ResumenPage, LoginPage, 
+    TabsPage, DetalleProductoPage, RegistroUsuarioPage
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AngularFireAuthModule, AngularFireModule, AngularFireDatabase, AngularFireDatabaseModule,
-    UsuarioProvider,
+    StatusBar, ScreenOrientation,
+    SplashScreen, { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AngularFireDatabase, 
     Facebook,
-    StorageUsuarioProvider
-    
-
+    ProductosProvider, UsuarioProvider, StorageUsuarioProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }
