@@ -6,4 +6,5 @@ export interface Credenciales {
     uid?:string; 
     provider?:string; 
     estaLogeado?:boolean; 
+    numeroTelefonico?:string; 
   }

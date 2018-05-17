@@ -2,11 +2,8 @@ import {AngularFireDatabase, snapshotChanges }from 'angularfire2/database';
 import * as firebase from 'firebase'; 
 import  "rxjs/add/operator/map"; 
 import { Credenciales } from '../../Modelo/Credenciales';
-
-
-
-import {Injectable }from '@angular/core'; 
-
+ 
+import {Injectable }from '@angular/core';  
 import { Usuario} from '../../Modelo/Modelo';
 
 
@@ -25,7 +22,8 @@ export class UsuarioProvider {
                  imagen:string, 
                  uid:string, 
                  provider:string, 
-                 estaLogueado:boolean ) {
+                 estaLogueado:boolean,
+                 numeroTelefonico?:string ) {
     
     console.log("cargarUsuario")
     this.usuario.credenciales = {};
@@ -36,6 +34,7 @@ export class UsuarioProvider {
     this.usuario.credenciales.uid = uid; 
     this.usuario.credenciales.provider = provider; 
     this.usuario.credenciales.estaLogeado = estaLogueado; 
+    this.usuario.credenciales.numeroTelefonico = numeroTelefonico;
   }
 
   salvarCredencialEnFireBase() {

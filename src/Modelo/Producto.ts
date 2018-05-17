@@ -1,6 +1,8 @@
 
 export interface Producto {
-    nombre?:string;
-    valor?:number;
-    estado?:boolean;
+    Nombre?:string;
+    Estado?:boolean;
+    Descripcion?:string;
+    Url?:string;
+    Valor?:number;
 }

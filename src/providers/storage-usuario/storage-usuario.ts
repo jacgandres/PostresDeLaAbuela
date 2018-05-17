@@ -22,8 +22,7 @@ export class StorageUsuarioProvider {
   }
 
   guardarUsuario(usuario: Usuario) {
-    if (this.platform.is('cordova')) {
-      console.log("this.storage: " + JSON.stringify(usuario));
+    if (this.platform.is('cordova')) { 
       this.storage.set("usuario", usuario);
     } else {
       localStorage.setItem("usuario", JSON.stringify(usuario));

@@ -1,20 +1,4 @@
-<ion-menu [content]="mycontent">
-    <ion-content class="marginTop60">
-        <ion-buttons>
-            <button ion-button block color="primary" icon-end>
-                Ver Resumen
-                <ion-icon name="ios-list-box"></ion-icon>
-            </button>
-
-            <button ion-button block color="primary" icon-end class="marginTop40" (click)="salirAplicacion();">
-                Salir
-                <ion-icon name="md-log-out"></ion-icon>
-            </button>
-        </ion-buttons>
-    </ion-content>
-</ion-menu>
-
-<ion-content #mycontent>
+<ion-content>
     <ion-list>
         <ion-item>
             <ion-thumbnail item-start>
@@ -25,32 +9,20 @@
         </ion-item>
     </ion-list>
     <ion-slides pager effect="cube" loop paginationType="progress">
-
-        <ion-slide>
-            <ion-list>
-                <ion-item>
-                    <img src="http://www.vanguardia.com/sites/default/files/imagecache/Noticia_600x400/foto_grandes_400x300_noticia/2018/02/05/web_postres_big_ce.jpg">
-                    <h2>Postres con frutos rojos</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat vitae ut eligendi commodi quo eius laudantium cumque natus. Distinctio voluptatibus ea consectetur enim rem dolorem aliquid aut reprehenderit atque quod.</p>
-                </ion-item>
-            </ion-list>
-        </ion-slide>
-
-        <ion-slide>
+        <ion-slide *ngFor="let producto of Productos; let i=index">
             <ion-list>
                 <ion-list-header class="marginTop">
-                    <h1> Postres con frutos rojos</h1>
+                    <h1> {{producto.Nombre}} </h1>
                     <button ion-button left>
                         seleccionar
                     </button>
                 </ion-list-header>
                 <ion-item>
-                    <img src="http://www.vanguardia.com/sites/default/files/imagecache/Noticia_600x400/foto_grandes_400x300_noticia/2018/02/05/web_postres_big_ce.jpg">
+                    <img [src]="producto.Url">
                 </ion-item>
-                <p color="light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat vitae ut eligendi commodi quo eius laudantium cumque natus. Distinctio voluptatibus ea consectetur enim rem dolorem aliquid aut reprehenderit atque quod.</p>
+                <p>{{producto.Valor | currency }} pesos</p>
+                <p color="light">{{producto.Descripcion}}</p>
             </ion-list>
         </ion-slide>
-
-
     </ion-slides>
 </ion-content>

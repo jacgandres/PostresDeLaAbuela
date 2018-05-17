@@ -6,9 +6,12 @@ import * as firebase from 'firebase/app';
 
 
 import { Facebook } from '@ionic-native/facebook';
-import { UsuarioProvider } from '../../providers/usuario/UsuarioProvider';
+
 import { HomePage } from '../home/home';
-import { StorageUsuarioProvider } from '../../providers/storage-usuario/storage-usuario';
+
+import { TabsPage } from '../tabs/tabs';
+
+import { UsuarioProvider, StorageUsuarioProvider } from "../../providers/providers.export";
 
 
 
@@ -20,12 +23,12 @@ import { StorageUsuarioProvider } from '../../providers/storage-usuario/storage-
 export class LoginPage {
 
   constructor(public navCtrl: NavController,
-              private afAuth: AngularFireAuth,
-              private fb: Facebook,
-              private platform: Platform,
-              private usuarioProv: UsuarioProvider,
-              private navPar : NavParams,
-              private usuarioStorage: StorageUsuarioProvider) {
+    private afAuth: AngularFireAuth,
+    private fb: Facebook,
+    private platform: Platform,
+    private usuarioProv: UsuarioProvider,
+    private navPar: NavParams,
+    private usuarioStorage: StorageUsuarioProvider) {
   }
 
   ionViewDidLoad() {
@@ -49,27 +52,29 @@ export class LoginPage {
           firebase.auth().signInWithCredential(facebookCredential)
             .then(user => {
               console.log("entro a la segunda promesa")
-
+              console.log(JSON.stringify(user));
               this.usuarioProv.cargarUsuario(
                 user.displayName,
                 user.email,
                 user.photoURL,
                 user.uid,
                 'facebook',
-                true
+                true,
+                user.phoneNumber
               );
 
 
               console.log("antes de entrar a la promesa firebase")
-              this.usuarioProv.salvarCredencialEnFireBase().then((result)=>{
+              this.usuarioProv.salvarCredencialEnFireBase().then((result) => {
                 console.log("entro a la  promesa firebase")
-               
-                this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario); 
-                this.navCtrl.setRoot(HomePage);
-                
-              }); 
 
-  
+                this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario);
+
+                this.navCtrl.setRoot(TabsPage);
+
+              });
+
+
 
             }).catch(e => console.log('Error con el login' + JSON.stringify(e)));
         })
