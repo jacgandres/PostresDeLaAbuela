@@ -1,13 +1,5 @@
 <ion-content>
-    <ion-list>
-        <ion-item>
-            <ion-thumbnail item-start>
-                <img src="{{credencial.imagen}}">
-            </ion-thumbnail>
-            <h2>Bienvenido</h2>
-            <p>{{credencial.nombre}}</p>
-        </ion-item>
-    </ion-list>
+    <h1>Postres de la Abuela</h1>
     <ion-slides pager effect="cube" loop paginationType="progress">
         <ion-slide *ngFor="let producto of Productos; let i=index">
             <ion-list>
