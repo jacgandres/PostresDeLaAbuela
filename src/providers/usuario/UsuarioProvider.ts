@@ -4,7 +4,7 @@ import  "rxjs/add/operator/map";
 import { Credenciales } from '../../Modelo/Credenciales';
  
 import {Injectable }from '@angular/core';  
-import { Usuario} from '../../Modelo/Modelo';
+import { Usuario} from '../../Modelo/Modelo.Export';
 
 
 @Injectable()

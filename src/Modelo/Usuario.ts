@@ -5,5 +5,5 @@ export interface Usuario {
     credenciales?:Credenciales;
     pedidos?:Pedido[];
     telefonos?:string[];
-    totalPedidos?:number;
+    valorTotalPedidos?:number;
 }

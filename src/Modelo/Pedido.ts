@@ -6,5 +6,5 @@ export interface Pedido {
     fechaEntrega?:Date;
     direccion?:string;
     valor?:number;
-    producto:Producto[];
+    producto?:Producto[];
 }

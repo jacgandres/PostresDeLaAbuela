@@ -2,7 +2,7 @@ import { AngularFireDatabase, snapshotChanges } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import "rxjs/add/operator/map";
 
-import { Producto } from "../../Modelo/Modelo";
+import { Producto } from "../../Modelo/Modelo.Export";
 
 import { Injectable } from '@angular/core';
 

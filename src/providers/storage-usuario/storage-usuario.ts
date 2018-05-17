@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 
-import { Usuario } from '../../Modelo/Usuario';
+import { Usuario } from '../../Modelo/Modelo.Export';
 
 
 @Injectable()

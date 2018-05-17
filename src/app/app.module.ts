@@ -17,6 +17,8 @@ import { ContenidoSeguroPipe } from "../pipes/pipes.module";
 //Providers
 import { ProductosProvider, UsuarioProvider, StorageUsuarioProvider } from "../providers/providers.export";
 
+///plugin
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 
 import { AngularFireModule } from 'angularfire2';
@@ -60,7 +62,7 @@ export const firebaseConfig = {
     TabsPage, DetalleProductoPage, RegistroUsuarioPage
   ],
   providers: [
-    StatusBar,
+    StatusBar, ScreenOrientation,
     SplashScreen, { provide: ErrorHandler, useClass: IonicErrorHandler },
     AngularFireDatabase, 
     Facebook,

@@ -52,7 +52,7 @@ export class LoginPage {
           firebase.auth().signInWithCredential(facebookCredential)
             .then(user => {
               console.log("entro a la segunda promesa")
-              console.log(JSON.stringify(user));
+              
               this.usuarioProv.cargarUsuario(
                 user.displayName,
                 user.email,
