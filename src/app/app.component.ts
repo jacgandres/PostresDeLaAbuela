@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { LoginPage } from '../pages/login/login'
 
-import { HomePage } from '../pages/home/home';
+import { HomePage, PerfilPage, ResumenPage, TabsPage, LoginPage } from "../pages/pages.export";
+
 import { StorageUsuarioProvider } from '../providers/storage-usuario/storage-usuario';
 
 @Component({
@@ -21,15 +21,15 @@ export class MyApp {
     platform.ready().then(() => {
 
       storageProv.obtenerUsuario().then(result => {
-        console.log("storageProv.obtenerUsuario: "+JSON.stringify(result));
+        console.log("storageProv.obtenerUsuario: " + JSON.stringify(result));
         statusBar.styleDefault();
         splashScreen.hide();
         if (result) {
-          this.rootPage = HomePage;
+          this.rootPage = TabsPage;
         } else {
           this.rootPage = LoginPage;
         }
-      }); 
+      });
 
     });
   }

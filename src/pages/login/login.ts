@@ -6,9 +6,12 @@ import * as firebase from 'firebase/app';
 
 
 import { Facebook } from '@ionic-native/facebook';
-import { UsuarioProvider } from '../../providers/usuario/usuario';
+
 import { HomePage } from '../home/home';
-import { StorageUsuarioProvider } from '../../providers/storage-usuario/storage-usuario';
+
+import { TabsPage } from '../tabs/tabs';
+
+import { UsuarioProvider, StorageUsuarioProvider } from "../../providers/providers.export";
 
 
 
@@ -24,6 +27,7 @@ export class LoginPage {
     private fb: Facebook,
     private platform: Platform,
     private usuarioProv: UsuarioProvider,
+    private navPar: NavParams,
     private usuarioStorage: StorageUsuarioProvider) {
   }
 
@@ -48,18 +52,28 @@ export class LoginPage {
           firebase.auth().signInWithCredential(facebookCredential)
             .then(user => {
               console.log("entro a la segunda promesa")
-
+              
               this.usuarioProv.cargarUsuario(
                 user.displayName,
                 user.email,
                 user.photoURL,
                 user.uid,
-                'facebook'
+                'facebook',
+                true,
+                user.phoneNumber
               );
 
-              this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario);
 
-              this.navCtrl.setRoot(HomePage);
+              console.log("antes de entrar a la promesa firebase")
+              this.usuarioProv.salvarCredencialEnFireBase().then((result) => {
+                console.log("entro a la  promesa firebase")
+
+                this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario);
+
+                this.navCtrl.setRoot(TabsPage);
+
+              });
+
 
 
             }).catch(e => console.log('Error con el login' + JSON.stringify(e)));
@@ -75,6 +89,7 @@ export class LoginPage {
         .then(res => {
 
           console.log(res);
+          debugger;
           let user = res.user;
 
           this.usuarioProv.cargarUsuario(
@@ -82,8 +97,12 @@ export class LoginPage {
             user.email,
             user.photoURL,
             user.uid,
-            'facebook'
+            'facebook',
+            true
           );
+
+          this.usuarioProv.salvarCredencialEnFireBase();
+
 
           this.navCtrl.setRoot(HomePage);
 
