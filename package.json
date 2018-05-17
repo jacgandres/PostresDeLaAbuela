@@ -1,5 +1,5 @@
 {
-    "name": "PostresDeLaAbuela",
+    "name": "Postres De La Abuela",
     "version": "0.0.1",
     "author": "Ionic Framework",
     "homepage": "http://ionicframework.com/",
@@ -75,7 +75,6 @@
             "cordova-plugin-screen-orientation": {}
         },
         "platforms": [
-            "ios",
             "android"
         ]
     }
