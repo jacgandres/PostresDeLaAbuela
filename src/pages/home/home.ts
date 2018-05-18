@@ -38,7 +38,7 @@ export class HomePage {
 
   iniciarHome() {
     console.log("Iniciando iniciarHome"); 
-
+    debugger;
     this.usuarioStorage.obtenerUsuario().then((result) =>  {
       this.credencial = this.usuarioStorage.usuarioAutenticado.credenciales; 
       console.log("iniciarHome obtenerUsuario: "); 
@@ -53,15 +53,15 @@ export class HomePage {
   }
  
   abrirModalFecha() {
-    let params:DatePickerOptions={
-            date : Date.now,
-            mode : 'date',
-            minDate: Date.now,
-            maxDate: new Date(Date.prototype.getFullYear(),Date.prototype.getMonth()+2,Date.prototype.getDay()+1),
-            androidTheme : THEME_DEVICE_DEFAULT_DARK
-    }
-    this.datePicker.show(params).then((result)=>{
+    /*let params:DatePickerOptions={
+      date : Date.now ,
+      mode : 'date',
+      minDate: Date.now,
+      maxDate: new Date(Date.prototype.getFullYear(),Date.prototype.getMonth()+2,Date.prototype.getDay()+1),
+      androidTheme : this.datePicker.ANDROID_THEMES.THEME_TRADITIONAL 
+}
+this.datePicker.show(params).then((result)=>{
 
-    });
+}); */
   }
 }
