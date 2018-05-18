@@ -1,6 +1,6 @@
 <ion-content>
     <h1>Postres de la Abuela</h1>
-    <ion-slides pager effect="cube" loop paginationType="progress">
+    <ion-slides no-margin no-padding pager effect="cube" loop paginationType="progress">
         <ion-slide *ngFor="let producto of Productos; let i=index">
             <ion-list>
                 <ion-list-header class="marginTop">
@@ -9,7 +9,7 @@
                         Seleccionar
                     </button>
                 </ion-list-header>
-                <ion-item>
+                <ion-item text-center>
                     <img [src]="producto.Url">
                 </ion-item>
                 <p>{{producto.Valor | currency }} pesos</p>
