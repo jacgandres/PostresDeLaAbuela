@@ -6,7 +6,7 @@ import {Producto, Pedido}from "../../Modelo/Modelo.Export";
 import {UsuarioProvider, StorageUsuarioProvider, ProductosProvider }from "../../providers/providers.export"; 
 
 import {ScreenOrientation }from '@ionic-native/screen-orientation'; 
-import {DatePicker }from '@ionic-native/date-picker'; 
+import {DatePicker, DatePickerOptions }from '@ionic-native/date-picker'; 
 
 import {DetalleProductoPage }from '../detalle-producto/detalle-producto'; 
 
@@ -53,8 +53,12 @@ export class HomePage {
   }
  
   abrirModalFecha() {
-    let params={
-      
+    let params:DatePickerOptions={
+            date : Date.now,
+            mode : 'date',
+            minDate: Date.now,
+            maxDate: new Date(Date.prototype.getFullYear(),Date.prototype.getMonth()+2,Date.prototype.getDay()+1),
+            androidTheme : THEME_DEVICE_DEFAULT_DARK
     }
     this.datePicker.show(params).then((result)=>{
 
