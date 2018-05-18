@@ -54,11 +54,11 @@ export class HomePage {
  
   abrirModalFecha() {
     let params:DatePickerOptions={
-            date : Date.now,
+            date : Date.now ,
             mode : 'date',
             minDate: Date.now,
             maxDate: new Date(Date.prototype.getFullYear(),Date.prototype.getMonth()+2,Date.prototype.getDay()+1),
-            androidTheme : THEME_DEVICE_DEFAULT_DARK
+            androidTheme : this.datePicker.ANDROID_THEMES.THEME_TRADITIONAL 
     }
     this.datePicker.show(params).then((result)=>{
 
