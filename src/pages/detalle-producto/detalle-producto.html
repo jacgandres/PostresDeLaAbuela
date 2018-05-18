@@ -8,5 +8,44 @@
 
 
 <ion-content padding>
-
+    <ion-grid>
+        <ion-row>
+            <ion-col col-6>
+                <ion-thumbnail item-start text-center>
+                    <img [src]="Producto.Url">
+                </ion-thumbnail>
+            </ion-col>
+            <ion-col col-6>
+                <h2>{{Producto.Nombre}}</h2>
+                <p>{{Producto.Descripcion}}</p>
+                <p>{{Producto.Valor | currency }} pesos</p>
+            </ion-col>
+        </ion-row>
+        <ion-row class="top-20">
+            <ion-col col-12>
+                <h3>Hacer Pedido</h3>
+            </ion-col>
+            <ion-col col-4>
+                Cantidad
+            </ion-col>
+            <ion-col col-8>
+                ......
+            </ion-col>
+            <ion-col col-4>
+                Fecha:
+            </ion-col>
+            <ion-col col-8>
+                <ion-button ion-button color="primary" icon-left (click)="abrirModalFecha();">
+                    <ion-icon name="md-calendar"></ion-icon>
+                    Seleccionar Fecha
+                </ion-button>
+            </ion-col>
+            <ion-col col-4>
+                Observaciones
+            </ion-col>
+            <ion-col col-8>
+                ......
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

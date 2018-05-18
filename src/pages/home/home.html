@@ -5,8 +5,8 @@
             <ion-list>
                 <ion-list-header class="marginTop">
                     <h1> {{producto.Nombre}} </h1>
-                    <button ion-button left>
-                        seleccionar
+                    <button ion-button left [navPush]="detalleProductoPage" [navParams]="{producto: producto}">
+                        Seleccionar
                     </button>
                 </ion-list-header>
                 <ion-item>
