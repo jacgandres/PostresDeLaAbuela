@@ -1,8 +1,25 @@
 <ion-header>
 
-    <ion-navbar>
-        <ion-title color="primary">
-            Postres de la Abuela </ion-title>
+    <ion-navbar color="pink">
+        <ion-buttons start>
+            <button ion-button>
+                Salir
+            </button>
+        </ion-buttons>
+
+        <ion-title> Tortas de Mamá </ion-title>
+
+        <ion-buttons end>
+            <button ion-button icon-only>
+              <ion-icon name="cart"></ion-icon>
+              <ion-badge color="danger"
+                         class="carrito-numero"
+                         *ngIf="pedidos.length > 0">
+                      {{pedidos.length }}
+              </ion-badge>
+        </button> &nbsp; &nbsp;
+
+        </ion-buttons>
     </ion-navbar>
 
 </ion-header>

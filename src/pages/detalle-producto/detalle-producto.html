@@ -1,6 +1,6 @@
 <ion-header>
 
-    <ion-navbar>
+    <ion-navbar color="pink">
         <ion-title color="primary">{{Producto.Nombre}}</ion-title>
     </ion-navbar>
 
@@ -16,20 +16,16 @@
                 </ion-thumbnail>
             </ion-col>
             <ion-col col-6>
-                <h2>{{Producto.Nombre}}</h2>
+                <h3>{{Producto.Nombre}}</h3>
                 <p>{{Producto.Descripcion}}</p>
                 <p>{{Producto.Valor | currency }} pesos</p>
             </ion-col>
         </ion-row>
-        <ion-row class="top-20">
-            <ion-col col-12>
-                <h3>Hacer Pedido</h3>
-            </ion-col>
-
-        </ion-row>
     </ion-grid>
     <ion-list>
-
+        <ion-item>
+            <ion-label> <strong> Hacer Pedido</strong></ion-label>
+        </ion-item>
         <ion-item>
             <ion-label fixed>
                 Observaciones</ion-label>
@@ -52,7 +48,6 @@
                 <ion-icon name="md-calendar"></ion-icon>
                 Fecha de Entrega: <small *ngIf="Pedido.fechaEntrega"></small>
             </button>
-            <br>
             <br>
             <button ion-button color="danger" icon-left text-left block (click)="ConfirmarPedido();"> 
                 <ion-icon name="cart"></ion-icon>
