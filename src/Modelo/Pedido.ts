@@ -1,10 +1,11 @@
 import { Producto } from './Producto';
 
-export interface Pedido {
+export interface Pedido { 
+    id?:string;
     estadoPedido?:boolean;
-    fechaPedido?:Date;
-    fechaEntrega?:Date;
-    direccion?:string;
+    fechaPedido?:number;
+    fechaEntrega?:number;
+    observacion?:string;
     valor?:number;
     producto?:Producto[];
 }

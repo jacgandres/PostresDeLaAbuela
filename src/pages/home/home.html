@@ -1,6 +1,15 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title color="primary">
+            Postres de la Abuela </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
 <ion-content>
-    <h1>Postres de la Abuela</h1>
-    <ion-slides no-margin no-padding pager effect="cube" loop paginationType="progress">
+
+    <ion-slides no-margin no-padding pager loop paginationType="progress">
         <ion-slide *ngFor="let producto of Productos; let i=index">
             <ion-list>
                 <ion-list-header class="marginTop">

@@ -12,7 +12,7 @@ export class StorageUsuarioProvider {
   public usuarioAutenticado: Usuario = {}
 
   constructor(private platform: Platform,
-    private storage: Storage) {
+              private storage: Storage) {
     console.log('Hello StorageUsuarioProvider Provider');
   }
 
@@ -26,6 +26,16 @@ export class StorageUsuarioProvider {
       this.storage.set("usuario", usuario);
     } else {
       localStorage.setItem("usuario", JSON.stringify(usuario));
+    }
+  }
+  
+  actualizarUsuario() {
+    console.log("actualizarUsuario")
+    if (this.platform.is('cordova')) { 
+      this.storage.remove('usuario');
+      this.storage.set("usuario", this.usuarioAutenticado);
+    } else {
+      localStorage.setItem("usuario", JSON.stringify(this.usuarioAutenticado));
     }
   }
 

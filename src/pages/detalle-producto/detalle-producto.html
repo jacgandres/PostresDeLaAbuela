@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>{{Producto.Nombre}}</ion-title>
+        <ion-title color="primary">{{Producto.Nombre}}</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -25,27 +25,39 @@
             <ion-col col-12>
                 <h3>Hacer Pedido</h3>
             </ion-col>
-            <ion-col col-4>
-                Cantidad
-            </ion-col>
-            <ion-col col-8>
-                ......
-            </ion-col>
-            <ion-col col-4>
-                Fecha:
-            </ion-col>
-            <ion-col col-8>
-                <button ion-button color="primary" icon-left (click)="abrirModalFecha();">
-                    <ion-icon name="md-calendar"></ion-icon>
-                    Seleccionar Fecha
-                </button>
-            </ion-col>
-            <ion-col col-4>
-                Observaciones
-            </ion-col>
-            <ion-col col-8>
-                ......
-            </ion-col>
+
         </ion-row>
     </ion-grid>
+    <ion-list>
+
+        <ion-item>
+            <ion-label fixed>
+                Observaciones</ion-label>
+            <ion-input placeholder="Observaciones" type="text" value="" [(ngModel)]="Pedido.observacion"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label fixed>Cantidad</ion-label>
+            <ion-input placeholder="Cantidad" type="number" [attr.maxlength]="2" [(ngModel)]="Cantidad"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label fixed>
+                Fecha</ion-label>
+            <ion-label>{{Pedido.fechaEntrega|date:'fullDate'}}</ion-label>
+        </ion-item>
+
+        <ion-buttons>
+            <button ion-button color="primary" icon-left (click)="abrirModalFecha();" text-left block> 
+                <ion-icon name="md-calendar"></ion-icon>
+                Fecha de Entrega: <small *ngIf="Pedido.fechaEntrega"></small>
+            </button>
+            <br>
+            <br>
+            <button ion-button color="danger" icon-left text-left block (click)="ConfirmarPedido();"> 
+                <ion-icon name="cart"></ion-icon>
+                Agregar 
+            </button>
+        </ion-buttons>
+    </ion-list>
 </ion-content>
