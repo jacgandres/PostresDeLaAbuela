@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ResumenPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Usuario, Pedido, Producto } from "../../Modelo/Modelo.Export";
+
 
 @IonicPage()
 @Component({
@@ -15,11 +11,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ResumenPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public usuarioAuthenticado: Usuario = {};
+  public pedidosActivos: Pedido[] = [];
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams) {
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ResumenPage');
+
   }
 
+  eliminarPedido(){
+
+  }
 }

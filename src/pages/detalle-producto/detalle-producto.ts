@@ -5,7 +5,7 @@ import { Producto, Pedido } from '../../Modelo/Modelo.Export';
 import { DatePicker } from '@ionic-native/date-picker';
 import { ConfiguracionServiciosProvider, StorageUsuarioProvider, UsuarioProvider } from "../../providers/providers.export";
 import { CommunUtilidadesProvider } from '../../providers/commun-utilidades/commun-utilidades';
-
+import { ResumenPage } from "../resumen/resumen";
 
 @IonicPage()
 @Component({
@@ -40,7 +40,7 @@ export class DetalleProductoPage {
       }
       this.Pedido.fechaEntrega = this.Pedido.fechaPedido + (1000 * 60 * 60 * 24);
     })
- 
+
   }
 
   abrirModalFecha() {
@@ -75,21 +75,21 @@ export class DetalleProductoPage {
     this.Pedido.id = this.utilidades.guid();
     this.usuarioProv.usuario = this.storage.usuarioAutenticado;
 
-    if(this.usuarioProv.usuario.pedidos==null )
-    {
-      this.usuarioProv.usuario.pedidos=[];
+    if (this.usuarioProv.usuario.pedidos == null) {
+      this.usuarioProv.usuario.pedidos = [];
     }
 
     console.log("Push Usuarios")
     this.usuarioProv.usuario.pedidos.push(this.Pedido);
 
     this.usuarioProv.adicionarPedidos(this.Pedido)
-      .then(()=>{
+      .then(() => {
         console.log("Agregar pedido a firebase")
-        this.storage.usuarioAutenticado = this.usuarioProv.usuario; 
-        this.storage.actualizarUsuario(); 
-        this.navCtrl.pop();
-    })
+        this.storage.usuarioAutenticado = this.usuarioProv.usuario;
+        this.storage.actualizarUsuario();
+
+        this.navCtrl.push(ResumenPage, { usuario: this.usuarioProv.usuario })
+      })
   }
 
   AgregarPedido(): any {

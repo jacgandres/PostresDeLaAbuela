@@ -15,6 +15,7 @@ import { DetalleProductoPage } from '../detalle-producto/detalle-producto';
 })
 export class HomePage {
 
+  private Evento: any;
   public Productos: Producto[] = [];
   public Usuario: Usuario = {};
   public pedidos: Pedido[] = [];
@@ -45,7 +46,7 @@ export class HomePage {
       }
       else {
         this.pedidos = this.Usuario.pedidos;
-        console.log("Pedidos: "+this.Usuario.pedidos.length);
+        console.log("Pedidos: " + this.Usuario.pedidos.length);
       }
       console.log("iniciarHome obtenerUsuario: ");
     })
@@ -56,7 +57,15 @@ export class HomePage {
     this.productoProv.obtenerProductos().then((result: Producto[]) => {
       console.log("Productos obtenidos: " + result.length);
       this.Productos = result;
+      if (this.Evento) {
+        this.Evento.complete();
+      }
     })
   }
 
+  actualizarProductos(event) {
+    this.Evento = event;
+    this.iniciarHome();
+    this.ObtenerProducto();
+  }
 }

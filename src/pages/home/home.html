@@ -1,6 +1,5 @@
 <ion-header>
-
-    <ion-navbar color="pink">
+    <ion-navbar color="blueMenu">
         <ion-buttons start>
             <button ion-button>
                 Salir
@@ -26,11 +25,19 @@
 
 <ion-content>
 
-    <ion-slides no-margin no-padding pager loop paginationType="progress">
+    <ion-refresher (ionRefresh)="actualizarProductos($event)">
+        <ion-refresher-content color="primary">
+            <h1> Actualizando</h1>
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-slides no-margin no-padding pager loop paginationType="progress" effect="flip">
         <ion-slide *ngFor="let producto of Productos; let i=index">
             <ion-list>
                 <ion-list-header class="marginTop">
-                    <h1> {{producto.Nombre}} </h1>
+                    <h1>
+                        <font face="font_family"><strong> {{producto.Nombre}}</strong> </font>
+                    </h1>
                     <button ion-button left [navPush]="detalleProductoPage" [navParams]="{producto: producto}">
                         Seleccionar
                     </button>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.postresdelaabuela.app001" version="0.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.postresdelaabuela.app001" version="0.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>TortasDeMama</name>
     <description>aplicacion en ionic</description>
     <author email="jacgandres@gmail.com" href="mailto:jacgandres@gmail.com">Jacgandres's Team</author>
@@ -90,5 +90,6 @@
     <plugin name="cordova-sqlite-storage" spec="^2.3.1" />
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
     <allow-navigation href="http://192.168.1.104:8100" />
+    <allow-navigation href="http://192.168.42.65:8100" />
     <engine name="android" spec="6.4.0" />
 </widget>

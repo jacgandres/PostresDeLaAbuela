@@ -6,6 +6,7 @@ export interface Pedido {
     fechaPedido?:number;
     fechaEntrega?:number;
     observacion?:string;
+    esConfirmado?:boolean;
     valor?:number;
     producto?:Producto[];
 }
