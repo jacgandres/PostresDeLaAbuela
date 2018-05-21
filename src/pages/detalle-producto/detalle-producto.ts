@@ -61,9 +61,12 @@ export class DetalleProductoPage {
   }
 
   ConfirmarPedido() {
-    this.Pedido.estadoPedido = true;
+    this.Pedido.estadoPedido = 'solicitado';
+    this.Pedido.id = this.utilidades.guid();
+    this.Pedido.esConfirmado = false;
     this.Pedido.producto = [];
     this.Pedido.valor = 0;
+
     if (this.Cantidad) {
       for (let index = 0; index < this.Cantidad; index++) {
         this.AgregarPedido();
@@ -72,7 +75,7 @@ export class DetalleProductoPage {
     else {
       this.AgregarPedido();
     }
-    this.Pedido.id = this.utilidades.guid();
+
     this.usuarioProv.usuario = this.storage.usuarioAutenticado;
 
     if (this.usuarioProv.usuario.pedidos == null) {
@@ -88,7 +91,8 @@ export class DetalleProductoPage {
         this.storage.usuarioAutenticado = this.usuarioProv.usuario;
         this.storage.actualizarUsuario();
 
-        this.navCtrl.push(ResumenPage, { usuario: this.usuarioProv.usuario })
+        this.navCtrl.push(ResumenPage, { usuario: this.usuarioProv.usuario });
+         
       })
   }
 

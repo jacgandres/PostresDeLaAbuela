@@ -2,7 +2,7 @@ import { Producto } from './Producto';
 
 export interface Pedido { 
     id?:string;
-    estadoPedido?:boolean;
+    estadoPedido?:string;
     fechaPedido?:number;
     fechaEntrega?:number;
     observacion?:string;

@@ -3,7 +3,7 @@
     <name>TortasDeMama</name>
     <description>aplicacion en ionic</description>
     <author email="jacgandres@gmail.com" href="mailto:jacgandres@gmail.com">Jacgandres's Team</author>
-    <content original-src="index.html" src="http://192.168.1.104:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
