@@ -1,8 +1,7 @@
-import {AngularFireDatabase, snapshotChanges }from 'angularfire2/database'; 
+import {AngularFireDatabase, snapshotChanges, AngularFireAction  }from 'angularfire2/database'; 
 import * as firebase from 'firebase'; 
 import "rxjs/add/operator/map"; 
-
-
+ 
 import {Injectable }from '@angular/core'; 
 import {Usuario, Pedido }from '../../Modelo/Modelo.Export'; 
 
@@ -12,6 +11,7 @@ export class UsuarioProvider {
 
   public usuario:Usuario =  {}; 
   public pedidosActivos:Pedido[]; 
+  
 
   constructor(private _afDB:AngularFireDatabase) {
 
@@ -82,21 +82,15 @@ export class UsuarioProvider {
   obtenerProductosActivos() {
     return new Promise((assert, reject) =>  {
       console.log("Entrando a promesa obtenerProductosActivos"); 
-      /*this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid)
-          .valueChanges()
-          .subscribe(results =>  {
-            console.log(JSON.stringify(results)); 
-            this.pedidosActivos = this.usuario.pedidos; 
-          }) */
-        this._afDB.list('/Usuarios/' + this.usuario.credenciales.uid + '/', ref => ref.child('esConfirmado').equalTo('false'))
-            .snapshotChanges()
-            .subscribe(results =>  {
-              console.log("Promesa busqueda activos");
-              console.log(JSON.stringify(results)); 
-              this.pedidosActivos = this.usuario.pedidos; 
-              assert();
+        this._afDB.list('/Usuarios/' + this.usuario.credenciales.uid + '/pedidos/')
+            .valueChanges()
+            .subscribe((pedidosResultado:Pedido[]) =>  {
+              console.log("Promesa busqueda activos: " + pedidosResultado.length); 
+              console.log(JSON.stringify(pedidosResultado)); 
+              let filtroPedidos = pedidosResultado.filter(item => item.esConfirmado === false)
+              this.pedidosActivos = filtroPedidos; 
+              assert(); 
             }); 
-            
     }); 
   }
 }

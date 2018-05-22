@@ -7,30 +7,31 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <ion-item class="item-divider item-icon-left">
+        <i class="icon ion-plus-circled"></i> Notes
+    </ion-item>
     <ion-list *ngFor="let pedido of pedidosActivos; let i=index">
         <ion-item-group>
-            <ion-item-divider color="light">pedido.producto[0].Nombre</ion-item-divider>
+            <ion-icon color="danger" name="ios-trash" item-end></ion-icon>
+            <ion-item-divider color="light">{{pedido.producto[0].Nombre}}: {{pedido.valor| currency}} pesos</ion-item-divider>
             <ion-item>
-                <ion-avatar item-start>
+                <ion-avatar item-start text-center>
                     <img [src]="pedido.producto[0].Url">
                 </ion-avatar>
-                <ion-icon name="Cart" item-start></ion-icon>
-                Cantidad de Tortas: {{pedido.producto.length}}
-                <ion-icon name="ios-pie-outline" item-end></ion-icon>
-
-                <ion-icon name="md-cash" item-start></ion-icon>
-                Valor Pedido: {{pedido.valor| currency}} pesos
-                <ion-icon name="ios-pie-outline" item-end></ion-icon>
-
-                <ion-icon name="md-calendar" item-start></ion-icon>
-                Fecha de Entrega: {{pedido.fechaEntrega|date:'fullDate'}}
-                <ion-icon name="ios-pie-outline" item-end></ion-icon>
-
-                <button ion-button color="danger" icon-left text-left block (click)="eliminarPedido();"> 
-                <ion-icon name="cart"></ion-icon>
-                Agregar 
-                </button>
+                <ion-list>
+                    <ion-item>
+                        <ion-icon name="md-cart" item-start></ion-icon>
+                        Cantidad: {{pedido.producto.length}}
+                    </ion-item>
+                    <ion-item>
+                        <ion-icon name="md-calendar" item-start></ion-icon>
+                        Fecha Entrega:
+                    </ion-item>
+                    <ion-item>
+                        {{pedido.fechaEntrega|date:'fullDate'}}
+                    </ion-item>
+                </ion-list>
             </ion-item>
         </ion-item-group>
     </ion-list>

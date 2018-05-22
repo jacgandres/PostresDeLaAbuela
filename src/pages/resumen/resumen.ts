@@ -28,7 +28,11 @@ export class ResumenPage {
     this.usuarioProv.obtenerProductosActivos()
          .then(() =>  {
                this.pedidosActivos = this.usuarioProv.pedidosActivos; 
-         }); 
+               console.log("pedidosActivos: "+ this.pedidosActivos.length);
+         },
+        (error)=>{
+          console.log("pedidosActivos Error");
+        }); 
   }
 
   eliminarPedido() {
