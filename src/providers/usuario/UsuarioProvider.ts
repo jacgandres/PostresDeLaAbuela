@@ -18,12 +18,12 @@ export class UsuarioProvider {
   }
  
   cargarUsuario(nombre:string, 
-    email:string, 
-    imagen:string, 
-    uid:string, 
-    provider:string, 
-    estaLogueado:boolean, 
-    numeroTelefonico?:string) {
+                email:string, 
+                imagen:string, 
+                uid:string, 
+                provider:string, 
+                estaLogueado:boolean, 
+                numeroTelefonico?:string) {
 
     console.log("cargarUsuario")
     this.usuario.credenciales =  {}; 
@@ -49,18 +49,22 @@ export class UsuarioProvider {
 
   verificarSiYaSeRegistro() {
 
-    return new Promise((assert, reject) =>  {
+    return new Promise((assert, reject) =>  { 
+      
       console.log("verificarSiYaSeRegistro")
 
       this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid)
         .valueChanges()
         .subscribe(snapshot =>  {
-
+       
           console.log("this._afDB.list " + this.usuario.credenciales.uid)
           console.log(JSON.stringify(snapshot)); 
           if ( ! snapshot) {
             console.log("Insertara nuevo registro " + this.usuario.credenciales.uid)
             this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).update(this.usuario); 
+          }
+          else{
+            this.usuario = snapshot;
           }
           assert(true); 
         })

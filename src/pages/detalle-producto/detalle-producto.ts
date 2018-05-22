@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 
 import { Producto, Pedido } from '../../Modelo/Modelo.Export';
 import { DatePicker } from '@ionic-native/date-picker';
@@ -20,12 +20,13 @@ export class DetalleProductoPage {
   public Cantidad: number;
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public configProv: ConfiguracionServiciosProvider,
-    private datePicker: DatePicker,
-    private utilidades: CommunUtilidadesProvider,
-    private storage: StorageUsuarioProvider,
-    private usuarioProv: UsuarioProvider) {
+              public navParams: NavParams,
+              public configProv: ConfiguracionServiciosProvider,
+              private datePicker: DatePicker,
+              private utilidades: CommunUtilidadesProvider,
+              private storage: StorageUsuarioProvider,
+              private usuarioProv: UsuarioProvider,
+              private platform:Platform) {
   }
 
   ionViewDidLoad() {
@@ -44,23 +45,29 @@ export class DetalleProductoPage {
   }
 
   abrirModalFecha() {
-
-    this.datePicker.show({
-      date: new Date(),
-      minDate: new Date(),
-      maxDate: new Date(this.Pedido.fechaPedido + (1000 * 30 * 60 * 60 * 24)),
-      mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
-    }).then((result) => {
-      this.Pedido.fechaEntrega = result.getTime();
-    },
-      (error) => {
-        console.log("Error control date picker")
-        console.log(JSON.stringify(error));
-      });
+    if(this.platform.is('cordova')){
+        this.datePicker.show({
+          date: new Date(),
+          minDate: new Date(),
+          maxDate: new Date(this.Pedido.fechaPedido + (1000 * 30 * 60 * 60 * 24)),
+          mode: 'date',
+          androidTheme: this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
+        }).then((result) => {
+          this.Pedido.fechaEntrega = result.getTime();
+        },
+          (error) => {
+            console.log("Error control date picker")
+            console.log(JSON.stringify(error));
+          });
+    }
+    else
+    {
+      this.Pedido.fechaEntrega = (new Date()).getTime();
+    }
   }
 
   ConfirmarPedido() {
+    debugger;
     this.Pedido.estadoPedido = 'solicitado';
     this.Pedido.id = this.utilidades.guid();
     this.Pedido.esConfirmado = false;

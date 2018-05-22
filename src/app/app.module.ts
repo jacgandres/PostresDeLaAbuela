@@ -72,7 +72,7 @@ export const firebaseConfig = {
   providers: [
     StatusBar, ScreenOrientation,
     SplashScreen, { provide: ErrorHandler, useClass: IonicErrorHandler },
-    //{ provide: LOCALE_ID, useValue: 'es-US' },
+    //{ provide: LOCALE_ID, useValue: 'es' },
     AngularFireDatabase, DatePicker, Facebook,  
     ProductosProvider, UsuarioProvider, StorageUsuarioProvider,
     ConfiguracionServiciosProvider,
