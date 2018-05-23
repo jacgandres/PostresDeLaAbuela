@@ -1,41 +1,56 @@
-import {Component }from '@angular/core'; 
-import {IonicPage, NavController, NavParams }from 'ionic-angular'; 
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import {Usuario, Pedido, Producto }from "../../Modelo/Modelo.Export"; 
-import {UsuarioProvider }from '../../providers/providers.export'; 
+import { Usuario, Pedido, Producto } from "../../Modelo/Modelo.Export";
+import { UsuarioProvider, StorageUsuarioProvider } from '../../providers/providers.export';
+ 
 
 
 @IonicPage()
-@Component( {
-  selector:'page-resumen', 
-  templateUrl:'resumen.html', 
+@Component({
+  selector: 'page-resumen',
+  templateUrl: 'resumen.html',
 })
 export class ResumenPage {
+  public valorTotalPedidos = 0;
+  public usuarioAuthenticado: Usuario = {};
+  public pedidosActivos: Pedido[] = [];
 
-  public usuarioAuthenticado:Usuario =  {}; 
-  public pedidosActivos:Pedido[] = []; 
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private usuarioProv: UsuarioProvider,
+    private userStorage: StorageUsuarioProvider) {
 
-  constructor(public navCtrl:NavController, 
-              public navParams:NavParams, 
-              private usuarioProv:UsuarioProvider ) {
-      
   }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad pagina resumen");
-    this.usuarioAuthenticado = this.navParams.get('usuario'); 
-    this.usuarioProv.usuario = this.usuarioAuthenticado; 
-    this.usuarioProv.obtenerProductosActivos()
-         .then(() =>  {
-               this.pedidosActivos = this.usuarioProv.pedidosActivos; 
-               console.log("pedidosActivos: "+ this.pedidosActivos.length);
-         },
-        (error)=>{
-          console.log("pedidosActivos Error");
-        }); 
+    this.userStorage.obtenerUsuario().then(() => {
+      this.usuarioAuthenticado = this.userStorage.usuarioAutenticado;
+
+      this.usuarioProv.usuario = this.usuarioAuthenticado;
+      this.usuarioProv.obtenerProductosActivos()
+        .then(() => {
+          this.pedidosActivos = this.usuarioProv.pedidosActivos;
+          console.log("pedidosActivos: " + this.pedidosActivos.length);
+          this.calcularTotalPedidos().then((result:number)=>{
+            debugger; 
+          })
+        },
+          (error) => {
+            console.log("pedidosActivos Error");
+          });
+    });
   }
 
-  eliminarPedido() {
-
+  calcularTotalPedidos(){
+    return new Promise((assert, reject)=>{ 
+      let valor=0;
+      this.pedidosActivos.forEach(function (pedidoItem: Pedido) { 
+        debugger;
+        this.valorTotalPedidos += pedidoItem.valor;
+        assert(valor);
+     });
+    });
   }
 }

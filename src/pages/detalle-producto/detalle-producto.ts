@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, Tabs } from 'ionic-angular';
 
 import { Producto, Pedido } from '../../Modelo/Modelo.Export';
 import { DatePicker } from '@ionic-native/date-picker';
@@ -26,7 +26,8 @@ export class DetalleProductoPage {
               private utilidades: CommunUtilidadesProvider,
               private storage: StorageUsuarioProvider,
               private usuarioProv: UsuarioProvider,
-              private platform:Platform) {
+              private platform:Platform,
+              private tabs:Tabs) {
   }
 
   ionViewDidLoad() {
@@ -67,7 +68,7 @@ export class DetalleProductoPage {
   }
 
   ConfirmarPedido() {
-    debugger;
+     
     this.Pedido.estadoPedido = 'solicitado';
     this.Pedido.id = this.utilidades.guid();
     this.Pedido.esConfirmado = false;
@@ -92,15 +93,17 @@ export class DetalleProductoPage {
     console.log("Push Usuarios")
     this.usuarioProv.usuario.pedidos.push(this.Pedido);
 
-    this.usuarioProv.adicionarPedidos(this.Pedido)
+    this.usuarioProv.adicionarPedidos(this.usuarioProv.usuario.pedidos)
       .then(() => {
+        
         console.log("Agregar pedido a firebase")
         this.storage.usuarioAutenticado = this.usuarioProv.usuario;
         this.storage.actualizarUsuario();
-
-        this.navCtrl.push(ResumenPage, { usuario: this.usuarioProv.usuario });
-         
-      })
+        
+        this.tabs.select(1);
+        this.tabs.getByIndex(1).setElementAttribute("tabBadge",3);
+        this.tabs.getByIndex(1).setElementAttribute("tabBadgeStyle","danger");
+      });
   }
 
   AgregarPedido(): any {

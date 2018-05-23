@@ -57,8 +57,7 @@ export class UsuarioProvider {
         .valueChanges()
         .subscribe(snapshot =>  {
        
-          console.log("this._afDB.list " + this.usuario.credenciales.uid)
-          console.log(JSON.stringify(snapshot)); 
+          console.log("this._afDB.list " + this.usuario.credenciales.uid) 
           if ( ! snapshot) {
             console.log("Insertara nuevo registro " + this.usuario.credenciales.uid)
             this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).update(this.usuario); 
@@ -71,11 +70,13 @@ export class UsuarioProvider {
     }); 
   }
 
-  adicionarPedidos(pedido:Pedido) {
+  adicionarPedidos(pedido:Pedido[]) {
     return new Promise((assert, reject) =>  {
+       
       console.log("adicionarPedidos"); 
-      this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid + '/pedidos/' + pedido.id)
-        .update(pedido).then(() =>  {
+      this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid + '/pedidos/')
+         .set(pedido).then(() =>  {
+          
           console.log("promesa adicionarPedidos"); 
           assert(); 
         })
@@ -85,12 +86,13 @@ export class UsuarioProvider {
   
   obtenerProductosActivos() {
     return new Promise((assert, reject) =>  {
+       
       console.log("Entrando a promesa obtenerProductosActivos"); 
         this._afDB.list('/Usuarios/' + this.usuario.credenciales.uid + '/pedidos/')
             .valueChanges()
             .subscribe((pedidosResultado:Pedido[]) =>  {
-              console.log("Promesa busqueda activos: " + pedidosResultado.length); 
-              console.log(JSON.stringify(pedidosResultado)); 
+               
+              console.log("Promesa busqueda activos: " + pedidosResultado.length);  
               let filtroPedidos = pedidosResultado.filter(item => item.esConfirmado === false)
               this.pedidosActivos = filtroPedidos; 
               assert(); 

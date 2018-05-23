@@ -8,12 +8,8 @@
 
 
 <ion-content>
-    <ion-item class="item-divider item-icon-left">
-        <i class="icon ion-plus-circled"></i> Notes
-    </ion-item>
     <ion-list *ngFor="let pedido of pedidosActivos; let i=index">
         <ion-item-group>
-            <ion-icon color="danger" name="ios-trash" item-end></ion-icon>
             <ion-item-divider color="light">{{pedido.producto[0].Nombre}}: {{pedido.valor| currency}} pesos</ion-item-divider>
             <ion-item>
                 <ion-avatar item-start text-center>
@@ -35,7 +31,10 @@
             </ion-item>
         </ion-item-group>
     </ion-list>
-    <ion-item>
+    <ion-item-group>
+        <ion-item-divider color="light">Valor Total {{valorTotalPedidos| currency}} pesos</ion-item-divider>
+        <ion-item>
 
-    </ion-item>
+        </ion-item>
+    </ion-item-group>
 </ion-content>

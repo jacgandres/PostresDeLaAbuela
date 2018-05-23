@@ -18,9 +18,9 @@ export class TabsPage {
     private platform: Platform) {
   }
 
-  tabHome = HomePage;
-  tapResumen = ResumenPage;
-  tabPerfil = PerfilPage;
+  public tabHome = HomePage;
+  public tapResumen = ResumenPage;
+  public tabPerfil = PerfilPage;
 
 
   salirAplicacion() {

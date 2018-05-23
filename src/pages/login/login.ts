@@ -104,13 +104,10 @@ export class LoginPage {
 
               console.log("antes de entrar a la promesa firebase")
               this.usuarioProv.salvarCredencialEnFireBase().then((result) => {
-                debugger;
-                console.log("entro a la  promesa firebase")
-
-                this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario);
-
-                this.navCtrl.setRoot(TabsPage);
-
+                
+                console.log("entro a la  promesa firebase");
+                this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario); 
+                this.navCtrl.setRoot(TabsPage); 
               });
 
         });

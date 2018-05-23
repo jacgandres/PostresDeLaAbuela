@@ -15,9 +15,9 @@ export class MyApp {
   rootPage: any;
 
   constructor(platform: Platform,
-            statusBar: StatusBar,
-            splashScreen: SplashScreen,
-            private storageProv: StorageUsuarioProvider) {
+              statusBar: StatusBar,
+              splashScreen: SplashScreen,
+              private storageProv: StorageUsuarioProvider) {
       
       platform.ready().then(() => { 
             storageProv.obtenerUsuario().then(result => {

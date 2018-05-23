@@ -22,11 +22,11 @@ export class HomePage {
   public detalleProductoPage = DetalleProductoPage;
 
   constructor(public navCtrl: NavController,
-    private usuarioStorage: StorageUsuarioProvider,
-    private usuarioProv: UsuarioProvider,
-    private platform: Platform,
-    private productoProv: ProductosProvider,
-    private screenOrientation: ScreenOrientation) {
+              private usuarioStorage: StorageUsuarioProvider,
+              private usuarioProv: UsuarioProvider,
+              private platform: Platform,
+              private productoProv: ProductosProvider,
+              private screenOrientation: ScreenOrientation) {
 
     this.iniciarHome();
     this.ObtenerProducto();
@@ -42,13 +42,16 @@ export class HomePage {
   
     this.usuarioStorage.obtenerUsuario().then((result) => {
       this.Usuario = this.usuarioStorage.usuarioAutenticado;
-      if (this.Usuario.pedidos == null) {
-        this.pedidos = [];
-      }
-      else {
-        this.pedidos = this.Usuario.pedidos;
-        console.log("Pedidos: " + this.Usuario.pedidos.length);
-      }
+      this.usuarioProv.usuario = this.Usuario;
+      this.usuarioProv.obtenerProductosActivos().then(()=>{ 
+          if (this.usuarioProv.pedidosActivos == null) {
+            this.pedidos = [];
+          }
+          else {
+            this.pedidos = this.usuarioProv.pedidosActivos;
+            console.log("Pedidos: " + this.pedidos.length);
+          }
+      })
       console.log("iniciarHome obtenerUsuario: ");
     })
 
