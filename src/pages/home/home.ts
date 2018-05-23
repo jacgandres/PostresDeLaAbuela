@@ -1,5 +1,5 @@
 import { Component, LOCALE_ID } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, Tabs } from 'ionic-angular';
 
 import { Producto, Pedido, Usuario } from "../../Modelo/Modelo.Export";
 
@@ -26,7 +26,8 @@ export class HomePage {
               private usuarioProv: UsuarioProvider,
               private platform: Platform,
               private productoProv: ProductosProvider,
-              private screenOrientation: ScreenOrientation) {
+              private screenOrientation: ScreenOrientation,
+              private tabs:Tabs) {
 
     this.iniciarHome();
     this.ObtenerProducto();
@@ -71,5 +72,11 @@ export class HomePage {
     this.Evento = event;
     this.iniciarHome();
     this.ObtenerProducto();
+  }
+  
+  IrResume(){
+    this.tabs.select(1);
+    this.tabs.getByIndex(1).setElementAttribute("tabBadge",3);
+    this.tabs.getByIndex(1).setElementAttribute("tabBadgeStyle","danger");
   }
 }

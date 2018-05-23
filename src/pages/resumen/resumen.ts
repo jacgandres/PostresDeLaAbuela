@@ -33,8 +33,8 @@ export class ResumenPage {
         .then(() => {
           this.pedidosActivos = this.usuarioProv.pedidosActivos;
           console.log("pedidosActivos: " + this.pedidosActivos.length);
-          this.calcularTotalPedidos().then((result:number)=>{
-            debugger; 
+          this.calcularTotalPedidos().then((result:number)=>{ 
+            this.valorTotalPedidos = result;
           })
         },
           (error) => {
@@ -46,11 +46,10 @@ export class ResumenPage {
   calcularTotalPedidos(){
     return new Promise((assert, reject)=>{ 
       let valor=0;
-      this.pedidosActivos.forEach(function (pedidoItem: Pedido) { 
-        debugger;
-        this.valorTotalPedidos += pedidoItem.valor;
-        assert(valor);
-     });
+      this.pedidosActivos.forEach(function (pedidoItem: Pedido )  {  
+        valor += pedidoItem.valor;
+      });
+      assert(valor);
     });
   }
 }

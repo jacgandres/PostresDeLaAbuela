@@ -1,23 +1,15 @@
 <ion-header>
     <ion-navbar color="blueMenu">
-        <ion-buttons start>
-            <button ion-button>
-                Salir
-            </button>
-        </ion-buttons>
-
         <ion-title> Tortas de Mamá </ion-title>
-
         <ion-buttons end>
-            <button ion-button icon-only>
+            <button ion-button icon-only (click)="IrResume();">
               <ion-icon name="cart"></ion-icon>
               <ion-badge color="danger"
                          class="carrito-numero"
                          *ngIf="pedidos.length > 0">
-                      {{pedidos.length }}
+                         {{pedidos.length }}
               </ion-badge>
         </button> &nbsp; &nbsp;
-
         </ion-buttons>
     </ion-navbar>
 
