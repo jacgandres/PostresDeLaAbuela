@@ -1,0 +1,45 @@
+<ion-header>
+
+    <ion-navbar color="blueMenu">
+        <ion-title>Resumen de Pedidos</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-item-group>
+        <ion-item-divider color="dark">Valor Total: <strong>{{valorTotalPedidos| currency}} pesos</strong></ion-item-divider>
+        <ion-item>
+            <button ion-button color="facebook" icon-left block>
+                    <ion-icon name="logo-usd"></ion-icon>
+                    Confirmar Pedido
+            </button>
+        </ion-item>
+    </ion-item-group>
+    <ion-list *ngFor="let pedido of pedidosActivos; let i=index">
+        <ion-item-group>
+            <ion-item-divider color="light">{{pedido.producto[0].Nombre}}: {{pedido.valor| currency}} pesos</ion-item-divider>
+            <ion-avatar item-start text-center>
+                <img [src]="pedido.producto[0].Url">
+            </ion-avatar>
+            <ion-list>
+                <ion-item>
+                    <ion-icon name="md-cart" item-start></ion-icon>
+                    Cantidad: {{pedido.producto.length}}
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="md-calendar" item-start></ion-icon>
+                    Fecha Entrega:
+                </ion-item>
+                <ion-item>
+                    {{pedido.fechaEntrega|date:'fullDate'}}
+                </ion-item>
+            </ion-list>
+            <button ion-button color="danger" icon-left block>
+                    <ion-icon name="ios-trash"></ion-icon>
+                    Quitar Productos
+            </button>
+        </ion-item-group>
+    </ion-list>
+</ion-content>

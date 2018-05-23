@@ -1,14 +1,45 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar color="blueMenu">
+        <ion-title> Tortas de Mamá </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="IrResume();">
+              <ion-icon name="cart"></ion-icon>
+              <ion-badge color="danger"
+                         class="carrito-numero"
+                         *ngIf="pedidos.length > 0">
+                         {{pedidos.length }}
+              </ion-badge>
+        </button> &nbsp; &nbsp;
+        </ion-buttons>
+    </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+
+    <ion-refresher (ionRefresh)="actualizarProductos($event)">
+        <ion-refresher-content color="primary">
+            <h1> Actualizando</h1>
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-slides no-margin no-padding pager loop paginationType="progress" effect="flip">
+        <ion-slide *ngFor="let producto of Productos; let i=index">
+            <ion-list>
+                <ion-list-header class="marginTop">
+                    <h1>
+                        <font face="font_family"><strong> {{producto.Nombre}}</strong> </font>
+                    </h1>
+                    <button ion-button left [navPush]="detalleProductoPage" [navParams]="{producto: producto}">
+                        Seleccionar
+                    </button>
+                </ion-list-header>
+                <ion-item text-center>
+                    <img [src]="producto.Url">
+                </ion-item>
+                <p>{{producto.Valor | currency }} pesos</p>
+                <p color="light">{{producto.Descripcion}}</p>
+            </ion-list>
+        </ion-slide>
+    </ion-slides>
 </ion-content>
