@@ -18,9 +18,9 @@ export class TabsPage {
     private platform: Platform) {
   }
 
-  tabHome = HomePage;
-  tapResumen = ResumenPage;
-  tabPerfil = PerfilPage;
+  public tabHome = HomePage;
+  public tapResumen = ResumenPage;
+  public tabPerfil = PerfilPage;
 
 
   salirAplicacion() {
@@ -30,7 +30,7 @@ export class TabsPage {
   quitarRegistroAplicacion(){
     this.usuarioProv.usuario = this.usuarioStorage.usuarioAutenticado;
     this.usuarioProv.usuario.credenciales.estaLogeado = false; 
-    this.usuarioProv.deslogearUsuario().then(() => {
+    this.usuarioProv.actualizarUsuario ().then(() => {
       this.usuarioStorage.salirAplicacion().then((result) => {
         this.platform.exitApp();
       })

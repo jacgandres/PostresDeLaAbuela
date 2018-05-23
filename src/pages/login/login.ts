@@ -23,12 +23,12 @@ import { UsuarioProvider, StorageUsuarioProvider } from "../../providers/provide
 export class LoginPage {
 
   constructor(public navCtrl: NavController,
-    private afAuth: AngularFireAuth,
-    private fb: Facebook,
-    private platform: Platform,
-    private usuarioProv: UsuarioProvider,
-    private navPar: NavParams,
-    private usuarioStorage: StorageUsuarioProvider) {
+              private afAuth: AngularFireAuth,
+              private fb: Facebook,
+              private platform: Platform,
+              private usuarioProv: UsuarioProvider,
+              private navPar: NavParams,
+              private usuarioStorage: StorageUsuarioProvider) {
   }
 
   ionViewDidLoad() {
@@ -40,7 +40,7 @@ export class LoginPage {
   }
 
   signInWithFacebook() {
-
+ 
     if (this.platform.is('cordova')) {
       console.log("antes de entrar a la primera promesa")
 
@@ -84,27 +84,31 @@ export class LoginPage {
       }
     } else {
       // escritorio
+     
       this.afAuth.auth
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
-        .then(res => {
+        .then(user => {
+           
+          console.log("entro a la segunda promesa")
+          console.log(JSON.stringify(user));
+          let credencial = user.user;
+              this.usuarioProv.cargarUsuario(
+                credencial.displayName,
+                credencial.email,
+                credencial.photoURL,
+                credencial.uid,
+                'facebook',
+                true,
+                credencial.phoneNumber
+              );
 
-          console.log(res);
-          debugger;
-          let user = res.user;
-
-          this.usuarioProv.cargarUsuario(
-            user.displayName,
-            user.email,
-            user.photoURL,
-            user.uid,
-            'facebook',
-            true
-          );
-
-          this.usuarioProv.salvarCredencialEnFireBase();
-
-
-          this.navCtrl.setRoot(HomePage);
+              console.log("antes de entrar a la promesa firebase")
+              this.usuarioProv.salvarCredencialEnFireBase().then((result) => {
+                
+                console.log("entro a la  promesa firebase");
+                this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario); 
+                this.navCtrl.setRoot(TabsPage); 
+              });
 
         });
     }
