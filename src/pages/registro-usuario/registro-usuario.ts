@@ -20,6 +20,7 @@ export class RegistroUsuarioPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegistroUsuarioPage');
+    console.log(this.navParams.get('Data'));
   }
 
 }
