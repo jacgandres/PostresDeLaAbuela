@@ -13,9 +13,9 @@ import { UsuarioProvider } from '../../providers/usuario/UsuarioProvider';
 export class TabsPage {
 
   constructor(public navCtrl: NavController,
-    private usuarioStorage: StorageUsuarioProvider,
-    private usuarioProv: UsuarioProvider,
-    private platform: Platform) {
+              private usuarioStorage: StorageUsuarioProvider,
+              private usuarioProv: UsuarioProvider,
+              private platform: Platform) {
   }
 
   public tabHome = HomePage;
@@ -29,9 +29,9 @@ export class TabsPage {
 
   quitarRegistroAplicacion(){
     this.usuarioProv.usuario = this.usuarioStorage.usuarioAutenticado;
-    this.usuarioProv.usuario.credenciales.estaLogeado = false; 
-    this.usuarioProv.actualizarUsuario ().then(() => {
-      this.usuarioStorage.salirAplicacion().then((result) => {
+    this.usuarioProv.usuario.credenciales.estaLogeado = false;  
+    this.usuarioProv.actualizarUsuario ().then(() => { 
+      this.usuarioStorage.salirAplicacion().then((result) => { 
         this.platform.exitApp();
       })
     }); 

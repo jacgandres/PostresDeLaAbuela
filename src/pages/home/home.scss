@@ -1,16 +1,8 @@
 page-home {
-    ion-item {
-        background-image: url(../../assets/imgs/wallpaper.png);
-        background-repeat: repeat;
-        background-color: #cccccc;
-    }
+    ion-item,
+    ion-list-header,
     ion-slides {
-        background-image: url(../../assets/imgs/wallpaper.png);
-        background-repeat: repeat;
-        background-color: #cccccc;
-    }
-    ion-list-header {
-        background-image: url(../../assets/imgs/wallpaper.png);
+        background-image: url(../../assets/imgs/wallpaper.jpg);
         background-repeat: repeat;
         background-color: #cccccc;
     }

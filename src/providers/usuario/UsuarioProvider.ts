@@ -43,6 +43,7 @@ export class UsuarioProvider {
   }
 
   actualizarUsuario() {
+     
     console.log("actualizarUsuario: " + this.usuario.credenciales.uid)
     return this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).update(this.usuario); 
   }

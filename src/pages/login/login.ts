@@ -37,9 +37,12 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage'); 
   }
 
-  RegistrarUsuario() {
+  IngresarPorUsuario() {
+  }
+
+  Registrarse() {
     let alert = this.alertCtrl.create( {
-      title:'Bienvenido, registro en nuestra aplicacion', 
+      title:'Bienvenido, registro en nuestra aplicación', 
       message:'Por favor ingrese los siguientes datos', 
         inputs:[ {
             name:'Email', 
@@ -62,7 +65,8 @@ export class LoginPage {
           }
         },  {
           text:'Registrarse', 
-          handler:(data) =>  {
+          handler:(data) =>  
+          {
             console.log(data); 
             this.navCtrl.push(RegistroUsuarioPage,  {Data:data})
           }
