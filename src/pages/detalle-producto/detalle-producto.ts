@@ -94,21 +94,24 @@ export class DetalleProductoPage {
     this.usuarioProv.usuario.pedidos.push(this.Pedido);
 
     this.usuarioProv.adicionarPedidos(this.usuarioProv.usuario.pedidos)
-      .then(() => {
-        
+      .then(() => { 
         console.log("Agregar pedido a firebase")
         this.storage.usuarioAutenticado = this.usuarioProv.usuario;
-        this.storage.actualizarUsuario();
-        
-        this.tabs.select(1);
-        this.tabs.getByIndex(1).setElementAttribute("tabBadge",3);
-        this.tabs.getByIndex(1).setElementAttribute("tabBadgeStyle","danger");
+        this.storage.actualizarUsuario().then(()=>{ 
+            this.navCtrl.popTo(ResumenPage); 
+            this.tabs.select(1); 
+        }); 
       });
   }
 
   AgregarPedido(): any {
+    this.Producto.Descripcion=""; 
     this.Pedido.producto.push(this.Producto);
     this.Pedido.valor += this.Producto.Valor;
   }
 
+
+  ionViewWillUnload(){
+    console.log("ionViewWillUnload DetalleProducto")
+  }
 }

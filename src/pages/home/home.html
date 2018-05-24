@@ -30,7 +30,8 @@
                     <h1>
                         <font face="font_family"><strong> {{producto.Nombre}}</strong> </font>
                     </h1>
-                    <button ion-button left [navPush]="detalleProductoPage" [navParams]="{producto: producto}">
+                    <button ion-button icon-left [navPush]="detalleProductoPage" [navParams]="{producto: producto}">
+                        <ion-icon name="md-checkbox-outline"></ion-icon>
                         Seleccionar
                     </button>
                 </ion-list-header>

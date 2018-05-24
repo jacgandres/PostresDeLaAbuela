@@ -9,7 +9,7 @@
 
 <ion-content>
     <ion-item-group>
-        <ion-item-divider color="dark">Valor Total: <strong>{{valorTotalPedidos| currency}} pesos</strong></ion-item-divider>
+        <ion-item-divider color="item-divider"><strong>Valor Total: {{valorTotalPedidos| currency}} pesos</strong></ion-item-divider>
         <ion-item>
             <button ion-button color="facebook" icon-left block>
                     <ion-icon name="logo-usd"></ion-icon>
@@ -19,7 +19,7 @@
     </ion-item-group>
     <ion-list *ngFor="let pedido of pedidosActivos; let i=index">
         <ion-item-group>
-            <ion-item-divider color="light">{{pedido.producto[0].Nombre}}: {{pedido.valor| currency}} pesos</ion-item-divider>
+            <ion-item-divider color="item-divider"><strong>{{pedido.producto[0].Nombre}}: {{pedido.valor| currency}} pesos</strong></ion-item-divider>
             <ion-avatar item-start text-center>
                 <img [src]="pedido.producto[0].Url">
             </ion-avatar>
