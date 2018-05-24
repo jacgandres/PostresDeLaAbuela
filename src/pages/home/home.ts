@@ -8,6 +8,8 @@ import { UsuarioProvider, StorageUsuarioProvider, ProductosProvider } from "../.
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { DetalleProductoPage } from '../detalle-producto/detalle-producto';
+ 
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 @Component({
   selector: 'page-home',
@@ -27,11 +29,15 @@ export class HomePage {
     private platform: Platform,
     private productoProv: ProductosProvider,
     private screenOrientation: ScreenOrientation,
+    private firebaseAnalytics: FirebaseAnalytics,
     private tabs: Tabs) {
 
   }
+
   ionViewWillEnter() {
     console.log("ionViewWillEnter");
+
+
     this.iniciarHome();
     this.ObtenerProducto();
 
@@ -53,6 +59,10 @@ export class HomePage {
     this.usuarioStorage.obtenerUsuario().then((result) => {
       this.Usuario = this.usuarioStorage.usuarioAutenticado;
       this.usuarioProv.usuario = this.Usuario;
+      
+      this.firebaseAnalytics.setUserId(this.Usuario.credenciales.uid); 
+      this.firebaseAnalytics.setCurrentScreen("home");
+
       this.usuarioProv.obtenerProductosActivos().then(() => {
         if (this.usuarioProv.pedidosActivos == null) {
           this.pedidos = [];

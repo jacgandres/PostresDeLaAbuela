@@ -6,6 +6,7 @@ import { DatePicker } from '@ionic-native/date-picker';
 import { ConfiguracionServiciosProvider, StorageUsuarioProvider, UsuarioProvider } from "../../providers/providers.export";
 import { CommunUtilidadesProvider } from '../../providers/commun-utilidades/commun-utilidades';
 import { ResumenPage } from "../resumen/resumen";
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 @IonicPage()
 @Component({
@@ -26,12 +27,14 @@ export class DetalleProductoPage {
               private utilidades: CommunUtilidadesProvider,
               private storage: StorageUsuarioProvider,
               private usuarioProv: UsuarioProvider,
-              private platform:Platform,
+              private platform:Platform, 
+              private firebaseAnalytics: FirebaseAnalytics,
               private tabs:Tabs) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DetalleProductoPage');
+  ionViewWillEnter() {
+    this.firebaseAnalytics.setCurrentScreen("Detalle Producto");
+    console.log('ionViewWillEnter DetalleProductoPage');
     this.Producto = this.navParams.get("producto");
     this.Pedido.fechaPedido = Date.now();
 
@@ -68,13 +71,14 @@ export class DetalleProductoPage {
   }
 
   ConfirmarPedido() {
-     
+    this.firebaseAnalytics.logEvent("confirmo pedido al carrito de compras",  {Usuario:this.storage.usuarioAutenticado.credenciales.uid}); 
+
     this.Pedido.estadoPedido = 'solicitado';
     this.Pedido.id = this.utilidades.guid();
     this.Pedido.esConfirmado = false;
     this.Pedido.producto = [];
     this.Pedido.valor = 0;
-
+ 
     if (this.Cantidad) {
       for (let index = 0; index < this.Cantidad; index++) {
         this.AgregarPedido();

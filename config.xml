@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.postresdelaabuela.app001" version="0.0.10" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.postresdelaabuela.app001" version="0.0.13" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>TortasDeMama</name>
     <description>aplicacion en ionic</description>
     <author email="jacgandres@gmail.com" href="mailto:jacgandres@gmail.com">Jacgandres's Team</author>
@@ -20,6 +20,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="1500" />
     <platform name="android">
+        <resource-file src="google-services.json" target="google-services.json" />
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -91,5 +92,9 @@
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
     <allow-navigation href="http://192.168.1.104:8100" />
     <allow-navigation href="http://192.168.42.65:8100" />
+    <plugin name="cordova-plugin-firebase-analytics" spec="^0.13.0">
+        <variable name="FIREBASE_VERSION" value="11.6.+" />
+    </plugin>
+    <plugin name="cordova-support-google-services" spec="^1.1.0" />
     <engine name="android" spec="6.4.0" />
 </widget>

@@ -30,6 +30,7 @@ import { DatePicker } from '@ionic-native/date-picker';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 import { Facebook } from '@ionic-native/facebook';
 import { IonicStorageModule } from '@ionic/storage'; 
@@ -59,7 +60,7 @@ export const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
+    AngularFireDatabaseModule, 
     AngularFireAuthModule,
     HttpModule
   ],
@@ -75,7 +76,7 @@ export const firebaseConfig = {
     //{ provide: LOCALE_ID, useValue: 'es' },
     AngularFireDatabase, DatePicker, Facebook,  
     ProductosProvider, UsuarioProvider, StorageUsuarioProvider,
-    ConfiguracionServiciosProvider,
+    ConfiguracionServiciosProvider,FirebaseAnalytics,
     CommunUtilidadesProvider
   ]
 })
