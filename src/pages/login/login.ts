@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams, Platform, AlertController }from 'io
 
 import {AngularFireAuth }from 'angularfire2/auth'; 
 import * as firebase from 'firebase/app'; 
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 
 import {Facebook }from '@ionic-native/facebook'; 
@@ -30,6 +31,7 @@ export class LoginPage {
               private usuarioProv:UsuarioProvider, 
               private navPar:NavParams, 
               private usuarioStorage:StorageUsuarioProvider, 
+              private firebaseAnalytics: FirebaseAnalytics,
               private alertCtrl:AlertController) {
   }
 
@@ -37,6 +39,10 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage'); 
   }
 
+  ionViewWillEnter() {
+    this.firebaseAnalytics.setCurrentScreen("Detalle Producto");
+  }
+  
   IngresarPorUsuario() {
   }
 
