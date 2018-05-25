@@ -1,12 +1,50 @@
-<ion-header>
+<ion-header color="blueMenu">
 
     <ion-navbar>
-        <ion-title>Bienvenido, registro de nuevos usuarios</ion-title>
+        <ion-title>Bienvenido</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <ion-list>
+        <ion-list-header>
+            <p>Registro de nuevos usuarios</p>
+        </ion-list-header>
+        <ion-item>
+            <ion-label floating>Telefono</ion-label>
+            <ion-input color="light" type="tel" [(ngModel)]="Telefono"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" [(ngModel)]="Correo"></ion-input>
+        </ion-item>
 
+        <ion-item>
+            <ion-label floating>Clave</ion-label>
+            <ion-input type="password" [(ngModel)]="Clave"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Confirmar Clave</ion-label>
+            <ion-input type="password" [(ngModel)]="VerificarClave"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Nombres</ion-label>
+            <ion-input type="text" [(ngModel)]="Nombre"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Apellidos</ion-label>
+            <ion-input type="text" [(ngModel)]="Apellido"></ion-input>
+        </ion-item>
+
+    </ion-list>
+
+    <button ion-button color="google" icon-right (click)="Registrarse()" block>
+        <ion-icon name="md-log-in"></ion-icon>
+        Registrarse
+      </button>
 </ion-content>

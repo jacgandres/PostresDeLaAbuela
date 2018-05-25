@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 
 //import { AES, Encoder } from "crypto-js";
+import { AlertController } from 'ionic-angular';
 
 @Injectable()
 export class CommunUtilidadesProvider {
@@ -12,7 +13,7 @@ export class CommunUtilidadesProvider {
   private iv = CryptoJS.enc.Base64.parse("#base64IV#");
 
 
-  constructor() { }
+  constructor(private alertCtrl: AlertController) { }
 
   public guid() {
     return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
@@ -32,5 +33,16 @@ export class CommunUtilidadesProvider {
     ///https://github.com/WeslleyDeSouza/SecureAngularLogin
     let decrypted = CryptoJS.AES.decrypt(textoEncriptado, this.fraseSecreta);
     return decrypted.toString(CryptoJS.enc.Utf8);
+  }
+
+
+  public MostrarMensaje(titulo: string, mensaje: string, inputs: any[], botones: any[]) {
+    let alert = this.alertCtrl.create({
+      title: titulo,
+      message: mensaje,
+      inputs: inputs,
+      buttons: botones
+    });
+    alert.present();
   }
 }

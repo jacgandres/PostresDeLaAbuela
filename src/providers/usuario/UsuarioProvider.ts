@@ -20,7 +20,8 @@ export class UsuarioProvider {
 
   }
 
-  cargarUsuario(nombre: string,
+  cargarUsuario(clave: string,
+    nombre: string,
     email: string,
     imagen: string,
     uid: string,
@@ -31,6 +32,7 @@ export class UsuarioProvider {
     console.log("cargarUsuario")
     this.usuario.credenciales = {};
 
+    this.usuario.credenciales.clave = clave;
     this.usuario.credenciales.nombre = nombre;
     this.usuario.credenciales.email = email;
     this.usuario.credenciales.imagen = imagen;
@@ -90,12 +92,12 @@ export class UsuarioProvider {
       console.log("Entrando a promesa obtenerProductosActivos");
       this._afDB.list('/Usuarios/')
         .valueChanges()
-        .subscribe((Usuarios: Usuario[]) => { 
+        .subscribe((Usuarios: Usuario[]) => {
           console.log("Promesa busqueda usuarios: " + Usuarios.length);
           let claveEncriptada = this.funcionesComunes.Encriptar(data.Clave).toString();
-          let usuarioLogeado:any =
+          let usuarioLogeado: any =
             Usuarios.filter(item => item.credenciales.clave == claveEncriptada
-                                    && item.credenciales.email == data.Email);
+              && item.credenciales.email == data.Email);
           if (usuarioLogeado != null && usuarioLogeado[0].credenciales) {
             this.usuario = usuarioLogeado[0];
             assert(true);
