@@ -3,7 +3,7 @@
     <name>TortasDeMama</name>
     <description>aplicacion en ionic</description>
     <author email="jacgandres@gmail.com" href="mailto:jacgandres@gmail.com">Jacgandres's Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.104:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -96,5 +96,6 @@
         <variable name="FIREBASE_VERSION" value="11.6.+" />
     </plugin>
     <plugin name="cordova-support-google-services" spec="^1.1.0" />
+    <plugin name="onesignal-cordova-plugin" spec="^2.4.1" />
     <engine name="android" spec="6.4.0" />
 </widget>

@@ -19,7 +19,8 @@ import { ContenidoSeguroPipe } from "../pipes/pipes.module";
 //Providers
 import {
   ProductosProvider, ConfiguracionServiciosProvider,
-  UsuarioProvider, StorageUsuarioProvider
+  UsuarioProvider, StorageUsuarioProvider,
+  CommunUtilidadesProvider, PushNotificationProvider
 } from "../providers/providers.export";
 
 ///plugin
@@ -34,9 +35,9 @@ import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 import { Facebook } from '@ionic-native/facebook';
 import { IonicStorageModule } from '@ionic/storage'; 
+import { OneSignal } from '@ionic-native/onesignal';
 
-import { HttpModule } from '@angular/http';
-import { CommunUtilidadesProvider } from '../providers/commun-utilidades/commun-utilidades';
+import { HttpModule } from '@angular/http'; 
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAYfcqRXUiO3-6AJUUJvozc8Mb2ttukdrY",
@@ -76,8 +77,9 @@ export const firebaseConfig = {
     //{ provide: LOCALE_ID, useValue: 'es' },
     AngularFireDatabase, DatePicker, Facebook,  
     ProductosProvider, UsuarioProvider, StorageUsuarioProvider,
-    ConfiguracionServiciosProvider,FirebaseAnalytics,
-    CommunUtilidadesProvider
+    ConfiguracionServiciosProvider,FirebaseAnalytics,OneSignal,
+    CommunUtilidadesProvider,
+    PushNotificationProvider
   ]
 })
 export class AppModule { }
