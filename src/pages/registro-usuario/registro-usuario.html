@@ -1,6 +1,6 @@
-<ion-header color="blueMenu">
+<ion-header>
 
-    <ion-navbar>
+    <ion-navbar color="blueMenu">
         <ion-title>Bienvenido</ion-title>
     </ion-navbar>
 
@@ -9,11 +9,13 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-list-header>
-            <p>Registro de nuevos usuarios</p>
-        </ion-list-header>
+
+        <h3>Registro de nuevos usuarios</h3>
+
         <ion-item>
-            <ion-label floating>Telefono</ion-label>
+            <ion-label floating>
+                <h4>Telefono</h4>
+            </ion-label>
             <ion-input color="light" type="tel" [(ngModel)]="Telefono"></ion-input>
         </ion-item>
         <ion-item>
