@@ -4,3 +4,13 @@ Copy the apkname.apk file you want to know the hash of to the 'Java\jdk1.7.0_79\
 Run this command keytool -list -printcert -jarfile apkname.apk
 Copy the SHA1 value and convert it using this site (http://tomeko.net/online_tools/hex_to_base64.php)
 Use the converted Keyhash value (ex. zaHqo1xcaPv6CmvlWnJk3SaNRIQ=)
+
+
+
+
+https://theapplaunchpad.com/
+
+https://play.google.com/apps/publish/?account=7953124224461937529
+
+https://developers.facebook.com/apps/1974106809569329/settings/basic/
+

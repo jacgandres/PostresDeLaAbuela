@@ -3,15 +3,13 @@
     <ion-grid>
         <ion-row>
             <ion-col>
-
                 <h3>Bienvenidos</h3>
-
             </ion-col>
         </ion-row>
 
         <ion-row>
-            <ion-col class="top-20">
-                <img src="./assets/imgs/app-logo.png">
+            <ion-col>
+                <img src="./assets/imgs/app-logo.jpg">
             </ion-col>
         </ion-row>
 
@@ -22,23 +20,27 @@
         </ion-row>
 
         <ion-row>
-            <ion-col class="top-5">
+            <ion-col>
                 <br>
-                <br>
-                <button (click)="signInWithFacebook()" ion-button color="facebook" icon-left block>
-                <ion-icon name="logo-facebook"></ion-icon>
-                Facebook
-              </button>
-                <br>
-                <button (click)="signInGoogle()" ion-button color="google" icon-left block>
-                <ion-icon name="contacts"></ion-icon>
-                Registrarse Usuario/Contraseña
-              </button>
+                <ion-buttons>
+                    <button (click)="signInWithFacebook()" ion-button color="facebook" icon-left block>
+                        <ion-icon name="logo-facebook"></ion-icon>
+                        Facebook
+                    </button>
+                    <br>
+                    <button ion-button color="primary" icon-left block (click)="IngresarPorUsuario()">
+                        <ion-icon name="contacts"></ion-icon>
+                        Usuario/Contraseña
+                    </button>
+                    <br>
+                    <button ion-button color="google" icon-right (click)="Registrarse()">
+                        <ion-icon name="md-log-in"></ion-icon>
+                        Registrarse
+                    </button>
+                </ion-buttons>
             </ion-col>
         </ion-row>
 
     </ion-grid>
-
-
 
 </ion-content>

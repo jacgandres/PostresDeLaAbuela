@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Usuario, Pedido, Producto } from "../../Modelo/Modelo.Export";
 import { UsuarioProvider, StorageUsuarioProvider } from '../../providers/providers.export';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
  
 
 
@@ -19,12 +20,14 @@ export class ResumenPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private usuarioProv: UsuarioProvider,
+    private firebaseAnalytics: FirebaseAnalytics,
     private userStorage: StorageUsuarioProvider) {
 
   }
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad pagina resumen");
+  ionViewWillEnter() {
+    console.log("ionViewWillEnter pagina resumen");
+    this.firebaseAnalytics.setCurrentScreen("Resumen")
     this.userStorage.obtenerUsuario().then(() => {
       this.usuarioAuthenticado = this.userStorage.usuarioAutenticado;
 

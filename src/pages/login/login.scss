@@ -1,19 +1,15 @@
 page-login {
-    ion-content {
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1b577b+0,341a4a+100 */
-        background: #1b577b;
-        /* Old browsers */
-        background: -moz-linear-gradient(-45deg, #1b577b 0%, #341a4a 100%);
-        /* FF3.6-15 */
-        background: -webkit-linear-gradient(-45deg, #1b577b 0%, #341a4a 100%);
-        /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(135deg, #1b577b 0%, #341a4a 100%);
-    }
-    img {
-        width: 150px;
+    ion-item,
+    ion-content,
+    ion-thumbnail ion-col ion-row ion-grid ion-slides,
+    ion-list-header,
+    ion-slides {
+        background-image: url(https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/wallpaper.jpg?alt=media&token=98d9e21b-e90a-4fe2-bcb8-be76cf9bddcb);
+        background-repeat: repeat;
+        background-color: #cccccc;
     }
     h3 {
-        color: white;
+        color: black;
     }
     .top-20 {
         margin-top: 20%;

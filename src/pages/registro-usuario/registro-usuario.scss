@@ -1,3 +1,23 @@
 page-registro-usuario {
-
+    ion-item,
+    ion-content,
+    ion-thumbnail ion-col ion-row ion-grid ion-slides,
+    ion-list-header,
+    ion-slides {
+        background-image: url(https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/wallpaper.jpg?alt=media&token=98d9e21b-e90a-4fe2-bcb8-be76cf9bddcb);
+        background-repeat: repeat;
+        background-color: #cccccc;
+    }
+    img {
+        width: 150px;
+    }
+    h3 {
+        color: white;
+    }
+    .top-20 {
+        margin-top: 20%;
+    }
+    .top-5 {
+        margin-top: 5%;
+    }
 }

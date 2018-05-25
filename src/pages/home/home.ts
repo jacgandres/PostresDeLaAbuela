@@ -8,6 +8,8 @@ import { UsuarioProvider, StorageUsuarioProvider, ProductosProvider } from "../.
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { DetalleProductoPage } from '../detalle-producto/detalle-producto';
+ 
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 @Component({
   selector: 'page-home',
@@ -22,36 +24,53 @@ export class HomePage {
   public detalleProductoPage = DetalleProductoPage;
 
   constructor(public navCtrl: NavController,
-              private usuarioStorage: StorageUsuarioProvider,
-              private usuarioProv: UsuarioProvider,
-              private platform: Platform,
-              private productoProv: ProductosProvider,
-              private screenOrientation: ScreenOrientation,
-              private tabs:Tabs) {
+    private usuarioStorage: StorageUsuarioProvider,
+    private usuarioProv: UsuarioProvider,
+    private platform: Platform,
+    private productoProv: ProductosProvider,
+    private screenOrientation: ScreenOrientation,
+    private firebaseAnalytics: FirebaseAnalytics,
+    private tabs: Tabs) {
+
+  }
+
+  ionViewWillEnter() {
+    console.log("ionViewWillEnter");
+
 
     this.iniciarHome();
     this.ObtenerProducto();
 
     if (this.platform.is('cordova')) {
-    console.log(this.screenOrientation.type);
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      console.log(this.screenOrientation.type);
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     }
+  }
+  ionViewDidLoad() {
+    console.log("ionViewDidLoad");
+  }
+  ionViewDidEnter() {
+    console.log("ionViewDidEnter");
   }
 
   iniciarHome() {
     console.log("Iniciando iniciarHome");
-  
+
     this.usuarioStorage.obtenerUsuario().then((result) => {
       this.Usuario = this.usuarioStorage.usuarioAutenticado;
       this.usuarioProv.usuario = this.Usuario;
-      this.usuarioProv.obtenerProductosActivos().then(()=>{ 
-          if (this.usuarioProv.pedidosActivos == null) {
-            this.pedidos = [];
-          }
-          else {
-            this.pedidos = this.usuarioProv.pedidosActivos;
-            console.log("Pedidos: " + this.pedidos.length);
-          }
+      
+      this.firebaseAnalytics.setUserId(this.Usuario.credenciales.uid); 
+      this.firebaseAnalytics.setCurrentScreen("home");
+
+      this.usuarioProv.obtenerProductosActivos().then(() => {
+        if (this.usuarioProv.pedidosActivos == null) {
+          this.pedidos = [];
+        }
+        else {
+          this.pedidos = this.usuarioProv.pedidosActivos;
+          console.log("Pedidos: " + this.pedidos.length);
+        }
       })
       console.log("iniciarHome obtenerUsuario: ");
     })
@@ -73,10 +92,10 @@ export class HomePage {
     this.iniciarHome();
     this.ObtenerProducto();
   }
-  
-  IrResume(){
+
+  IrResume() {
     this.tabs.select(1);
-    this.tabs.getByIndex(1).setElementAttribute("tabBadge",3);
-    this.tabs.getByIndex(1).setElementAttribute("tabBadgeStyle","danger");
+    this.tabs.getByIndex(1).setElementAttribute("tabBadge", 3);
+    this.tabs.getByIndex(1).setElementAttribute("tabBadgeStyle", "danger");
   }
 }
