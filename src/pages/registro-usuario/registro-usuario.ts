@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { CommunUtilidadesProvider } from '../../providers/commun-utilidades/commun-utilidades';
 
-/**
- * Generated class for the RegistroUsuarioPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+ 
 
 @IonicPage()
 @Component({
@@ -15,12 +11,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RegistroUsuarioPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private funcionesComunes:CommunUtilidadesProvider) {
+                
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegistroUsuarioPage');
-    console.log(this.navParams.get('Data'));
+    debugger;
+    let data = this.navParams.get('Data')
+    console.log(JSON.stringify(data));
+
+    var result1= this.funcionesComunes.Encriptar(data.Clave)
+ 
+    console.log(JSON.stringify(result1.toString()));
+    var result2= this.funcionesComunes.Encriptar(result1.toString());
+    console.log(JSON.stringify(result2.toString()));
+
+
   }
 
 }

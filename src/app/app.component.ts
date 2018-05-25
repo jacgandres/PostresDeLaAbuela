@@ -27,16 +27,17 @@ export class MyApp {
         console.log("storageProv.obtenerUsuario: " + JSON.stringify(result));
         statusBar.styleDefault();
         splashScreen.hide();
+        let id ="Usuario No Autenticado";
         if (result) {
           this.firebaseAnalytics.logEvent("confirmo pedido al carrito de compras", 
                  {Usuario:this.storageProv.usuarioAutenticado.credenciales.uid}); 
-
+                 id = this.storageProv.usuarioAutenticado.credenciales.uid;
           this.rootPage = TabsPage;
         } else {
           this.rootPage = LoginPage;
         }
 
-        this._pushProvider.iniciar_notificacion(this.storageProv.usuarioAutenticado.credenciales.uid);
+        this._pushProvider.iniciar_notificacion(id);
       });
     });
   }
