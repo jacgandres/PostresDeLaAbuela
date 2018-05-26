@@ -37,6 +37,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { IonicStorageModule } from '@ionic/storage'; 
 import { OneSignal } from '@ionic-native/onesignal';
 
+
 import { HttpModule } from '@angular/http'; 
 
 export const firebaseConfig = {

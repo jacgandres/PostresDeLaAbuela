@@ -31,6 +31,7 @@ export class StorageUsuarioProvider {
   }
 
   guardarUsuario(usuario: Usuario) {
+    
     this.usuarioAutenticado = usuario;
     this.actualizarUsuario();
   }

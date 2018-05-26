@@ -4,7 +4,8 @@ import { CommunUtilidadesProvider } from '../../providers/commun-utilidades/comm
 import { Credenciales, Usuario } from '../../Modelo/Modelo.Export';
 import { UsuarioProvider } from '../../providers/usuario/UsuarioProvider';
 import { TabsPage } from '../tabs/tabs';
-
+import { StorageUsuarioProvider } from '../../providers/providers.export';
+ 
 
 
 @IonicPage()
@@ -13,8 +14,7 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'registro-usuario.html',
 })
 export class RegistroUsuarioPage {
-
-  usuarioStorage: any;
+ 
   public Nombre = "";
   public Apellido = "";
   public Telefono = "";
@@ -23,9 +23,10 @@ export class RegistroUsuarioPage {
   public Correo = "";
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private usuarioProv: UsuarioProvider,
-    private funcionesComunes: CommunUtilidadesProvider) {
+              public navParams: NavParams,
+              private usuarioProv: UsuarioProvider,
+              private funcionesComunes: CommunUtilidadesProvider,
+              private usuarioStorage:StorageUsuarioProvider) {
 
   }
 
@@ -45,6 +46,7 @@ export class RegistroUsuarioPage {
   }
 
   Registrarse() {
+    
     if (this.Clave != this.VerificarClave) {
       this.funcionesComunes.MostrarMensaje(
         "Información",
@@ -78,25 +80,25 @@ export class RegistroUsuarioPage {
     usuario.email = this.Correo;
     usuario.photoURL = "";
     usuario.uid = this.funcionesComunes.guid();
-    usuario.phoneNumber = this.getPhoneNumber();
-
+    usuario.phoneNumber = this.getPhoneNumber(); 
+    
     this.salvarCredencialEnFireBase(usuario, "Usuario/Clave", this.funcionesComunes.Encriptar(this.Clave).toString());
 
   }
 
   private salvarCredencialEnFireBase(user: any, provider: string, clave: string) {
-    this.usuarioProv.cargarUsuario(clave,
-      user.displayName,
-      user.email,
-      user.photoURL,
-      user.uid,
-      provider,
-      true,
-      user.phoneNumber);
+                                    this.usuarioProv.cargarUsuario(clave,
+                                      user.displayName,
+                                      user.email,
+                                      user.photoURL,
+                                      user.uid,
+                                      provider,
+                                      true,
+                                      user.phoneNumber);
 
     console.log("antes de entrar a la promesa firebase");
     this.usuarioProv.salvarCredencialEnFireBase().then(() => {
-      debugger;
+      
       console.log("entro a la  promesa firebase");
       this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario);
       this.navCtrl.setRoot(TabsPage);
@@ -105,6 +107,11 @@ export class RegistroUsuarioPage {
 
 
   getPhoneNumber(): any {
-    return "1234567890";
+    if(this.Telefono.length>0)
+    {return this.Telefono;}
+    else
+    {
+      return "12344321";
+    }
   }
 }

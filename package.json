@@ -53,6 +53,7 @@
         "firebase": "^4.12.1",
         "ionic-angular": "3.9.2",
         "ionicons": "3.0.0",
+        "npm": "^6.1.0",
         "onesignal-cordova-plugin": "^2.4.1",
         "promise-polyfill": "^7.1.2",
         "rxjs": "5.5.8",
@@ -73,7 +74,7 @@
             "cordova-plugin-ionic-keyboard": {},
             "cordova-plugin-facebook4": {
                 "APP_ID": "1974106809569329",
-                "APP_NAME": "PostresDeLaAbuela",
+                "APP_NAME": "TortasDeMama",
                 "ANDROID_SDK_VERSION": "4.+"
             },
             "cordova-plugin-statusbar": {},
