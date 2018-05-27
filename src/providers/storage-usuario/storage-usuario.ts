@@ -30,14 +30,14 @@ export class StorageUsuarioProvider {
     }
   }
 
-  guardarUsuario(usuario: Usuario) {
-    
+  guardarUsuario(usuario: Usuario) { 
     this.usuarioAutenticado = usuario;
-    this.actualizarUsuario();
+    return this.actualizarUsuario();
   }
 
   actualizarUsuario() {
     return new Promise((assert) => {
+       
       console.log("actualizarUsuario")
       if (this.platform.is('cordova')) {
         this.storage.remove('usuario');

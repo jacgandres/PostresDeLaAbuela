@@ -61,10 +61,9 @@ export class UsuarioProvider {
       this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid)
         .valueChanges()
         .subscribe(snapshot =>  {
-          
+           
           console.log("this._afDB.list " + this.usuario.credenciales.uid)
           if ( ! snapshot) {
-             
             console.log("Insertara nuevo registro " + this.usuario.credenciales.uid)
             this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
           }

@@ -1,6 +1,6 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule, LOCALE_ID } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -36,6 +36,7 @@ import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { Facebook } from '@ionic-native/facebook';
 import { IonicStorageModule } from '@ionic/storage'; 
 import { OneSignal } from '@ionic-native/onesignal';
+import { TouchID } from '@ionic-native/touch-id';
 
 
 import { HttpModule } from '@angular/http'; 
@@ -79,7 +80,7 @@ export const firebaseConfig = {
     AngularFireDatabase, DatePicker, Facebook,  
     ProductosProvider, UsuarioProvider, StorageUsuarioProvider,
     ConfiguracionServiciosProvider,FirebaseAnalytics,OneSignal,
-    CommunUtilidadesProvider,
+    CommunUtilidadesProvider, TouchID,
     PushNotificationProvider
   ]
 })

@@ -16,31 +16,31 @@
             <ion-label floating>
                 <h4>Telefono</h4>
             </ion-label>
-            <ion-input color="light" type="tel" [(ngModel)]="Telefono"></ion-input>
+            <ion-input color="light" type="tel" [(ngModel)]="Telefono" name="Telefono"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Email</ion-label>
-            <ion-input type="email" [(ngModel)]="Correo"></ion-input>
+            <ion-input type="email" [(ngModel)]="Correo" name="Email"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Clave</ion-label>
-            <ion-input type="password" [(ngModel)]="Clave"></ion-input>
+            <ion-input type="password" [(ngModel)]="Clave" name="Clave1"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Confirmar Clave</ion-label>
-            <ion-input type="password" [(ngModel)]="VerificarClave"></ion-input>
+            <ion-input type="password" [(ngModel)]="VerificarClave" name="VerificarClave"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Nombres</ion-label>
-            <ion-input type="text" [(ngModel)]="Nombre"></ion-input>
+            <ion-input type="text" [(ngModel)]="Nombre" name="Nombres"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Apellidos</ion-label>
-            <ion-input type="text" [(ngModel)]="Apellido"></ion-input>
+            <ion-input type="text" [(ngModel)]="Apellido" name="Apellido"></ion-input>
         </ion-item>
 
     </ion-list>
@@ -48,5 +48,5 @@
     <button ion-button color="google" icon-right (click)="Registrarse()" block>
         <ion-icon name="md-log-in"></ion-icon>
         Registrarse
-      </button>
+    </button>
 </ion-content>
