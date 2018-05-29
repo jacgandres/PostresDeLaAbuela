@@ -71,6 +71,7 @@ export class LoginPage {
         text: 'Ingresar',
         handler: (data) => {
           this.funcionesComunes.presentarLoadingDefault();
+           
           this.usuarioProv.obtenerUsuarioPorClave(data).then((result) => {
 
             if (result) {

@@ -94,7 +94,7 @@ export class UsuarioProvider {
 
   obtenerUsuarioPorClave(data) {
     return new Promise((assert) =>  {
-       
+        
       console.log("Entrando a promesa obtenerProductosActivos"); 
       this.suscripcionClave =
           this._afDB.list('/Usuarios/')

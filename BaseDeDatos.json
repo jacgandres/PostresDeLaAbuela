@@ -1,54 +1,99 @@
 {
+    "Configuracion": {
+        "WallPaper": "http://www.google.com"
+    },
     "Productos": [{
         "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
         "Estado": true,
+        "Id": 1,
         "Nombre": "Tarta de Frutas del Bosque",
-        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/images.jpg?alt=media&token=e3787868-05b6-4e97-a7ff-75abe3c83ea3",
+        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/tortas_y_postres.jpg?alt=media&token=cfe83857-0824-43a6-9d89-1f54e16b66c0",
         "Valor": 34233
     }, {
         "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
         "Estado": true,
+        "Id": 2,
         "Nombre": "exquisitas tortas y postres",
-        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/postres-lacteos-recetas.jpg?alt=media&token=3f30e963-b83d-4b8b-b2d3-7cb96df62fa3",
+        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/torta_de_fresas_y_nu_OJO20.jpg?alt=media&token=851e1d96-aebe-43f8-9772-d8d6ea1d725b",
         "Valor": 54355
     }, {
         "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
         "Estado": true,
+        "Id": 3,
         "Nombre": "Torta de asafran",
-        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/tarta-de-queso.jpg?alt=media&token=c74a15c1-2cc4-412b-8a07-573333f82222",
+        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/tarta_de_queso.jpg?alt=media&token=6de9874a-3d59-4a64-9626-f3eb5e32606a",
         "Valor": 76543
     }, {
         "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
         "Estado": true,
+        "Id": 4,
         "Nombre": "tarta de queso sin horno",
-        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/Tarta_de_Frutas_del_Bosque.jpg?alt=media&token=89bb76ef-a59e-41d3-aa38-67a2d31bbea7",
+        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/tarta_de_frutas_del__J7Rjc.jpg?alt=media&token=876ba88c-330a-4a19-be4f-4cfe43aaa9b9",
         "Valor": 87654
     }, {
         "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
         "Estado": true,
+        "Id": 5,
         "Nombre": "Torta de fresas y Nutella",
-        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/Torta-de-fresas-y-Nutella.jpg?alt=media&token=cdfa2c8e-d82c-42c9-a1ed-fec1e631a32d",
+        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/postres_lacteos_rece_CS73O.jpg?alt=media&token=622db90b-bb3a-4eac-8ec4-842b478e6847",
         "Valor": 35643
     }, {
         "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
         "Estado": true,
+        "Id": 6,
         "Nombre": "postres lacteos ",
-        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/tortas-y-postres.jpg?alt=media&token=13f2f33a-d019-4eda-bdf3-95a93a837539",
+        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/images.jpg?alt=media&token=c2bbfbc3-d74b-42c9-9164-797ab63ef7c1",
         "Valor": 12345
     }],
     "Usuarios": {
-        "DShPjXjUgiO6nvoMJOSYvOhHD873": {
+        "6d9dc022-ff7e-a204-2ba1-82678d86255e": {
             "credenciales": {
-                "email": "alejandrohd5310@gmail.com",
-                "estaLogeado": true,
-                "imagen": "https://graph.facebook.com/10216476096237735/picture",
-                "nombre": "Alejandro Herrera",
-                "provider": "facebook",
-                "uid": "DShPjXjUgiO6nvoMJOSYvOhHD873"
-            }
+                "clave": "5GSCR3zoTFDGkYtXAo3eBw==",
+                "email": "jacg",
+                "estaLogeado": false,
+                "imagen": "",
+                "nombre": "JAIME ANDRES CARVAJAL GUTIERREZ",
+                "numeroTelefonico": "1234567890",
+                "provider": "Usuario/Clave",
+                "uid": "6d9dc022-ff7e-a204-2ba1-82678d86255e"
+            },
+            "pedidos": [{
+                "esConfirmado": false,
+                "estadoPedido": "solicitado",
+                "fechaEntrega": 1527619329335,
+                "fechaPedido": 1527619321885,
+                "id": "21125cfb-1d41-aa78-d9c6-b5ef2b735e49",
+                "observacion": "11111111111",
+                "producto": [{
+                    "Descripcion": "",
+                    "Estado": true,
+                    "Id": 1,
+                    "Nombre": "Tarta de Frutas del Bosque",
+                    "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/tortas_y_postres.jpg?alt=media&token=cfe83857-0824-43a6-9d89-1f54e16b66c0",
+                    "Valor": 34233
+                }],
+                "valor": 34233
+            }, {
+                "esConfirmado": false,
+                "estadoPedido": "solicitado",
+                "fechaEntrega": 1527705830252,
+                "fechaPedido": 1527619430252,
+                "id": "ef6d1a7f-ae13-9ba4-1fa1-f6c0fefc716b",
+                "observacion": "222222222222222",
+                "producto": [{
+                    "Descripcion": "",
+                    "Estado": true,
+                    "Id": 1,
+                    "Nombre": "Tarta de Frutas del Bosque",
+                    "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/tortas_y_postres.jpg?alt=media&token=cfe83857-0824-43a6-9d89-1f54e16b66c0",
+                    "Valor": 34233
+                }],
+                "valor": 34233
+            }]
         },
         "FaSSHtiscdUgs54RppwGRR66QhM2": {
             "credenciales": {
+                "clave": "",
                 "email": "jacgandres@hotmail.com",
                 "estaLogeado": false,
                 "imagen": "https://graph.facebook.com/10155669999542532/picture",
@@ -56,105 +101,14 @@
                 "provider": "facebook",
                 "uid": "FaSSHtiscdUgs54RppwGRR66QhM2"
             },
-            "pedidos": {
-                "4ba4f305-c57b-de42-3a2a-5608126114ae": {
-                    "esConfirmado": false,
-                    "estadoPedido": "solicitado",
-                    "fechaEntrega": 1527051600000,
-                    "fechaPedido": 1526906287263,
-                    "id": "4ba4f305-c57b-de42-3a2a-5608126114ae",
-                    "observacion": " ninguna",
-                    "producto": [{
-                        "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        "Estado": true,
-                        "Nombre": "Tarta de Frutas del Bosque",
-                        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/images.jpg?alt=media&token=e3787868-05b6-4e97-a7ff-75abe3c83ea3",
-                        "Valor": 34233
-                    }, {
-                        "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        "Estado": true,
-                        "Nombre": "Tarta de Frutas del Bosque",
-                        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/images.jpg?alt=media&token=e3787868-05b6-4e97-a7ff-75abe3c83ea3",
-                        "Valor": 34233
-                    }, {
-                        "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        "Estado": true,
-                        "Nombre": "Tarta de Frutas del Bosque",
-                        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/images.jpg?alt=media&token=e3787868-05b6-4e97-a7ff-75abe3c83ea3",
-                        "Valor": 34233
-                    }],
-                    "valor": 102699
-                },
-                "c45f4a39-50b2-6604-05bd-b3a66e4c3f7c": {
-                    "esConfirmado": false,
-                    "estadoPedido": "solicitado",
-                    "fechaEntrega": 1527656400000,
-                    "fechaPedido": 1526906912548,
-                    "id": "c45f4a39-50b2-6604-05bd-b3a66e4c3f7c",
-                    "observacion": "Ninguna",
-                    "producto": [{
-                        "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        "Estado": true,
-                        "Nombre": "Tarta de Frutas del Bosque",
-                        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/images.jpg?alt=media&token=e3787868-05b6-4e97-a7ff-75abe3c83ea3",
-                        "Valor": 34233
-                    }, {
-                        "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        "Estado": true,
-                        "Nombre": "Tarta de Frutas del Bosque",
-                        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/images.jpg?alt=media&token=e3787868-05b6-4e97-a7ff-75abe3c83ea3",
-                        "Valor": 34233
-                    }, {
-                        "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        "Estado": true,
-                        "Nombre": "Tarta de Frutas del Bosque",
-                        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/images.jpg?alt=media&token=e3787868-05b6-4e97-a7ff-75abe3c83ea3",
-                        "Valor": 34233
-                    }, {
-                        "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        "Estado": true,
-                        "Nombre": "Tarta de Frutas del Bosque",
-                        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/images.jpg?alt=media&token=e3787868-05b6-4e97-a7ff-75abe3c83ea3",
-                        "Valor": 34233
-                    }, {
-                        "Descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        "Estado": true,
-                        "Nombre": "Tarta de Frutas del Bosque",
-                        "Url": "https://firebasestorage.googleapis.com/v0/b/postresdelaabula.appspot.com/o/images.jpg?alt=media&token=e3787868-05b6-4e97-a7ff-75abe3c83ea3",
-                        "Valor": 34233
-                    }],
-                    "valor": 171165
-                }
-            }
-        },
-        "MQD3McS7w8bt3Dt2w2WmuIu1oFe2": {
-            "credenciales": {
-                "email": "carinsol02@hotmail.com",
-                "estaLogeado": true,
-                "imagen": "https://graph.facebook.com/10155832448664355/picture",
-                "nombre": "Catherin Solarte",
-                "provider": "facebook",
-                "uid": "MQD3McS7w8bt3Dt2w2WmuIu1oFe2"
-            }
-        },
-        "qN27bckyhydUbRKMCSG9uyubWgT2": {
-            "credenciales": {
-                "email": "jeduardocarvajal@gmail.com",
-                "estaLogeado": true,
-                "imagen": "https://graph.facebook.com/10156588131728470/picture",
-                "nombre": "Jaime Eduardo Carvajal Amado",
-                "provider": "facebook",
-                "uid": "qN27bckyhydUbRKMCSG9uyubWgT2"
-            }
-        },
-        "uSnYbBcljdTJJOrgvHsMhbm5gBm2": {
-            "credenciales": {
-                "email": "karollcardonammm@hotmail.com",
-                "estaLogeado": true,
-                "imagen": "https://graph.facebook.com/10215016264907349/picture",
-                "nombre": "Carol Natalia Cardona Ospina",
-                "provider": "facebook",
-                "uid": "uSnYbBcljdTJJOrgvHsMhbm5gBm2"
+            "dispositivo": {
+                "cordova": "cordova",
+                "isVirtual": false,
+                "manufacturer": "manufacturer",
+                "model": "model",
+                "serial": "serial",
+                "uuid": "uuid",
+                "version": "version"
             }
         }
     }
