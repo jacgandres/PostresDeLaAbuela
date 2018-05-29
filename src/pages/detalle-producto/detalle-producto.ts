@@ -33,6 +33,7 @@ export class DetalleProductoPage {
   }
 
   ionViewWillEnter() {
+    this.utilidades.presentarLoadingDefault();
     this.firebaseAnalytics.setCurrentScreen("Detalle Producto");
     console.log('ionViewWillEnter DetalleProductoPage');
     this.Producto = this.navParams.get("producto");
@@ -44,6 +45,7 @@ export class DetalleProductoPage {
         this.Pedido.fechaPedido = Date.now();
       }
       this.Pedido.fechaEntrega = this.Pedido.fechaPedido + (1000 * 60 * 60 * 24);
+      this.utilidades.LoadingView.dismiss();
     })
 
   }
@@ -71,6 +73,7 @@ export class DetalleProductoPage {
   }
 
   ConfirmarPedido() {
+    this.utilidades.presentarLoadingDefault();
     this.firebaseAnalytics.logEvent("confirmo pedido al carrito de compras",  {Usuario:this.storage.usuarioAutenticado.credenciales.uid}); 
 
     this.Pedido.estadoPedido = 'solicitado';
@@ -102,6 +105,7 @@ export class DetalleProductoPage {
         console.log("Agregar pedido a firebase")
         this.storage.usuarioAutenticado = this.usuarioProv.usuario;
         this.storage.actualizarUsuario().then(()=>{ 
+            this.utilidades.LoadingView.dismiss();
             this.navCtrl.popTo(ResumenPage); 
             this.tabs.select(1); 
         }); 

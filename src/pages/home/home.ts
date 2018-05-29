@@ -3,7 +3,7 @@ import { NavController, Platform, Tabs } from 'ionic-angular';
 
 import { Producto, Pedido, Usuario } from "../../Modelo/Modelo.Export";
 
-import { UsuarioProvider, StorageUsuarioProvider, ProductosProvider } from "../../providers/providers.export";
+import { UsuarioProvider, StorageUsuarioProvider, ProductosProvider, CommunUtilidadesProvider } from "../../providers/providers.export";
 
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
@@ -24,13 +24,14 @@ export class HomePage {
   public detalleProductoPage = DetalleProductoPage;
 
   constructor(public navCtrl: NavController,
-    private usuarioStorage: StorageUsuarioProvider,
-    private usuarioProv: UsuarioProvider,
-    private platform: Platform,
-    private productoProv: ProductosProvider,
-    private screenOrientation: ScreenOrientation,
-    private firebaseAnalytics: FirebaseAnalytics,
-    private tabs: Tabs) {
+              private usuarioStorage: StorageUsuarioProvider,
+              private usuarioProv: UsuarioProvider,
+              private platform: Platform,
+              private productoProv: ProductosProvider,
+              private funcionesComunes:CommunUtilidadesProvider,
+              private screenOrientation: ScreenOrientation,
+              private firebaseAnalytics: FirebaseAnalytics,
+              private tabs: Tabs) {
 
   }
 
@@ -55,7 +56,7 @@ export class HomePage {
 
   iniciarHome() {
     console.log("Iniciando iniciarHome");
-
+    this.funcionesComunes.presentarLoadingDefault();
     this.usuarioStorage.obtenerUsuario().then((result) => {
       this.Usuario = this.usuarioStorage.usuarioAutenticado;
       this.usuarioProv.usuario = this.Usuario;
@@ -71,6 +72,7 @@ export class HomePage {
           this.pedidos = this.usuarioProv.pedidosActivos;
           console.log("Pedidos: " + this.pedidos.length);
         }
+        this.funcionesComunes.LoadingView.dismiss();
       })
       console.log("iniciarHome obtenerUsuario: ");
     })

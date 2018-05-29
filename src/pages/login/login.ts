@@ -70,12 +70,14 @@ export class LoginPage {
       }, {
         text: 'Ingresar',
         handler: (data) => {
+          this.funcionesComunes.presentarLoadingDefault();
           this.usuarioProv.obtenerUsuarioPorClave(data).then((result) => {
 
             if (result) {
               console.log("entro a la  promesa firebase");
-              this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario);
-              this.navCtrl.setRoot(TabsPage);
+              this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario).then(()=>{ 
+                  this.navCtrl.setRoot(TabsPage);
+              });
             }
             else {
               this.funcionesComunes.MostrarMensaje('Usuario/Clave Erroneas',
@@ -86,6 +88,7 @@ export class LoginPage {
                   role: 'cancel'
                 }]);
             }
+            this.funcionesComunes.LoadingView.dismiss();
           });
         }
       }

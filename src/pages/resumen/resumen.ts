@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Usuario, Pedido, Producto } from "../../Modelo/Modelo.Export";
-import { UsuarioProvider, StorageUsuarioProvider } from '../../providers/providers.export';
-import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
+import { UsuarioProvider, StorageUsuarioProvider, CommunUtilidadesProvider } from '../../providers/providers.export';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics'; 
  
 
 
@@ -17,11 +17,12 @@ export class ResumenPage {
   public usuarioAuthenticado: Usuario = {};
   public pedidosActivos: Pedido[] = [];
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private usuarioProv: UsuarioProvider,
-    private firebaseAnalytics: FirebaseAnalytics,
-    private userStorage: StorageUsuarioProvider) {
+  constructor(private navCtrl: NavController,
+              private navParams: NavParams,
+              private funcionesComunes: CommunUtilidadesProvider,
+              private usuarioProv: UsuarioProvider,
+              private firebaseAnalytics: FirebaseAnalytics,
+              private userStorage: StorageUsuarioProvider) {
 
   }
 
@@ -37,11 +38,13 @@ export class ResumenPage {
           this.pedidosActivos = this.usuarioProv.pedidosActivos;
           console.log("pedidosActivos: " + this.pedidosActivos.length);
           this.calcularTotalPedidos().then((result:number)=>{ 
-            this.valorTotalPedidos = result;
+              this.valorTotalPedidos = result;
+              this.funcionesComunes.LoadingView.dismiss();
           })
         },
           (error) => {
-            console.log("pedidosActivos Error");
+              console.log("pedidosActivos Error");
+              this.funcionesComunes.LoadingView.dismiss();
           });
     });
   }

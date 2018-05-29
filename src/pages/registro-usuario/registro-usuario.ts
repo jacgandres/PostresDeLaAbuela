@@ -23,10 +23,10 @@ export class RegistroUsuarioPage {
   public Correo = "";
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private usuarioProv: UsuarioProvider,
-    private funcionesComunes: CommunUtilidadesProvider,
-    private usuarioStorage: StorageUsuarioProvider) {
+              public navParams: NavParams,
+              private usuarioProv: UsuarioProvider,
+              private funcionesComunes: CommunUtilidadesProvider,
+              private usuarioStorage: StorageUsuarioProvider) {
 
   }
 
@@ -75,6 +75,8 @@ export class RegistroUsuarioPage {
       return;
     }
 
+    this.funcionesComunes.presentarLoadingDefault();
+     
     let usuario: any = {};
     usuario.displayName = this.Nombre + " " + this.Apellido;
     usuario.email = this.Correo;
@@ -89,20 +91,19 @@ export class RegistroUsuarioPage {
 
   private salvarCredencialEnFireBase(user: any, provider: string, clave: string) {
     this.usuarioProv.cargarUsuario(clave,
-      user.displayName,
-      user.email,
-      user.photoURL,
-      user.uid,
-      provider,
-      true,
-      user.phoneNumber);
+                                    user.displayName,
+                                    user.email,
+                                    user.photoURL,
+                                    user.uid,
+                                    provider,
+                                    true,
+                                    user.phoneNumber);
 
     console.log("antes de entrar a la promesa firebase");
-    this.usuarioProv.salvarCredencialEnFireBase().then(() => {
-       
+    this.usuarioProv.salvarCredencialEnFireBase().then(() => { 
       console.log("entro a la  promesa firebase");
       this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario).then(() => {
-       
+        this.funcionesComunes.LoadingView.dismiss();
         this.navCtrl.setRoot(TabsPage);
       });
     });
