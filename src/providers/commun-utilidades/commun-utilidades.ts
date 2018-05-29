@@ -2,18 +2,21 @@
 import { Injectable } from '@angular/core';
 
 import * as CryptoJS from 'crypto-js';
+ 
+import { AlertController, LoadingController, Loading } from 'ionic-angular';
 
-//import { AES, Encoder } from "crypto-js";
-import { AlertController } from 'ionic-angular';
+import { Device } from '@ionic-native/device';
 
 @Injectable()
 export class CommunUtilidadesProvider {
 
   private fraseSecreta = CryptoJS.enc.Base64.parse("#base64Key#");
   private iv = CryptoJS.enc.Base64.parse("#base64IV#");
+  public LoadingView:Loading;
 
 
-  constructor(private alertCtrl: AlertController) { }
+  constructor(private alertCtrl: AlertController,
+              private loadingCtrl: LoadingController) { }
 
   public guid() {
     return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
@@ -44,5 +47,17 @@ export class CommunUtilidadesProvider {
       buttons: botones
     });
     alert.present();
+  } 
+    
+  public presentarLoadingDefault() {
+    this.LoadingView = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `
+        <div class="custom-spinner-container" color='blueMenu'>
+          <img src='../assets/imgs/lazyload.gif'></img>
+        </div>`,
+    }); 
+
+    this.LoadingView.present();
   }
 }

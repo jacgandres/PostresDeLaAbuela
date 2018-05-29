@@ -1,4 +1,4 @@
-import { Component, LOCALE_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, Platform, Tabs } from 'ionic-angular';
 
 import { Producto, Pedido, Usuario } from "../../Modelo/Modelo.Export";

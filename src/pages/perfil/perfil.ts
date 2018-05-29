@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
-
-/**
- * Generated class for the PerfilPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { DeviceServiceProvider, StorageUsuarioProvider } from '../../providers/providers.export';
+import { Dispositivo, Usuario} from '../../Modelo/Modelo.Export'; 
+ 
 
 @IonicPage()
 @Component({
@@ -16,12 +12,23 @@ import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 })
 export class PerfilPage {
 
-  constructor(public navCtrl: NavController, 
-    private firebaseAnalytics: FirebaseAnalytics,public navParams: NavParams) {
+  Dispositivo:Dispositivo;
+  UsuarioAutenticado:Usuario
+
+  constructor(private navCtrl: NavController, 
+              private firebaseAnalytics: FirebaseAnalytics,
+              private navParams: NavParams,
+              private deviceProvider: DeviceServiceProvider,
+              private usuarioStorage:StorageUsuarioProvider
+            ) {
   }
 
   ionViewWillEnter() {
-    this.firebaseAnalytics.setCurrentScreen("Resumen")
+    this.firebaseAnalytics.setCurrentScreen("Resumen"); 
+
+    this.deviceProvider.obtenerInformacionDispositivo();
+    this.Dispositivo = this.deviceProvider.Usuario.dispositivo;
+    this.usuarioStorage.usuarioAutenticado.dispositivo = this.Dispositivo;
   }
 
 }

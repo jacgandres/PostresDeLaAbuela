@@ -6,6 +6,7 @@ import {Injectable }from '@angular/core';
 import {Usuario, Pedido }from '../../Modelo/Modelo.Export'; 
 import {CommunUtilidadesProvider }from '../commun-utilidades/commun-utilidades'; 
 import {assert }from 'ionic-angular/util/util'; 
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Injectable()
@@ -13,6 +14,9 @@ export class UsuarioProvider {
 
   public usuario:Usuario =  {}; 
   public pedidosActivos:Pedido[]; 
+  private suscripcionUsuarios:Subscription;
+  private suscripcionClave:Subscription;
+  private suscripcionProductos:Subscription;
 
 
   constructor(private _afDB:AngularFireDatabase, 
@@ -58,20 +62,21 @@ export class UsuarioProvider {
       
       console.log("verificarSiYaSeRegistro")
 
-      this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid)
-        .valueChanges()
-        .subscribe(snapshot =>  {
-           
-          console.log("this._afDB.list " + this.usuario.credenciales.uid)
-          if ( ! snapshot) {
-            console.log("Insertara nuevo registro " + this.usuario.credenciales.uid)
-            this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
-          }
-          else {
-            this.usuario = snapshot; 
-          }
-          assert(true); 
-        })
+      this.suscripcionUsuarios =
+         this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid)
+            .valueChanges()
+            .subscribe(snapshot =>  { 
+                console.log("this._afDB.list " + this.usuario.credenciales.uid)
+                if ( ! snapshot) {
+                  console.log("Insertara nuevo registro " + this.usuario.credenciales.uid)
+                  this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
+                }
+                else {
+                  this.usuario = snapshot; 
+                }
+                this.suscripcionUsuarios.unsubscribe();
+                assert(true); 
+            });
     }); 
   }
 
@@ -91,39 +96,42 @@ export class UsuarioProvider {
     return new Promise((assert) =>  {
        
       console.log("Entrando a promesa obtenerProductosActivos"); 
-      this._afDB.list('/Usuarios/')
-        .valueChanges()
-        .subscribe((Usuarios:Usuario[]) =>  {
-           
-          console.log("Promesa busqueda usuarios: " + Usuarios.length); 
-          let claveEncriptada = this.funcionesComunes.Encriptar(data.Clave).toString(); 
-          let usuarioLogeado:any = 
-            Usuarios.filter(item => item.credenciales.clave == claveEncriptada && item.credenciales.email == data.Email); 
-          if (usuarioLogeado != null && usuarioLogeado[0]  && usuarioLogeado[0].credenciales) {
-            this.usuario = usuarioLogeado[0]; 
-            assert(true); 
-          }
-          else {
-            assert(false); 
-          }
-        }); 
+      this.suscripcionClave =
+          this._afDB.list('/Usuarios/')
+            .valueChanges()
+            .subscribe((Usuarios:Usuario[]) =>  { 
+                console.log("Promesa busqueda usuarios: " + Usuarios.length); 
+                let claveEncriptada = this.funcionesComunes.Encriptar(data.Clave).toString(); 
+                let usuarioLogeado:any = 
+                  Usuarios.filter(item => item.credenciales.clave == claveEncriptada && item.credenciales.email == data.Email); 
+                
+                this.suscripcionClave.unsubscribe();
+                
+                if (usuarioLogeado != null && usuarioLogeado[0]  && usuarioLogeado[0].credenciales) {
+                  this.usuario = usuarioLogeado[0]; 
+                  assert(true); 
+                }
+                else {
+                  assert(false); 
+                }
+            }); 
     }); 
   }
 
 
   obtenerProductosActivos() {
-    return new Promise((assert, reject) =>  {
-
+    return new Promise((assert, reject) =>  { 
       console.log("Entrando a promesa obtenerProductosActivos"); 
-      this._afDB.list('/Usuarios/' + this.usuario.credenciales.uid + '/pedidos/')
-        .valueChanges()
-        .subscribe((pedidosResultado:Pedido[]) =>  {
-
-          console.log("Promesa busqueda activos: " + pedidosResultado.length); 
-          let filtroPedidos = pedidosResultado.filter(item => item.esConfirmado === false)
-          this.pedidosActivos = filtroPedidos; 
-          assert(); 
-        }); 
+      this.suscripcionProductos =
+          this._afDB.list('/Usuarios/' + this.usuario.credenciales.uid + '/pedidos/')
+            .valueChanges()
+            .subscribe((pedidosResultado:Pedido[]) =>  { 
+                console.log("Promesa busqueda activos: " + pedidosResultado.length); 
+                let filtroPedidos = pedidosResultado.filter(item => item.esConfirmado === false)
+                this.pedidosActivos = filtroPedidos; 
+                this.suscripcionProductos.unsubscribe();
+                assert(); 
+            }); 
     }); 
   }
 }

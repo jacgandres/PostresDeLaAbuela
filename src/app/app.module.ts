@@ -1,7 +1,7 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, LoadingController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -19,13 +19,14 @@ import { ContenidoSeguroPipe } from "../pipes/pipes.module";
 //Providers
 import {
   ProductosProvider, ConfiguracionServiciosProvider,
-  UsuarioProvider, StorageUsuarioProvider,
+  UsuarioProvider, StorageUsuarioProvider, DeviceServiceProvider,
   CommunUtilidadesProvider, PushNotificationProvider
 } from "../providers/providers.export";
 
 ///plugin
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { DatePicker } from '@ionic-native/date-picker';
+import { Device } from '@ionic-native/device';
 
 
 import { AngularFireModule } from 'angularfire2';
@@ -35,8 +36,7 @@ import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 import { Facebook } from '@ionic-native/facebook';
 import { IonicStorageModule } from '@ionic/storage'; 
-import { OneSignal } from '@ionic-native/onesignal';
-import { TouchID } from '@ionic-native/touch-id';
+import { OneSignal } from '@ionic-native/onesignal';  
 
 
 import { HttpModule } from '@angular/http'; 
@@ -65,6 +65,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, 
     AngularFireAuthModule,
+    //LoadingController,
     HttpModule
   ],
   bootstrap: [IonicApp],
@@ -80,8 +81,9 @@ export const firebaseConfig = {
     AngularFireDatabase, DatePicker, Facebook,  
     ProductosProvider, UsuarioProvider, StorageUsuarioProvider,
     ConfiguracionServiciosProvider,FirebaseAnalytics,OneSignal,
-    CommunUtilidadesProvider, TouchID,
-    PushNotificationProvider
+    CommunUtilidadesProvider, Device, 
+    PushNotificationProvider,  
+    DeviceServiceProvider
   ]
 })
 export class AppModule { }

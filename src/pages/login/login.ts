@@ -6,8 +6,7 @@ import * as firebase from 'firebase/app';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 
-import { Facebook } from '@ionic-native/facebook';
-import { TouchID } from '@ionic-native/touch-id';
+import { Facebook } from '@ionic-native/facebook'; 
 
 import { HomePage, TabsPage, RegistroUsuarioPage } from '../pages.export';
 
@@ -33,23 +32,13 @@ export class LoginPage {
               private navPar: NavParams,
               private funcionesComunes: CommunUtilidadesProvider,
               private usuarioStorage: StorageUsuarioProvider,
-              private firebaseAnalytics: FirebaseAnalytics,
-              private touchId:TouchID,
+              private firebaseAnalytics: FirebaseAnalytics, 
               private alertCtrl: AlertController) {
         
-     this.TouchIdDisponible=false;
-     this.FingerPrintEstaDisponible();
+     this.TouchIdDisponible=false; 
 
   }
-
-  FingerPrintEstaDisponible(){
-    this.touchId.isAvailable()
-        .then(
-          res => console.log('TouchID is available!'),
-          err => console.error('TouchID is not available', err)
-        );
-  }
-
+ 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -195,8 +184,7 @@ export class LoginPage {
     let storage = this.usuarioStorage;
     this.usuarioProv.salvarCredencialEnFireBase().then(() => {
       console.log("entro a la  promesa firebase");
-      storage.guardarUsuario(this.usuarioProv.usuario).then(() => {
-        
+      storage.guardarUsuario(this.usuarioProv.usuario).then(() => { 
         this.navCtrl.setRoot(TabsPage);
       });
     });
