@@ -15,8 +15,7 @@ import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
-
+export class HomePage { 
   private Evento: any;
   public Productos: Producto[] = [];
   public Usuario: Usuario = {};
@@ -96,8 +95,6 @@ export class HomePage {
   }
 
   IrResume() {
-    this.tabs.select(1);
-    this.tabs.getByIndex(1).setElementAttribute("tabBadge", 3);
-    this.tabs.getByIndex(1).setElementAttribute("tabBadgeStyle", "danger");
+    this.tabs.select(1); 
   }
 }

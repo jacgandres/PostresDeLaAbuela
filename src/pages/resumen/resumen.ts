@@ -16,6 +16,7 @@ export class ResumenPage {
   public valorTotalPedidos = 0;
   public usuarioAuthenticado: Usuario = {};
   public pedidosActivos: Pedido[] = [];
+  private Evento: any;
 
   constructor(private navCtrl: NavController,
               private navParams: NavParams,
@@ -27,22 +28,29 @@ export class ResumenPage {
   }
 
   ionViewWillEnter() {
-    console.log("ionViewWillEnter pagina resumen");
-    this.firebaseAnalytics.setCurrentScreen("Resumen")
-    this.userStorage.obtenerUsuario().then(() => {
-      this.usuarioAuthenticado = this.userStorage.usuarioAutenticado;
+    this.funcionesComunes.presentarLoadingDefault();
+    this.IniciarPagina();
+  }
 
-      this.usuarioProv.usuario = this.usuarioAuthenticado;
-      this.usuarioProv.obtenerProductosActivos()
-        .then(() => {
-          this.pedidosActivos = this.usuarioProv.pedidosActivos;
-          console.log("pedidosActivos: " + this.pedidosActivos.length);
-          this.calcularTotalPedidos().then((result:number)=>{ 
-              this.valorTotalPedidos = result;
-              this.funcionesComunes.LoadingView.dismiss();
-          })
-        },
-          (error) => {
+  private IniciarPagina() {
+    console.log("ionViewWillEnter pagina resumen");
+    this.firebaseAnalytics.setCurrentScreen("Resumen");
+    this.userStorage.obtenerUsuario().then(() => {
+        this.usuarioAuthenticado = this.userStorage.usuarioAutenticado;
+        this.firebaseAnalytics.logEvent("Usuario", { Usuario: this.usuarioAuthenticado });
+        this.usuarioProv.usuario = this.usuarioAuthenticado;
+        this.usuarioProv.obtenerProductosActivos()
+          .then(() => {
+              this.pedidosActivos = this.usuarioProv.pedidosActivos;
+              console.log("pedidosActivos: " + this.pedidosActivos.length);
+              this.calcularTotalPedidos().then((result: number) => {
+                  this.valorTotalPedidos = result;
+                  this.funcionesComunes.LoadingView.dismiss(); 
+                  if (this.Evento) {
+                    this.Evento.complete();
+                  }
+              });
+          }, (error) => {
               console.log("pedidosActivos Error");
               this.funcionesComunes.LoadingView.dismiss();
           });
@@ -57,5 +65,16 @@ export class ResumenPage {
       });
       assert(valor);
     });
+  }
+
+  
+  ionViewWillUnload(){
+    console.log("ionViewWillUnload Resumen")
+  }
+
+  actualizarResumen(evento)
+  {
+    this.Evento = evento;
+    this.IniciarPagina();
   }
 }
