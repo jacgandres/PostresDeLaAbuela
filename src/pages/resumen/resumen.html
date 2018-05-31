@@ -1,13 +1,18 @@
 <ion-header>
-
     <ion-navbar color="blueMenu">
         <ion-title>Resumen de Pedidos</ion-title>
     </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
+
+    <ion-refresher (ionRefresh)="actualizarResumen($event)">
+        <ion-refresher-content color="primary">
+            <h1> Actualizando</h1>
+        </ion-refresher-content>
+    </ion-refresher>
+
     <ion-item-group>
         <ion-item-divider color="item-divider"><strong>Valor Total: {{valorTotalPedidos| currency}} pesos</strong></ion-item-divider>
         <ion-item>

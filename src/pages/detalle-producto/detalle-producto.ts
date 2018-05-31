@@ -106,7 +106,7 @@ export class DetalleProductoPage {
         this.storage.usuarioAutenticado = this.usuarioProv.usuario;
         this.storage.actualizarUsuario().then(()=>{ 
             this.utilidades.LoadingView.dismiss();
-            this.navCtrl.popTo(ResumenPage); 
+            //this.navCtrl.popTo(ResumenPage); 
             this.tabs.select(1); 
         }); 
       });

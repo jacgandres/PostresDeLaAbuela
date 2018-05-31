@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
+<<<<<<< HEAD
 <widget id="com.postresdelaabuela.app001" version="0.0.20" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+=======
+<widget id="com.postresdelaabuela.app001" version="0.0.19" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+>>>>>>> 3de9f04d06a6709eca9e8ffe0c1347b6a688123e
     <name>TortasDeMama</name>
     <description>aplicacion en ionic</description>
     <author email="jacgandres@gmail.com" href="mailto:jacgandres@gmail.com">Jacgandres's Team</author>
