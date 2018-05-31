@@ -1,4 +1,4 @@
-import { Producto } from './Producto';
+import { Producto } from './Modelo.Export'; 
 
 export interface Pedido { 
     id?:string;

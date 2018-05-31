@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Usuario, Pedido, Producto } from "../../Modelo/Modelo.Export";
-import { UsuarioProvider, StorageUsuarioProvider } from '../../providers/providers.export';
-import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
+import { UsuarioProvider, StorageUsuarioProvider, CommunUtilidadesProvider } from '../../providers/providers.export';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics'; 
  
 
 
@@ -16,32 +16,43 @@ export class ResumenPage {
   public valorTotalPedidos = 0;
   public usuarioAuthenticado: Usuario = {};
   public pedidosActivos: Pedido[] = [];
+  private Evento: any;
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private usuarioProv: UsuarioProvider,
-    private firebaseAnalytics: FirebaseAnalytics,
-    private userStorage: StorageUsuarioProvider) {
+  constructor(private navCtrl: NavController,
+              private navParams: NavParams,
+              private funcionesComunes: CommunUtilidadesProvider,
+              private usuarioProv: UsuarioProvider,
+              private firebaseAnalytics: FirebaseAnalytics,
+              private userStorage: StorageUsuarioProvider) {
 
   }
 
   ionViewWillEnter() {
-    console.log("ionViewWillEnter pagina resumen");
-    this.firebaseAnalytics.setCurrentScreen("Resumen")
-    this.userStorage.obtenerUsuario().then(() => {
-      this.usuarioAuthenticado = this.userStorage.usuarioAutenticado;
+    this.funcionesComunes.presentarLoadingDefault();
+    this.IniciarPagina();
+  }
 
-      this.usuarioProv.usuario = this.usuarioAuthenticado;
-      this.usuarioProv.obtenerProductosActivos()
-        .then(() => {
-          this.pedidosActivos = this.usuarioProv.pedidosActivos;
-          console.log("pedidosActivos: " + this.pedidosActivos.length);
-          this.calcularTotalPedidos().then((result:number)=>{ 
-            this.valorTotalPedidos = result;
-          })
-        },
-          (error) => {
-            console.log("pedidosActivos Error");
+  private IniciarPagina() {
+    console.log("ionViewWillEnter pagina resumen");
+    this.firebaseAnalytics.setCurrentScreen("Resumen");
+    this.userStorage.obtenerUsuario().then(() => {
+        this.usuarioAuthenticado = this.userStorage.usuarioAutenticado;
+        this.firebaseAnalytics.logEvent("Usuario", { Usuario: this.usuarioAuthenticado });
+        this.usuarioProv.usuario = this.usuarioAuthenticado;
+        this.usuarioProv.obtenerProductosActivos()
+          .then(() => {
+              this.pedidosActivos = this.usuarioProv.pedidosActivos;
+              console.log("pedidosActivos: " + this.pedidosActivos.length);
+              this.calcularTotalPedidos().then((result: number) => {
+                  this.valorTotalPedidos = result;
+                  this.funcionesComunes.LoadingView.dismiss(); 
+                  if (this.Evento) {
+                    this.Evento.complete();
+                  }
+              });
+          }, (error) => {
+              console.log("pedidosActivos Error");
+              this.funcionesComunes.LoadingView.dismiss();
           });
     });
   }
@@ -54,5 +65,16 @@ export class ResumenPage {
       });
       assert(valor);
     });
+  }
+
+  
+  ionViewWillUnload(){
+    console.log("ionViewWillUnload Resumen")
+  }
+
+  actualizarResumen(evento)
+  {
+    this.Evento = evento;
+    this.IniciarPagina();
   }
 }

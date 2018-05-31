@@ -15,28 +15,27 @@ export class MyApp {
 
   rootPage: any;
 
-  constructor(platform: Platform,
-    statusBar: StatusBar,
-    splashScreen: SplashScreen,
-    private storageProv: StorageUsuarioProvider,
-    private firebaseAnalytics: FirebaseAnalytics,
-    private _pushProvider: PushNotificationProvider) {
+  constructor(private platform: Platform,
+              private statusBar: StatusBar,
+              private splashScreen: SplashScreen,
+              private storageProv: StorageUsuarioProvider,
+              private firebaseAnalytics: FirebaseAnalytics,
+              private _pushProvider: PushNotificationProvider) {
 
     platform.ready().then(() => {
       storageProv.obtenerUsuario().then(result => {
         console.log("storageProv.obtenerUsuario: " + JSON.stringify(result));
         statusBar.styleDefault();
         splashScreen.hide();
-        let id ="Usuario No Autenticado";
+        let id = "Usuario No Autenticado";
         if (result) {
-          this.firebaseAnalytics.logEvent("confirmo pedido al carrito de compras", 
-                 {Usuario:this.storageProv.usuarioAutenticado.credenciales.uid}); 
-                 id = this.storageProv.usuarioAutenticado.credenciales.uid;
+          this.firebaseAnalytics.logEvent("confirmo pedido al carrito de compras",
+            { Usuario: this.storageProv.usuarioAutenticado.credenciales.uid });
+          id = this.storageProv.usuarioAutenticado.credenciales.uid;
           this.rootPage = TabsPage;
         } else {
           this.rootPage = LoginPage;
         }
-
         this._pushProvider.iniciar_notificacion(id);
       });
     });

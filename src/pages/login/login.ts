@@ -6,15 +6,12 @@ import * as firebase from 'firebase/app';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 
-import { Facebook } from '@ionic-native/facebook';
+import { Facebook } from '@ionic-native/facebook'; 
 
-import { HomePage } from '../home/home';
+import { HomePage, TabsPage, RegistroUsuarioPage } from '../pages.export';
 
-import { TabsPage } from '../tabs/tabs';
-
-import { UsuarioProvider, StorageUsuarioProvider,CommunUtilidadesProvider } from "../../providers/providers.export";
-import { RegistroUsuarioPage } from "../pages.export";
-import { Credenciales } from '../../Modelo/Credenciales'; 
+import { UsuarioProvider, StorageUsuarioProvider, CommunUtilidadesProvider } from "../../providers/providers.export";
+import { Credenciales } from '../../Modelo/Modelo.Export';
 
 
 
@@ -25,17 +22,23 @@ import { Credenciales } from '../../Modelo/Credenciales';
 })
 export class LoginPage {
 
+  TouchIdDisponible:boolean;
+
   constructor(public navCtrl: NavController,
-    private afAuth: AngularFireAuth,
-    private fb: Facebook,
-    private platform: Platform,
-    private usuarioProv: UsuarioProvider,
-    private navPar: NavParams,
-    private funcionesComunes:CommunUtilidadesProvider,
-    private usuarioStorage: StorageUsuarioProvider,
-    private firebaseAnalytics: FirebaseAnalytics,
-    private alertCtrl: AlertController) {
+              private afAuth: AngularFireAuth,
+              private fb: Facebook,
+              private platform: Platform,
+              private usuarioProv: UsuarioProvider,
+              private navPar: NavParams,
+              private funcionesComunes: CommunUtilidadesProvider,
+              private usuarioStorage: StorageUsuarioProvider,
+              private firebaseAnalytics: FirebaseAnalytics, 
+              private alertCtrl: AlertController) {
+        
+     this.TouchIdDisponible=false; 
+
   }
+ 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -46,66 +49,65 @@ export class LoginPage {
   }
 
   IngresarPorUsuario() {
-    let inputs:any[]= 
-    [ {
+    let inputs: any[] =
+      [{
         name: 'Email',
-        placeholder: 'Email',
-        type: 'email'
-      }, 
-      {
+        placeholder: 'Email o Nombre de Usuario'
+      }, {
         name: 'Clave',
         placeholder: 'Clave',
         type: 'password'
       }
-    ];
+      ];
 
-    let botones:any[]=
-    [
-      {
+    let botones: any[] =
+      [{
         text: 'Cancelar',
         role: 'cancel',
         handler: () => {
           console.log('Cancel clicked');
         }
-      }, 
-      {
+      }, {
         text: 'Ingresar',
         handler: (data) => {
+          this.funcionesComunes.presentarLoadingDefault();
+           
           this.usuarioProv.obtenerUsuarioPorClave(data).then((result) => {
+
             if (result) {
               console.log("entro a la  promesa firebase");
-              this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario);
-              this.navCtrl.setRoot(TabsPage);
+              this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario).then(()=>{ 
+                  this.navCtrl.setRoot(TabsPage);
+              });
             }
             else {
-                this.funcionesComunes.MostrarMensaje('Usuario/Clave Erroneas',
-                    'Verifique la informacion, no se encontro ningun usuario con los datos ingresados.',
-                    [],
-                    [{
-                      text: 'Aceptar',
-                      role: 'cancel'
-                    }]   ) ;
+              this.funcionesComunes.MostrarMensaje('Usuario/Clave Erroneas',
+                'Verifique la informacion, no se encontro ningun usuario con los datos ingresados.',
+                [],
+                [{
+                  text: 'Aceptar',
+                  role: 'cancel'
+                }]);
             }
+            this.funcionesComunes.LoadingView.dismiss();
           });
         }
-      } 
-    ]
+      }
+      ]
 
 
     this.funcionesComunes.MostrarMensaje('Bienvenido, registro en nuestra aplicación',
-                                          'Por favor ingrese los siguientes datos',
-                                         inputs,
-                                         botones);
-                                    
+      'Por favor ingrese los siguientes datos',
+      inputs,
+      botones);
+
   }
 
   Registrarse() {
-    let inputs:any[] =
-    [
-      {
+    let inputs: any[] =
+      [{
         name: 'Email',
-        placeholder: 'Email',
-        type: 'email'
+        placeholder: 'Email o Nombre de Usuario'
       }, {
         name: 'Clave',
         placeholder: 'Clave',
@@ -115,10 +117,9 @@ export class LoginPage {
         placeholder: 'Número Telefónico',
         type: 'tel'
       }
-    ];
-    let buttons:any[]=
-    [
-      {
+      ];
+    let buttons: any[] =
+      [{
         text: 'Cancelar',
         role: 'cancel',
         handler: () => {
@@ -131,35 +132,38 @@ export class LoginPage {
           this.navCtrl.push(RegistroUsuarioPage, { Data: data })
         }
       }
-    ] 
+      ]
     this.funcionesComunes.MostrarMensaje(
-        'Bienvenido, registro en nuestra aplicación',
-        'Por favor ingrese los siguientes datos',
-        inputs,
-        buttons);
-       
+      'Bienvenido, registro en nuestra aplicación',
+      'Por favor ingrese los siguientes datos',
+      inputs,
+      buttons);
+
   }
 
   signInWithFacebook() {
 
     console.log("antes de entrar a la primera promesa")
     if (this.platform.is('cordova')) {
-      try {
-        this.fb.login(['email', 'public_profile']).then(res => {
-          console.log("entro a la primera promesa")
-          const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-          firebase.auth().signInWithCredential(facebookCredential)
-            .then(user => {
-              debugger;
-              console.log("entro a la segunda promesa")
-
-              this.salvarCredencialEnFireBase(user, "facebook", "");
-
-            }).catch(e => console.log('Error con el login' + JSON.stringify(e)));
-        })
-
-      } catch (error) {
-        console.log(JSON.stringify(error));
+      try { 
+        this.fb.login(['email', 'public_profile'/*,'user_friends'*/])
+          .then(res => {
+              console.log("entro a la primera promesa..........................................")
+              console.log(JSON.stringify(res));
+              this.funcionesComunes.MostrarMensaje("contactos facebook",JSON.stringify(res),[],[]);
+              const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+              firebase.auth().signInWithCredential(facebookCredential)
+                .then(user => {
+                  console.log("entro a la segunda promesa................................................")
+                  this.salvarCredencialEnFireBase(user, "facebook", "");
+                }).catch(e => console.log('Error con el login' + JSON.stringify(e)));
+            },(error1)=>{
+               console.log("Error pidiendo credenciales en facebook....");
+               console.log(JSON.stringify(error1));
+            });
+ 
+      } catch (error2) {
+        console.log(JSON.stringify(error2));
       }
     } else {
       // escritorio
@@ -167,13 +171,11 @@ export class LoginPage {
       this.afAuth.auth
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then(userFace => {
-          debugger;
+
           console.log("entro a la segunda promesa")
           console.log(JSON.stringify(userFace));
           let user = userFace.user;
-
           this.salvarCredencialEnFireBase(user, "facebook", "");
-
         });
     }
   }
@@ -189,11 +191,12 @@ export class LoginPage {
       user.phoneNumber);
 
     console.log("antes de entrar a la promesa firebase");
+    let storage = this.usuarioStorage;
     this.usuarioProv.salvarCredencialEnFireBase().then(() => {
-      debugger;
       console.log("entro a la  promesa firebase");
-      this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario);
-      this.navCtrl.setRoot(TabsPage);
+      storage.guardarUsuario(this.usuarioProv.usuario).then(() => { 
+        this.navCtrl.setRoot(TabsPage);
+      });
     });
   }
 }
