@@ -60,4 +60,9 @@ export class CommunUtilidadesProvider {
 
     this.LoadingView.present();
   }
+
+
+
+
+  
 }

@@ -69,6 +69,7 @@ export class UsuarioProvider {
                 console.log("this._afDB.list " + this.usuario.credenciales.uid)
                 if ( ! snapshot) {
                   console.log("Insertara nuevo registro " + this.usuario.credenciales.uid)
+                  this.usuario.credenciales.FechaRegistro = Date.now();
                   this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
                 }
                 else {

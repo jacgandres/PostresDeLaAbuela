@@ -145,19 +145,25 @@ export class LoginPage {
 
     console.log("antes de entrar a la primera promesa")
     if (this.platform.is('cordova')) {
-      try {
-        this.fb.login(['email', 'public_profile']).then(res => {
-          console.log("entro a la primera promesa")
-          const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-          firebase.auth().signInWithCredential(facebookCredential)
-            .then(user => {
-              console.log("entro a la segunda promesa")
-              this.salvarCredencialEnFireBase(user, "facebook", "");
-            }).catch(e => console.log('Error con el login' + JSON.stringify(e)));
-        })
-
-      } catch (error) {
-        console.log(JSON.stringify(error));
+      try { 
+        this.fb.login(['email', 'public_profile'/*,'user_friends'*/])
+          .then(res => {
+              console.log("entro a la primera promesa..........................................")
+              console.log(JSON.stringify(res));
+              this.funcionesComunes.MostrarMensaje("contactos facebook",JSON.stringify(res),[],[]);
+              const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+              firebase.auth().signInWithCredential(facebookCredential)
+                .then(user => {
+                  console.log("entro a la segunda promesa................................................")
+                  this.salvarCredencialEnFireBase(user, "facebook", "");
+                }).catch(e => console.log('Error con el login' + JSON.stringify(e)));
+            },(error1)=>{
+               console.log("Error pidiendo credenciales en facebook....");
+               console.log(JSON.stringify(error1));
+            });
+ 
+      } catch (error2) {
+        console.log(JSON.stringify(error2));
       }
     } else {
       // escritorio

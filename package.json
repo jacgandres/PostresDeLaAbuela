@@ -21,6 +21,7 @@
         "@angular/http": "5.2.9",
         "@angular/platform-browser": "5.2.9",
         "@angular/platform-browser-dynamic": "5.2.9",
+        "@ionic-native/camera": "^4.7.0",
         "@ionic-native/core": "4.6.0",
         "@ionic-native/date-picker": "^4.7.0",
         "@ionic-native/device": "^4.7.0",
@@ -38,6 +39,7 @@
         "angularfire2": "^5.0.0-rc.6.0",
         "cordova-android": "6.4.0",
         "cordova-ios": "4.5.4",
+        "cordova-plugin-camera": "^4.0.3",
         "cordova-plugin-datepicker": "^0.9.3",
         "cordova-plugin-device": "^2.0.2",
         "cordova-plugin-facebook4": "^2.1.0",
@@ -88,7 +90,8 @@
             },
             "cordova-support-google-services": {},
             "onesignal-cordova-plugin": {},
-            "cordova-plugin-device": {}
+            "cordova-plugin-device": {},
+            "cordova-plugin-camera": {}
         },
         "platforms": [
             "android"

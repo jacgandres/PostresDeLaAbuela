@@ -8,4 +8,5 @@ export interface Credenciales {
     provider?:string; 
     estaLogeado?:boolean; 
     numeroTelefonico?:string; 
+    FechaRegistro?:number;
   }

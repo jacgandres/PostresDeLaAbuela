@@ -13,9 +13,7 @@
         <h3>Registro de nuevos usuarios</h3>
 
         <ion-item>
-            <ion-label floating>
-                <h4>Telefono</h4>
-            </ion-label>
+            <ion-label floating>Telefono</ion-label>
             <ion-input color="light" type="tel" [(ngModel)]="Telefono" name="Telefono"></ion-input>
         </ion-item>
         <ion-item>
@@ -42,11 +40,29 @@
             <ion-label floating>Apellidos</ion-label>
             <ion-input type="text" [(ngModel)]="Apellido" name="Apellido"></ion-input>
         </ion-item>
-
     </ion-list>
-
+    <ion-grid>
+        <ion-row>
+            <ion-col col-6>
+                <button ion-button color="primary" icon-right (click)="AbrirCamara()" block>
+                <ion-icon name="ios-camera"></ion-icon>
+                &nbsp;Foto de Perfil
+             </button>
+            </ion-col>
+            <ion-col col-6>
+                <button ion-button color="primary" icon-right (click)="AbrirGaleria()" block>
+                    <ion-icon name="ios-camera"></ion-icon>
+                    &nbsp;Abrir Galeria
+             </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <hr>
+    <ion-item *ngIf="Imagen">
+        <ion-img [src]="Imagen"> </ion-img>
+    </ion-item>
     <button ion-button color="google" icon-right (click)="Registrarse()" block>
         <ion-icon name="md-log-in"></ion-icon>
-        Registrarse
+        &nbsp;Registrarse
     </button>
 </ion-content>

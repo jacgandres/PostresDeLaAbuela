@@ -35,11 +35,13 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 import { Facebook } from '@ionic-native/facebook';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { IonicStorageModule } from '@ionic/storage'; 
 import { OneSignal } from '@ionic-native/onesignal';  
 
 
 import { HttpModule } from '@angular/http'; 
+import { ValidacionUrlPipe } from '../pipes/validacion-url/validacion-url'; 
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAYfcqRXUiO3-6AJUUJvozc8Mb2ttukdrY",
@@ -56,7 +58,7 @@ export const firebaseConfig = {
     HomePage, PerfilPage, ResumenPage, LoginPage,
     TabsPage, DetalleProductoPage, RegistroUsuarioPage,
     ///pipes
-    ContenidoSeguroPipe
+    ContenidoSeguroPipe,ValidacionUrlPipe
   ],
   imports: [
     BrowserModule,
@@ -78,12 +80,12 @@ export const firebaseConfig = {
     StatusBar, ScreenOrientation,
     SplashScreen, { provide: ErrorHandler, useClass: IonicErrorHandler },
     //{ provide: LOCALE_ID, useValue: 'es' },
-    AngularFireDatabase, DatePicker, Facebook,  
+    AngularFireDatabase, DatePicker, Facebook, Camera,
     ProductosProvider, UsuarioProvider, StorageUsuarioProvider,
     ConfiguracionServiciosProvider,FirebaseAnalytics,OneSignal,
     CommunUtilidadesProvider, Device, 
     PushNotificationProvider,  
-    DeviceServiceProvider
+    DeviceServiceProvider 
   ]
 })
 export class AppModule { }

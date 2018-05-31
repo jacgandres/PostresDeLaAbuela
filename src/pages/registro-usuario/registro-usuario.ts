@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { CommunUtilidadesProvider } from '../../providers/commun-utilidades/commun-utilidades';
-import { Credenciales, Usuario } from '../../Modelo/Modelo.Export';
+import { Credenciales, Usuario, BASE64Image } from '../../Modelo/Modelo.Export';
 import { UsuarioProvider } from '../../providers/usuario/UsuarioProvider';
 import { TabsPage } from '../tabs/tabs';
 import { StorageUsuarioProvider } from '../../providers/providers.export';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
 
@@ -21,11 +22,14 @@ export class RegistroUsuarioPage {
   public Clave = "";
   public VerificarClave = "";
   public Correo = "";
+  public Imagen:string;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
+  constructor(private navCtrl: NavController,
+              private navParams: NavParams,
               private usuarioProv: UsuarioProvider,
+              private platform:Platform,
               private funcionesComunes: CommunUtilidadesProvider,
+              private camera: Camera,
               private usuarioStorage: StorageUsuarioProvider) {
 
   }
@@ -114,6 +118,60 @@ export class RegistroUsuarioPage {
     if (this.Telefono.length > 0) { return this.Telefono; }
     else {
       return "12344321";
+    }
+  }
+
+  AbrirCamara(){
+        debugger;
+    if(this.platform.is("cordova")){
+        const options: CameraOptions = {
+          quality: 50,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE
+        }
+        console.log("Capturando foto..............................")
+        
+        this.camera.getPicture(options).then((imageData) => {
+          console.log("foto Capturada..............................")
+          this.Imagen =  'data:image/jpeg;base64,' + imageData;
+          console.log(JSON.stringify(this.Imagen));
+        }, (err) => {
+          console.log("Error foto ---------------------")
+          console.log(JSON.stringify(err));
+          this.Imagen ="";
+        });
+    }
+    else{
+      this.Imagen =  'data:image/jpeg;base64,'+ BASE64Image;
+    }
+  }
+
+  AbrirGaleria()
+  {
+    debugger;
+    if(this.platform.is("cordova"))
+    {
+        const options: CameraOptions = {
+          quality: 50,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE
+        }
+        console.log("Capturando Galeria..............................")
+        this.camera.getPicture(options).then((imageData) => { 
+            console.log("Galeria Capturada..............................")
+            this.Imagen =  'data:image/JPEG;base64,' + imageData;
+            console.log(JSON.stringify(this.Imagen));
+        }, (err) => {
+          console.log("Error Galeria ---------------------")
+          console.log(JSON.stringify(err));
+          this.Imagen ="";
+        });
+    }
+    else{
+      this.Imagen =  'data:image/JPEG;base64,'+ BASE64Image;
     }
   }
 }
