@@ -28,13 +28,13 @@ export class RegistroUsuarioPage {
   public Imagen64: string;
 
   constructor(private navCtrl: NavController,
-    private navParams: NavParams,
-    private usuarioProv: UsuarioProvider,
-    private platform: Platform,
-    private funcionesComunes: CommunUtilidadesProvider,
-    private imagePicker: ImagePicker,
-    private camera: Camera,
-    private usuarioStorage: StorageUsuarioProvider) {
+              private navParams: NavParams,
+              private usuarioProv: UsuarioProvider,
+              private platform: Platform,
+              private funcionesComunes: CommunUtilidadesProvider,
+              private imagePicker: ImagePicker,
+              private camera: Camera,
+              private usuarioStorage: StorageUsuarioProvider) {
 
   }
 
@@ -44,8 +44,7 @@ export class RegistroUsuarioPage {
     let data = this.navParams.get('Data')
     console.log(JSON.stringify(data));
 
-    var result1 = this.funcionesComunes.Encriptar(data.Clave)
-
+    var result1 = this.funcionesComunes.Encriptar(data.Clave);
     console.log(JSON.stringify(result1.toString()));
 
     this.Clave = data.Clave;
@@ -123,7 +122,7 @@ export class RegistroUsuarioPage {
   }
 
   AbrirCamara() {
-    debugger;
+    
     const options: CameraOptions = {
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -131,20 +130,20 @@ export class RegistroUsuarioPage {
       mediaType: this.camera.MediaType.PICTURE
     }
     if (this.platform.is("cordova")) {
-      console.log("Capturando foto..............................")
+        console.log("Capturando foto..............................")
 
-      this.camera.getPicture(options).then((imageData) => {
-        console.log("foto Capturada..............................") 
+        this.camera.getPicture(options).then((imageData) => {
+            console.log("foto Capturada..............................") 
 
-        this.Imagen = 'data:image/PNG;base64,' + imageData;
-        this.Imagen64 = imageData;
+            this.Imagen = 'data:image/PNG;base64,' + imageData;
+            this.Imagen64 = imageData;
 
-        console.log(JSON.stringify(this.Imagen));
-      }, (err) => {
-        console.log("Error foto ---------------------")
-        console.log(JSON.stringify(err));
-        this.Imagen = "";
-      });
+            console.log(JSON.stringify(this.Imagen));
+        }, (err) => {
+            console.log("Error foto ---------------------")
+            console.log(JSON.stringify(err));
+            this.Imagen = "";
+        });
     }
     else {
       this.Imagen = 'data:image/jpeg;base64,' + BASE64Image;

@@ -3,8 +3,7 @@ import { IonicPage, NavController, NavParams, Platform, AlertController } from '
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
-
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics'; 
 
 import { Facebook } from '@ionic-native/facebook'; 
 
@@ -97,9 +96,9 @@ export class LoginPage {
 
 
     this.funcionesComunes.MostrarMensaje('Bienvenido, registro en nuestra aplicación',
-      'Por favor ingrese los siguientes datos',
-      inputs,
-      botones);
+                                          'Por favor ingrese los siguientes datos',
+                                          inputs,
+                                          botones);
 
   }
 
@@ -134,10 +133,10 @@ export class LoginPage {
       }
       ]
     this.funcionesComunes.MostrarMensaje(
-      'Bienvenido, registro en nuestra aplicación',
-      'Por favor ingrese los siguientes datos',
-      inputs,
-      buttons);
+            'Bienvenido, registro en nuestra aplicación',
+            'Por favor ingrese los siguientes datos',
+            inputs,
+            buttons);
 
   }
 
