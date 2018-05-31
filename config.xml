@@ -98,5 +98,8 @@
     <plugin name="onesignal-cordova-plugin" spec="^2.4.1" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
+    <plugin name="com.synconset.imagepicker" spec="~2.1.8">
+        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="selector de imagenes para seleccionarlas como perfil" />
+    </plugin>
     <engine name="android" spec="6.4.0" />
 </widget>

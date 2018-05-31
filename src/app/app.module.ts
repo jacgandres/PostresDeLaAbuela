@@ -25,6 +25,7 @@ import {
 
 ///plugin
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { ImagePicker } from '@ionic-native/image-picker';
 import { DatePicker } from '@ionic-native/date-picker';
 import { Device } from '@ionic-native/device';
 
@@ -35,7 +36,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 import { Facebook } from '@ionic-native/facebook';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
 import { IonicStorageModule } from '@ionic/storage'; 
 import { OneSignal } from '@ionic-native/onesignal';  
 
@@ -84,7 +85,7 @@ export const firebaseConfig = {
     ProductosProvider, UsuarioProvider, StorageUsuarioProvider,
     ConfiguracionServiciosProvider,FirebaseAnalytics,OneSignal,
     CommunUtilidadesProvider, Device, 
-    PushNotificationProvider,  
+    PushNotificationProvider,  ImagePicker, 
     DeviceServiceProvider 
   ]
 })
