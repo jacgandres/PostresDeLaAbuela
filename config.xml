@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.postresdelaabuela.app001" version="0.0.21" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>TortasDeMama</name> 
+    <name>TortasDeMama</name>
     <description>aplicacion en ionic</description>
     <author email="jacgandres@gmail.com" href="mailto:jacgandres@gmail.com">Jacgandres's Team</author>
     <content src="index.html" />

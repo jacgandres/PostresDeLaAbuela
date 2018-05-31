@@ -150,7 +150,7 @@ export class LoginPage {
           .then(res => {
               console.log("entro a la primera promesa..........................................")
               console.log(JSON.stringify(res));
-              this.funcionesComunes.MostrarMensaje("contactos facebook",JSON.stringify(res),[],[]);
+              
               const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
               firebase.auth().signInWithCredential(facebookCredential)
                 .then(user => {
