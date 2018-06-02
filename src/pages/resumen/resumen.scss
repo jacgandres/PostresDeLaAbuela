@@ -1,14 +1,7 @@
 page-resumen {
-    ion-refresher-content,
-    ion-refresher,
-    ion-item,
     ion-item-group,
-    ion-list,
-    ion-avatar,
-    ion-content,
-    ion-list-header {
-        background-image: url('../assets/imgs/wallpaper1.jpg');
-        background-repeat: repeat;
-        background-color: #cccccc;
+    ion-item,
+    ion-list {
+        background-color: transparent;
     }
 }

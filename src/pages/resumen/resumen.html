@@ -41,7 +41,7 @@
                     {{pedido.fechaEntrega|date:'fullDate'}}
                 </ion-item>
             </ion-list>
-            <button ion-button color="danger" icon-left block>
+            <button ion-button color="danger" icon-left block (click)="QuitarProducto(pedido)">
                     <ion-icon name="ios-trash"></ion-icon>
                     Quitar Productos
             </button>

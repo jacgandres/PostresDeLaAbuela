@@ -151,7 +151,7 @@ export class RegistroUsuarioPage {
   }
 
   AbrirGaleria() {
-    debugger;
+    
     const options: ImagePickerOptions = {
       quality: 70,
       outputType: 1,

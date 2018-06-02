@@ -27,18 +27,20 @@ export class TabsPage {
 
 
   salirAplicacion() {
-    this.firebaseAnalytics.logEvent("Salio de la aplicacion",  {Usuario:this.usuarioStorage.usuarioAutenticado.credenciales.uid}); 
-    this.platform.exitApp(); 
+      this.firebaseAnalytics.logEvent("Salio de la aplicacion",  {Usuario:this.usuarioStorage.usuarioAutenticado.credenciales.uid}); 
+      this.usuarioStorage.LimpiarCarrito();
+      this.platform.exitApp();  
   }
 
   quitarRegistroAplicacion() {
-    this.usuarioProv.usuario = this.usuarioStorage.usuarioAutenticado; 
-    this.usuarioProv.usuario.credenciales.estaLogeado = false; 
-    this.usuarioProv.actualizarUsuario ().then(() =>  {
-      this.usuarioStorage.salirAplicacion().then((result) =>  {
-        this.firebaseAnalytics.logEvent("Salio y elimino registro de la aplicacion",  {Usuario:this.usuarioStorage.usuarioAutenticado.credenciales.uid}); 
-        this.platform.exitApp(); 
-      })
-    }); 
+      this.usuarioProv.usuario = this.usuarioStorage.usuarioAutenticado; 
+      this.usuarioProv.usuario.credenciales.estaLogeado = false; 
+      this.usuarioProv.actualizarUsuario ().then(() =>  {
+        this.usuarioStorage.salirAplicacion().then((result) =>  {
+          this.firebaseAnalytics.logEvent("Salio y elimino registro de la aplicacion",  {Usuario:this.usuarioStorage.usuarioAutenticado.credenciales.uid});
+          this.usuarioStorage.LimpiarCarrito(); 
+          this.platform.exitApp(); 
+        })
+      }); 
   }
 }

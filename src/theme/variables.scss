@@ -74,3 +74,31 @@ img {
     width: 150px;
     /* Set a small width */
 }
+
+
+/*ion-refresher-content,
+ion-refresher,
+ion-item,
+ion-item-group,
+ion-list,
+ion-avatar,
+ion-list-header,
+ion-slides,*/
+
+ion-item-group,
+ion-list-header,
+ion-item,
+ion-list,
+ion-slides,
+ion-slide,
+ion-content {
+    background-image: url('../assets/imgs/wallpaper1.jpg');
+    background-repeat: repeat;
+    //background-color: #cccccc;
+}
+
+ion-item-group,
+ion-item,
+ion-list {
+    background-color: transparent;
+}

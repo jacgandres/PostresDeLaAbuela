@@ -1,10 +1,7 @@
 page-perfil {
-    ion-item,
-    ion-content,
-    ion-list-header,
-    ion-slides {
-        background-image: url('../assets/imgs/wallpaper1.jpg');
-        background-repeat: repeat;
-        background-color: #cccccc;
+    ion-list {
+        padding-left: 44px;
+        padding-right: 35px;
+        opacity: 0.7;
     }
 }

@@ -35,10 +35,11 @@ export class ResumenPage {
   private IniciarPagina() {
     console.log("ionViewWillEnter pagina resumen");
     this.firebaseAnalytics.setCurrentScreen("Resumen");
-    this.userStorage.obtenerUsuario().then(() => {
+    this.userStorage.ObtenerProductosCarrito().then((result:Pedido[]) => {
         this.usuarioAuthenticado = this.userStorage.usuarioAutenticado;
         this.firebaseAnalytics.logEvent("Usuario", { Usuario: this.usuarioAuthenticado });
         this.usuarioProv.usuario = this.usuarioAuthenticado;
+        /*
         this.usuarioProv.obtenerProductosActivos()
           .then(() => {
               this.pedidosActivos = this.usuarioProv.pedidosActivos;
@@ -53,7 +54,17 @@ export class ResumenPage {
           }, (error) => {
               console.log("pedidosActivos Error");
               this.funcionesComunes.LoadingView.dismiss();
-          });
+          });*/
+
+          this.pedidosActivos=result;
+          this.calcularTotalPedidos().then((result: number) => {
+            this.valorTotalPedidos = result;
+            this.funcionesComunes.LoadingView.dismiss(); 
+            if (this.Evento) {
+              this.Evento.complete();
+            }
+          }); 
+           
     });
   }
 
@@ -76,5 +87,35 @@ export class ResumenPage {
   {
     this.Evento = evento;
     this.IniciarPagina();
+  }
+
+  QuitarProducto(pedido:Pedido ){
+
+      this.funcionesComunes.MostrarMensaje("Quitar Producto!",
+                                           "Esta seguro de quitar este producto?",[],
+                                           [
+                                             {
+                                                text: 'Cancelar',
+                                                role: 'cancel',
+                                                handler: () => {
+                                                  console.log('Cancel clicked');
+                                                }
+                                              }, 
+                                              {
+                                                text: 'Aceptar',
+                                                handler: (data) => 
+                                                { 
+                                                    let tempPedidos= this.pedidosActivos.filter(ped => ped.id!=pedido.id);
+                                                    this.pedidosActivos = tempPedidos;
+
+                                                    this.userStorage.ActualizarCarritoCompras(this.pedidosActivos).then((result)=>
+                                                    {
+                                                      this.Evento = null;
+                                                      this.IniciarPagina();
+                                                    })
+                                                }
+                                            }
+                                          ]) ;
+
   }
 }

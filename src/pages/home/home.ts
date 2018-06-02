@@ -63,7 +63,7 @@ export class HomePage {
       this.firebaseAnalytics.setUserId(this.Usuario.credenciales.uid); 
       this.firebaseAnalytics.setCurrentScreen("home");
 
-      this.usuarioProv.obtenerProductosActivos().then(() => {
+      /*this.usuarioProv.obtenerProductosActivos().then(() => {
         if (this.usuarioProv.pedidosActivos == null) {
           this.pedidos = [];
         }
@@ -72,7 +72,17 @@ export class HomePage {
           console.log("Pedidos: " + this.pedidos.length);
         }
         this.funcionesComunes.LoadingView.dismiss();
-      })
+      })*/
+      
+      this.usuarioStorage.ObtenerProductosCarrito().then((result:Pedido[])=>{
+          if (result != null && result.length > 0 ) {
+            this.pedidos = result;
+            console.log("Pedidos: " + this.pedidos.length);
+          }
+          
+          this.funcionesComunes.LoadingView.dismiss();
+      });
+
       console.log("iniciarHome obtenerUsuario: ");
     })
 

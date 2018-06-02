@@ -41,10 +41,10 @@ export class CommunUtilidadesProvider {
 
   public MostrarMensaje(titulo: string, mensaje: string, inputs: any[], botones: any[]) {
     let alert = this.alertCtrl.create({
-      title: titulo,
-      message: mensaje,
-      inputs: inputs,
-      buttons: botones
+        title: titulo,
+        message: mensaje,
+        inputs: inputs,
+        buttons: botones
     });
     alert.present();
   } 
@@ -52,10 +52,9 @@ export class CommunUtilidadesProvider {
   public presentarLoadingDefault() {
     this.LoadingView = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `
-        <div class="custom-spinner-container" color='blueMenu'>
-          <img src='../assets/imgs/lazyload.gif'></img>
-        </div>`,
+      content: `<div class="custom-spinner-container" color='blueMenu'>
+                  <img src="./assets/imgs/lazyload.gif"></img>
+                </div>`
     }); 
 
     this.LoadingView.present();
