@@ -141,18 +141,20 @@ export class LoginPage {
   }
 
   signInWithFacebook() {
-
+    
     console.log("antes de entrar a la primera promesa")
     if (this.platform.is('cordova')) {
       try { 
         this.fb.login(['email', 'public_profile'/*,'user_friends'*/])
           .then(res => {
+            
               console.log("entro a la primera promesa..........................................")
               console.log(JSON.stringify(res));
               
               const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
               firebase.auth().signInWithCredential(facebookCredential)
                 .then(user => {
+                  
                   console.log("entro a la segunda promesa................................................")
                   this.salvarCredencialEnFireBase(user, "facebook", "");
                 }).catch(e => console.log('Error con el login' + JSON.stringify(e)));

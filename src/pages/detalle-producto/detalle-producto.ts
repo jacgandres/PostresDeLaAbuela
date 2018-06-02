@@ -113,7 +113,9 @@ export class DetalleProductoPage {
       this.storage.GuardarCarritoCompras(this.Pedido).then((result)=>{
           this.utilidades.LoadingView.dismiss(); 
           //this.navCtrl.popTo(ResumenPage); 
-          this.tabs.select(1); 
+          //this.tabs.select(1); 
+          
+          this.navCtrl.popToRoot();
       });
     
   }
@@ -126,6 +128,6 @@ export class DetalleProductoPage {
 
 
   ionViewWillUnload() {
-    console.log("ionViewWillUnload DetalleProducto")
+    console.log("ionViewWillUnload DetalleProducto") ;
   }
 }

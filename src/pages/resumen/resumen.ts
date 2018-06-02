@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Tabs } from 'ionic-angular';
 
 import { Usuario, Pedido, Producto } from "../../Modelo/Modelo.Export";
 import { UsuarioProvider, StorageUsuarioProvider, CommunUtilidadesProvider } from '../../providers/providers.export';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics'; 
+import { HomePage } from '../pages.export';
  
 
 
@@ -23,12 +24,13 @@ export class ResumenPage {
               private funcionesComunes: CommunUtilidadesProvider,
               private usuarioProv: UsuarioProvider,
               private firebaseAnalytics: FirebaseAnalytics,
-              private userStorage: StorageUsuarioProvider) {
+              private userStorage: StorageUsuarioProvider,
+              private tabs: Tabs) {
 
   }
 
   ionViewWillEnter() {
-    this.funcionesComunes.presentarLoadingDefault();
+    this.funcionesComunes.presentarLoadingDefault(); 
     this.IniciarPagina();
   }
 
@@ -79,8 +81,8 @@ export class ResumenPage {
   }
 
   
-  ionViewWillUnload(){
-    console.log("ionViewWillUnload Resumen")
+  ionViewWillUnload(){    
+    console.log("ionViewWillUnload Resumen"); 
   }
 
   actualizarResumen(evento)
@@ -117,5 +119,34 @@ export class ResumenPage {
                                             }
                                           ]) ;
 
+  }
+
+  ConfirmarPedidos(){ 
+    this.funcionesComunes.MostrarMensaje("Confirmar Pedido!",
+          "Esta apunto de confirmar el pedido, nos comunicaremos con usted.",[],
+          [
+            {
+              text: 'Cancelar',
+              role: 'cancel',
+              handler: () => {
+                  console.log('Cancel clicked');
+              }
+            }, 
+            {
+              text: 'Aceptar',
+              handler: (data) => 
+              { 
+                 this.usuarioProv.adicionarPedidos(this.pedidosActivos).then((data)=>{
+                    this.userStorage.LimpiarCarrito();
+                    this.navCtrl.setPages([{
+                      page: HomePage
+                    }])
+                 }).then(()=>{
+                    
+                    this.tabs.select(0); 
+                 });
+              }
+          }
+        ]);
   }
 }

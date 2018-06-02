@@ -9,14 +9,14 @@
 
     <ion-refresher (ionRefresh)="actualizarResumen($event)">
         <ion-refresher-content color="primary">
-            <h1> Actualizando</h1>
+            <h1>Actualizando</h1>
         </ion-refresher-content>
     </ion-refresher>
 
     <ion-item-group>
         <ion-item-divider color="item-divider"><strong>Valor Total: {{valorTotalPedidos| currency}} pesos</strong></ion-item-divider>
         <ion-item>
-            <button ion-button color="facebook" icon-left block>
+            <button ion-button color="facebook" icon-left block (click)="ConfirmarPedidos()">
                     <ion-icon name="logo-usd"></ion-icon>
                     Confirmar Pedido
             </button>

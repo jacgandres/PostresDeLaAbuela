@@ -86,13 +86,13 @@ export class RegistroUsuarioPage {
 
     let usuario: any = {};
     usuario.displayName = this.Nombre + " " + this.Apellido;
-    usuario.email = this.Correo;
+    usuario.email = this.Correo.toLowerCase().trim();
     usuario.photoURL = "";
     usuario.uid = this.funcionesComunes.guid();
     usuario.phoneNumber = this.getPhoneNumber();
 
 
-    this.salvarCredencialEnFireBase(usuario, "Usuario/Clave", this.funcionesComunes.Encriptar(this.Clave).toString());
+    this.salvarCredencialEnFireBase(usuario, "Usuario/Clave", this.funcionesComunes.Encriptar(this.Clave.trim()).toString());
   }
 
   private salvarCredencialEnFireBase(user: any, provider: string, clave: string) {
@@ -105,13 +105,30 @@ export class RegistroUsuarioPage {
       true,
       user.phoneNumber);
 
-    console.log("antes de entrar a la promesa firebase");
-    this.usuarioProv.salvarCredencialEnFireBase().then(() => {
-      console.log("entro a la  promesa firebase");
-      this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario).then(() => {
-        this.funcionesComunes.LoadingView.dismiss();
-        this.navCtrl.setRoot(TabsPage);
-      });
+    this.usuarioProv.CrearUsuarioYContrasena().then((result:any)=>{
+          
+          this.usuarioProv.usuario.credenciales.ApiKey = result.G
+          this.usuarioProv.usuario.credenciales.uid = result.uid; 
+          this.usuarioProv.usuario.credenciales.AccessToken = result._lat;
+          this.usuarioProv.usuario.credenciales.RefreshToken = result.refreshToken;
+          this.usuarioProv.usuario.credenciales.FechaRegistro = Number.parseInt(result.metadata.b);
+
+          this.usuarioProv.LogInUsuarioContrasena().then((resolve) =>{ 
+              
+              console.log("antes de entrar a la promesa firebase");
+              this.usuarioProv.salvarCredencialEnFireBase().then(() => {
+                  
+                  console.log("entro a la  promesa firebase");
+                  this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario).then(() => {
+                        
+                        this.funcionesComunes.LoadingView.dismiss();
+                        this.navCtrl.setRoot(TabsPage);
+                  });
+              }); 
+          },(error)=>{
+              
+              console.log(JSON.parse(error));
+          });
     });
   }
 

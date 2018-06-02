@@ -79,6 +79,9 @@ export class HomePage {
             this.pedidos = result;
             console.log("Pedidos: " + this.pedidos.length);
           }
+          else{
+            this.pedidos=[];
+          }
           
           this.funcionesComunes.LoadingView.dismiss();
       });

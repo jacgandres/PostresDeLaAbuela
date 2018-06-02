@@ -7,6 +7,7 @@ import {Usuario, Pedido }from '../../Modelo/Modelo.Export';
 import {CommunUtilidadesProvider }from '../commun-utilidades/commun-utilidades'; 
 import {assert }from 'ionic-angular/util/util'; 
 import { Subscription } from 'rxjs/Subscription';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @Injectable()
@@ -20,18 +21,19 @@ export class UsuarioProvider {
 
 
   constructor(private _afDB:AngularFireDatabase, 
-    private funcionesComunes:CommunUtilidadesProvider) {
+              private _aFAuth: AngularFireAuth,
+              private funcionesComunes:CommunUtilidadesProvider) {
 
   }
 
   cargarUsuario(clave:string, 
-    nombre:string, 
-    email:string, 
-    imagen:string, 
-    uid:string, 
-    provider:string, 
-    estaLogueado:boolean, 
-    numeroTelefonico?:string) {
+                nombre:string, 
+                email:string, 
+                imagen:string, 
+                uid:string, 
+                provider:string, 
+                estaLogueado:boolean, 
+                numeroTelefonico?:string) {
 
     console.log("cargarUsuario")
     this.usuario.credenciales =  {}; 
@@ -82,8 +84,7 @@ export class UsuarioProvider {
   }
 
   adicionarPedidos(pedido:Pedido[]) {
-    return new Promise((assert, reject) =>  {
-
+    return new Promise((assert, reject) =>  { 
       console.log("adicionarPedidos"); 
       this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid + '/pedidos/')
         .set(pedido).then(() =>  {
@@ -91,6 +92,42 @@ export class UsuarioProvider {
           assert(); 
         })
     }); 
+  }
+
+  CrearUsuarioYContrasena(){
+      
+      return new Promise((resolve, reject)=>{
+          
+          this._aFAuth.auth.createUserWithEmailAndPassword(
+              this.usuario.credenciales.email,this.usuario.credenciales.clave).then((data)=>{
+                  
+                  console.log(JSON.stringify(data));
+                  resolve(data);
+              },(error)=>{
+                  
+                  console.log(JSON.stringify(error));
+                  reject(null);
+              })
+      })
+  }
+
+  LogInUsuarioContrasena()  {
+    return new Promise((resolve, reject)=>{
+        
+        this._aFAuth.auth.signInWithEmailAndPassword(
+            this.usuario.credenciales.email,
+            this.usuario.credenciales.clave
+        ).then((data)=>{
+            
+            console.log(JSON.stringify(data));
+            resolve(data);
+        },
+        (error)=>{
+            
+            console.log(JSON.stringify(error));
+            reject(null);
+        })
+    });
   }
 
   obtenerUsuarioPorClave(data) {
