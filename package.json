@@ -23,6 +23,7 @@
         "@angular/platform-browser-dynamic": "5.2.9",
         "@ionic-native/camera": "4.7.0",
         "@ionic-native/core": "4.7.0",
+        "@ionic-native/crop": "^4.7.0",
         "@ionic-native/date-picker": "4.7.0",
         "@ionic-native/device": "4.7.0",
         "@ionic-native/facebook": "4.7.0",

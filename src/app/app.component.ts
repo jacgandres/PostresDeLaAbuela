@@ -24,7 +24,7 @@ export class MyApp {
 
     platform.ready().then(() => {
       storageProv.obtenerUsuario().then(result => {
-        console.log("storageProv.obtenerUsuario: " + JSON.stringify(result));
+        console.log("storageProv.obtenerUsuario: " );
         statusBar.styleDefault();
         splashScreen.hide();
         let id = "Usuario No Autenticado";

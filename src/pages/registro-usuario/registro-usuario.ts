@@ -24,8 +24,7 @@ export class RegistroUsuarioPage {
   public Clave = "";
   public VerificarClave = "";
   public Correo = "";
-  public Imagen: string;
-  public Imagen64: string;
+  public Imagen: string; 
 
   constructor(private navCtrl: NavController,
               private navParams: NavParams,
@@ -39,14 +38,9 @@ export class RegistroUsuarioPage {
   }
 
   ionViewWillEnter() {
-    console.log('ionViewDidLoad RegistroUsuarioPage');
-
-    let data = this.navParams.get('Data')
-    console.log(JSON.stringify(data));
-
-    var result1 = this.funcionesComunes.Encriptar(data.Clave);
-    console.log(JSON.stringify(result1.toString()));
-
+    console.log('ionViewDidLoad RegistroUsuarioPage'); 
+    let data = this.navParams.get('Data') 
+ 
     this.Clave = data.Clave;
     this.Correo = data.Email;
     this.Telefono = data.Telefono;
@@ -71,13 +65,13 @@ export class RegistroUsuarioPage {
       this.Correo.length < 1 ||
       this.Clave.length < 1) {
       this.funcionesComunes.MostrarMensaje(
-        "Información",
-        "Todos los campos deben estar diligenciados",
-        [],
-        [{
-          text: 'Aceptar',
-          role: 'cancel'
-        }]
+          "Información",
+          "Todos los campos deben estar diligenciados",
+          [],
+          [{
+            text: 'Aceptar',
+            role: 'cancel'
+          }]
       );
       return;
     }
@@ -90,43 +84,38 @@ export class RegistroUsuarioPage {
     usuario.photoURL = "";
     usuario.uid = this.funcionesComunes.guid();
     usuario.phoneNumber = this.getPhoneNumber();
-
-
+ 
     this.salvarCredencialEnFireBase(usuario, "Usuario/Clave", this.funcionesComunes.Encriptar(this.Clave.trim()).toString());
   }
 
   private salvarCredencialEnFireBase(user: any, provider: string, clave: string) {
     this.usuarioProv.cargarUsuario(clave,
-      user.displayName,
-      user.email,
-      user.photoURL,
-      user.uid,
-      provider,
-      true,
-      user.phoneNumber);
-
-    this.usuarioProv.CrearUsuarioYContrasena().then((result:any)=>{
-          
+                                    user.displayName,
+                                    user.email,
+                                    user.photoURL,
+                                    user.uid,
+                                    provider,
+                                    true,
+                                    user.phoneNumber);
+    this.usuarioProv.CrearUsuarioYContrasena().then((result:any)=>{ 
           this.usuarioProv.usuario.credenciales.ApiKey = result.G
           this.usuarioProv.usuario.credenciales.uid = result.uid; 
           this.usuarioProv.usuario.credenciales.AccessToken = result._lat;
           this.usuarioProv.usuario.credenciales.RefreshToken = result.refreshToken;
           this.usuarioProv.usuario.credenciales.FechaRegistro = Number.parseInt(result.metadata.b);
-
-          this.usuarioProv.LogInUsuarioContrasena().then((resolve) =>{ 
-              
+          this.usuarioProv.usuario.credenciales.imagen = this.Imagen;
+          
+          this.usuarioProv.LogInUsuarioContrasena().then((resolve) =>{  
               console.log("antes de entrar a la promesa firebase");
-              this.usuarioProv.salvarCredencialEnFireBase().then(() => {
-                  
+              
+              this.usuarioProv.salvarCredencialEnFireBase().then(() => { 
                   console.log("entro a la  promesa firebase");
-                  this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario).then(() => {
-                        
+                  this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario).then(() => { 
                         this.funcionesComunes.LoadingView.dismiss();
                         this.navCtrl.setRoot(TabsPage);
                   });
               }); 
-          },(error)=>{
-              
+          },(error)=>{ 
               console.log(JSON.parse(error));
           });
     });
@@ -141,84 +130,44 @@ export class RegistroUsuarioPage {
   AbrirCamara() {
     
     const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG,
-      mediaType: this.camera.MediaType.PICTURE
+        quality: 75,
+        correctOrientation:true,
+        cameraDirection: this.camera.Direction.FRONT,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE
     }
+    this.EjecutarComponenteCamara(options);
+  }
+
+  private EjecutarComponenteCamara(options: CameraOptions) {
     if (this.platform.is("cordova")) {
-        console.log("Capturando foto..............................")
-
-        this.camera.getPicture(options).then((imageData) => {
-            console.log("foto Capturada..............................") 
-
-            this.Imagen = 'data:image/PNG;base64,' + imageData;
-            this.Imagen64 = imageData;
-
-            console.log(JSON.stringify(this.Imagen));
-        }, (err) => {
-            console.log("Error foto ---------------------")
-            console.log(JSON.stringify(err));
-            this.Imagen = "";
-        });
+      console.log("Capturando foto..............................");
+      this.camera.getPicture(options).then((imageData) => {
+        console.log("foto Capturada..............................");
+        this.Imagen = imageData;
+        console.log("Imagen tomada: " + this.Imagen.length);
+      }, (err) => {
+        console.log("Error foto ---------------------");
+        console.log(JSON.stringify(err));
+        this.Imagen = "";
+      });
     }
     else {
-      this.Imagen = 'data:image/jpeg;base64,' + BASE64Image;
+      this.Imagen = BASE64Image;
     }
   }
 
   AbrirGaleria() {
-    
-    const options: ImagePickerOptions = {
-      quality: 70,
-      outputType: 1,
-      maximumImagesCount: 1
+    const options: CameraOptions = {
+        quality: 75,
+        correctOrientation:true, 
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY 
     }
-    if (this.platform.is("cordova")) {
-      try {
-        console.log("Capturando Galeria..............................");
-
-        this.imagePicker.hasReadPermission().then((result)=>{
-          if(result)
-          {
-               console.log("hasReadPermission Galeria..............................");
-              this.imagePicker.getPictures(options).then((results) => {
-                  this.Imagen = 'data:image/jpeg;base64,' + results[0];
-                  this.Imagen64 = results[0];
-                  console.log("Galeria Capturada: .... ", JSON.stringify(results));
-              }, (error) => {
-                this.Imagen ="";
-                this.Imagen64 = "";
-                  console.log("ERROR en selector: .... ", JSON.stringify(error));
-              }); 
-          }
-          else{
-            this.Imagen = "";
-            this.Imagen64 = "";
-            console.log("hasReadPermission: .... ", JSON.stringify(result));
-            this.imagePicker.requestReadPermission();
-          }
-        });
-        
-      } catch (error) {
-        console.log("Error Galeria ---------------------")
-        console.log(JSON.stringify(error));
-      }
-
-
-
-      /*this.camera.getPicture(options).then((imageData) => { 
-          console.log("Galeria Capturada..............................")
-          this.Imagen =  'data:image/JPEG;base64,' + imageData;
-          console.log(JSON.stringify(this.Imagen));
-      }, (err) => {
-          console.log("Error Galeria ---------------------")
-          console.log(JSON.stringify(err));
-          this.Imagen ="";
-      });*/
-    }
-    else {
-      this.Imagen = 'data:image/JPEG;base64,' + BASE64Image;
-    }
+    this.EjecutarComponenteCamara(options);
+ 
   }
 }

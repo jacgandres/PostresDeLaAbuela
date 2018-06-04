@@ -127,7 +127,7 @@ export class LoginPage {
       }, {
         text: 'Registrarse',
         handler: (data) => {
-          console.log(data);
+          console.log("Registrar Usuario Datos Iniciales ............." +data);
           this.navCtrl.push(RegistroUsuarioPage, { Data: data })
         }
       }
@@ -149,8 +149,7 @@ export class LoginPage {
           .then(res => {
             
               console.log("entro a la primera promesa..........................................")
-              console.log(JSON.stringify(res));
-              
+               
               const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
               firebase.auth().signInWithCredential(facebookCredential)
                 .then(user => {
@@ -173,8 +172,7 @@ export class LoginPage {
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then(userFace => {
 
-          console.log("entro a la segunda promesa")
-          console.log(JSON.stringify(userFace));
+          console.log("entro a la segunda promesa") 
           let user = userFace.user;
           this.salvarCredencialEnFireBase(user, "facebook", "");
         });
