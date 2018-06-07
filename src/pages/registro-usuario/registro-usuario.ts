@@ -113,7 +113,13 @@ export class RegistroUsuarioPage {
                   this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario).then(() => { 
                         this.funcionesComunes.LoadingView.dismiss();
                         this.navCtrl.setRoot(TabsPage);
+                  },(error1)=>{
+                    console.log("error guardando en storage......");
+                    this.funcionesComunes.LoadingView.dismiss();
                   });
+              },(error2)=>{
+                console.log("error salvar Credencial En FireBase......");
+                this.funcionesComunes.LoadingView.dismiss();
               }); 
           },(error)=>{ 
               console.log(JSON.parse(error));
