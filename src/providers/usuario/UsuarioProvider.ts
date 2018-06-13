@@ -35,17 +35,17 @@ export class UsuarioProvider {
                 estaLogueado:boolean, 
                 numeroTelefonico?:string) {
 
-    console.log("cargarUsuario")
-    this.usuario.credenciales =  {}; 
-
-    this.usuario.credenciales.clave = clave; 
-    this.usuario.credenciales.nombre = nombre; 
-    this.usuario.credenciales.email = email; 
-    this.usuario.credenciales.imagen = imagen; 
-    this.usuario.credenciales.uid = uid; 
-    this.usuario.credenciales.provider = provider; 
-    this.usuario.credenciales.estaLogeado = estaLogueado; 
-    this.usuario.credenciales.numeroTelefonico = numeroTelefonico; 
+      console.log("cargarUsuario")
+      this.usuario.credenciales =  {}; 
+      
+      this.usuario.credenciales.clave = clave; 
+      this.usuario.credenciales.nombre = nombre; 
+      this.usuario.credenciales.email = email; 
+      this.usuario.credenciales.imagen = imagen; 
+      this.usuario.credenciales.uid = uid; 
+      this.usuario.credenciales.provider = provider; 
+      this.usuario.credenciales.estaLogeado = estaLogueado; 
+      this.usuario.credenciales.numeroTelefonico = numeroTelefonico; 
   }
 
   salvarCredencialEnFireBase() {
@@ -66,6 +66,7 @@ export class UsuarioProvider {
          this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid)
             .valueChanges()
             .subscribe(snapshot =>  { 
+                
                 console.log("this._afDB.list " + this.usuario.credenciales.uid)
                 if ( ! snapshot) {
                   
@@ -73,26 +74,34 @@ export class UsuarioProvider {
                   this.usuario.credenciales.FechaRegistro = Date.now();
                   if(this.usuario.credenciales.imagen != null && this.usuario.credenciales.imagen.length>0)
                   {
-                    let archivo = {
-                      img: this.usuario.credenciales.imagen,
-                      titulo: "Imagen de perfil: "+this.usuario.credenciales.nombre,
-                      usuario: this.usuario.credenciales.nombre
+                    if(this.usuario.credenciales.provider.toLocaleLowerCase() != "facebook"){
+                        let archivo = {
+                          img: this.usuario.credenciales.imagen,
+                          titulo: "Imagen de perfil: "+this.usuario.credenciales.nombre,
+                          usuario: this.usuario.credenciales.nombre
+                        }
+                        this.CargarImagenEnFirebase(archivo).then((result:string)=>{
+                          
+                          this.usuario.credenciales.imagen = result;
+                          this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
+                          this.suscripcionUsuarios.unsubscribe();
+                          assert(true);  
+                        },(err1)=>{
+                          
+                          console.log("Error en carga de imagen, resultado promesa............");
+                          console.log(JSON.stringify(err1));
+                          this.usuario.credenciales.imagen = "";
+                          this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
+                          this.suscripcionUsuarios.unsubscribe();
+                          assert(true);   
+                        });
                     }
-                    this.CargarImagenEnFirebase(archivo).then((result:string)=>{
+                    else{
                       
-                      this.usuario.credenciales.imagen = result;
                       this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
                       this.suscripcionUsuarios.unsubscribe();
                       assert(true);  
-                    },(err1)=>{
-                      
-                      console.log("Error en carga de imagen, resultado promesa............");
-                      console.log(JSON.stringify(err1));
-                      this.usuario.credenciales.imagen = "";
-                      this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
-                      this.suscripcionUsuarios.unsubscribe();
-                      assert(true);   
-                    })
+                    }
                   }
                   else{
                     this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
@@ -101,6 +110,7 @@ export class UsuarioProvider {
                   } 
                 }
                 else {
+                  
                   this.usuario = snapshot; 
                   this.suscripcionUsuarios.unsubscribe();
                   assert(true); 

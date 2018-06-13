@@ -147,7 +147,7 @@ export class LoginPage {
       try { 
         this.fb.login(['email', 'public_profile'/*,'user_friends'*/])
           .then(res => {
-            
+              
               console.log("entro a la primera promesa..........................................")
                
               const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
@@ -191,7 +191,9 @@ export class LoginPage {
 
     console.log("antes de entrar a la promesa firebase");
     let storage = this.usuarioStorage;
+    
     this.usuarioProv.salvarCredencialEnFireBase().then(() => {
+      
       console.log("entro a la  promesa firebase");
       storage.guardarUsuario(this.usuarioProv.usuario).then(() => { 
         this.navCtrl.setRoot(TabsPage);
