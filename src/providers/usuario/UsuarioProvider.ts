@@ -5,7 +5,7 @@ import "rxjs/add/operator/map";
 import {Injectable }from '@angular/core'; 
 import {Usuario, Pedido }from '../../Modelo/Modelo.Export'; 
 import {CommunUtilidadesProvider }from '../commun-utilidades/commun-utilidades'; 
-import {assert }from 'ionic-angular/util/util'; 
+  
 import { Subscription } from 'rxjs/Subscription';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -119,14 +119,19 @@ export class UsuarioProvider {
     }); 
   }
 
-  adicionarPedidos(pedido:Pedido[]) {
+  adicionarPedidos(pedidos:Pedido[]) {
     return new Promise((assert, reject) =>  { 
+      pedidos.forEach(function(pedidoItem:Pedido){
+         pedidoItem.esConfirmado = true;
+      })
+      
       console.log("adicionarPedidos"); 
       this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid + '/pedidos/')
-        .set(pedido).then(() =>  {
-          console.log("promesa adicionarPedidos"); 
-          assert(); 
-        })
+          .set(pedidos).then(() =>  {
+            
+            console.log("promesa adicionarPedidos"); 
+            assert(); 
+          })
     }); 
   }
 

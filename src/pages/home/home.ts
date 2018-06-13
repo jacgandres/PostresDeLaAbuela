@@ -10,6 +10,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { DetalleProductoPage } from '../detalle-producto/detalle-producto';
  
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
+import { assert } from 'ionic-angular/util/util';
 
 @Component({
   selector: 'page-home',
@@ -55,38 +56,35 @@ export class HomePage {
 
   iniciarHome() {
     console.log("Iniciando iniciarHome");
-    this.funcionesComunes.presentarLoadingDefault();
+    //this.funcionesComunes.presentarLoadingDefault();
     this.usuarioStorage.obtenerUsuario().then((result) => {
-      this.Usuario = this.usuarioStorage.usuarioAutenticado;
-      this.usuarioProv.usuario = this.Usuario;
-      
-      this.firebaseAnalytics.setUserId(this.Usuario.credenciales.uid); 
-      this.firebaseAnalytics.setCurrentScreen("home");
+         
+        this.Usuario = this.usuarioStorage.usuarioAutenticado;
+        this.usuarioProv.usuario = this.Usuario;
+        
+        this.firebaseAnalytics.setUserId(this.Usuario.credenciales.uid); 
+        this.firebaseAnalytics.setCurrentScreen("home");
+  
+        this.usuarioStorage.ObtenerProductosCarrito().then((result:Pedido[])=>{
+          try { 
+              
+              if (result != null && result.length > 0 ) {
+                this.pedidos = result;
+                console.log("Pedidos: " + this.pedidos.length);
+              }
+              else{
+                this.pedidos=[];
+              }  
 
-      /*this.usuarioProv.obtenerProductosActivos().then(() => {
-        if (this.usuarioProv.pedidosActivos == null) {
-          this.pedidos = [];
-        }
-        else {
-          this.pedidos = this.usuarioProv.pedidosActivos;
-          console.log("Pedidos: " + this.pedidos.length);
-        }
-        this.funcionesComunes.LoadingView.dismiss();
-      })*/
-      
-      this.usuarioStorage.ObtenerProductosCarrito().then((result:Pedido[])=>{
-          if (result != null && result.length > 0 ) {
-            this.pedidos = result;
-            console.log("Pedidos: " + this.pedidos.length);
-          }
-          else{
-            this.pedidos=[];
-          }
-          
-          this.funcionesComunes.LoadingView.dismiss();
-      });
+              //this.funcionesComunes.LoadingView.dismiss(); 
 
-      console.log("iniciarHome obtenerUsuario: ");
+            } catch (error) {
+              
+              console.error(JSON.parse(error));
+            }
+        });
+       
+        console.log("iniciarHome obtenerUsuario: ");
     })
 
   }

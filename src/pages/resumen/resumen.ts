@@ -40,31 +40,14 @@ export class ResumenPage {
     this.userStorage.ObtenerProductosCarrito().then((result:Pedido[]) => {
         this.usuarioAuthenticado = this.userStorage.usuarioAutenticado;
         this.firebaseAnalytics.logEvent("Usuario", { Usuario: this.usuarioAuthenticado });
-        this.usuarioProv.usuario = this.usuarioAuthenticado;
-        /*
-        this.usuarioProv.obtenerProductosActivos()
-          .then(() => {
-              this.pedidosActivos = this.usuarioProv.pedidosActivos;
-              console.log("pedidosActivos: " + this.pedidosActivos.length);
-              this.calcularTotalPedidos().then((result: number) => {
-                  this.valorTotalPedidos = result;
-                  this.funcionesComunes.LoadingView.dismiss(); 
-                  if (this.Evento) {
-                    this.Evento.complete();
-                  }
-              });
-          }, (error) => {
-              console.log("pedidosActivos Error");
-              this.funcionesComunes.LoadingView.dismiss();
-          });*/
-
+        this.usuarioProv.usuario = this.usuarioAuthenticado; 
           this.pedidosActivos=result;
           this.calcularTotalPedidos().then((result: number) => {
-            this.valorTotalPedidos = result;
-            this.funcionesComunes.LoadingView.dismiss(); 
-            if (this.Evento) {
-              this.Evento.complete();
-            }
+              this.valorTotalPedidos = result;
+              this.funcionesComunes.LoadingView.dismiss(); 
+              if (this.Evento) {
+                this.Evento.complete();
+              }
           }); 
            
     });
@@ -136,6 +119,7 @@ export class ResumenPage {
               text: 'Aceptar',
               handler: (data) => 
               { 
+                 
                  this.usuarioProv.adicionarPedidos(this.pedidosActivos).then((data)=>{
                     this.userStorage.LimpiarCarrito();
                     this.navCtrl.setPages([{

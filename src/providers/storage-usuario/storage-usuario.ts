@@ -57,6 +57,7 @@ export class StorageUsuarioProvider {
 
       if (this.platform.is('cordova')) {
           this.storage.get('usuario').then(val => {
+            
             console.log("obtenerUsuario this.storage.get");
             if (val) {
               this.usuarioAutenticado = val;
