@@ -11,6 +11,6 @@ export class ValidacionUrlPipe implements PipeTransform {
     if(value!= null && value.length>1)
       return value;
 
-    return "./assets/imgs/nophoto.PNG";
+    return "./assets/imgs/nophoto.png";
   }
 }

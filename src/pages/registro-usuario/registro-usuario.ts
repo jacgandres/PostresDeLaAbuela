@@ -89,6 +89,7 @@ export class RegistroUsuarioPage {
   }
 
   private salvarCredencialEnFireBase(user: any, provider: string, clave: string) {
+     
     this.usuarioProv.cargarUsuario(clave,
                                     user.displayName,
                                     user.email,

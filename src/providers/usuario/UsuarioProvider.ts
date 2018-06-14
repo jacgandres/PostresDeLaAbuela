@@ -69,48 +69,46 @@ export class UsuarioProvider {
                 
                 console.log("this._afDB.list " + this.usuario.credenciales.uid)
                 if ( ! snapshot) {
-                  
-                  console.log("Insertara nuevo registro " + this.usuario.credenciales.uid)
-                  this.usuario.credenciales.FechaRegistro = Date.now();
-                  if(this.usuario.credenciales.imagen != null && this.usuario.credenciales.imagen.length>0)
-                  {
-                    if(this.usuario.credenciales.provider.toLocaleLowerCase() != "facebook"){
-                        let archivo = {
-                          img: this.usuario.credenciales.imagen,
-                          titulo: "Imagen de perfil: "+this.usuario.credenciales.nombre,
-                          usuario: this.usuario.credenciales.nombre
+                    console.log("Insertara nuevo registro " + this.usuario.credenciales.uid)
+                    this.usuario.credenciales.FechaRegistro = Date.now();
+                    if(! this.usuario.credenciales.imagen && this.usuario.credenciales.imagen != null && this.usuario.credenciales.imagen.length>0)
+                    {
+                        if(this.usuario.credenciales.provider.toLocaleLowerCase() != "facebook"){
+                            let archivo = {
+                              img: this.usuario.credenciales.imagen,
+                              titulo: "Imagen de perfil: "+this.usuario.credenciales.nombre,
+                              usuario: this.usuario.credenciales.nombre
+                            }
+                            this.CargarImagenEnFirebase(archivo).then((result:string)=>{
+                              
+                              this.usuario.credenciales.imagen = result;
+                              this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
+                              this.suscripcionUsuarios.unsubscribe();
+                              assert(true);  
+                            },(err1)=>{
+                              
+                              console.log("Error en carga de imagen, resultado promesa............");
+                              console.log(JSON.stringify(err1));
+                              this.usuario.credenciales.imagen = "";
+                              this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
+                              this.suscripcionUsuarios.unsubscribe();
+                              assert(true);   
+                            });
                         }
-                        this.CargarImagenEnFirebase(archivo).then((result:string)=>{
-                          
-                          this.usuario.credenciales.imagen = result;
+                        else{ 
                           this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
                           this.suscripcionUsuarios.unsubscribe();
                           assert(true);  
-                        },(err1)=>{
-                          
-                          console.log("Error en carga de imagen, resultado promesa............");
-                          console.log(JSON.stringify(err1));
-                          this.usuario.credenciales.imagen = "";
-                          this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
-                          this.suscripcionUsuarios.unsubscribe();
-                          assert(true);   
-                        });
+                        }
                     }
-                    else{
-                      
-                      this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
-                      this.suscripcionUsuarios.unsubscribe();
-                      assert(true);  
-                    }
-                  }
-                  else{
-                    this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
-                    this.suscripcionUsuarios.unsubscribe();
-                    assert(true);  
-                  } 
+                    else{ 
+                        if(!this.usuario.credenciales.imagen){ this.usuario.credenciales.imagen=""; }
+                        this._afDB.object('/Usuarios/' + this.usuario.credenciales.uid).set(this.usuario); 
+                        this.suscripcionUsuarios.unsubscribe();
+                        assert(true);  
+                    } 
                 }
-                else {
-                  
+                else { 
                   this.usuario = snapshot; 
                   this.suscripcionUsuarios.unsubscribe();
                   assert(true); 

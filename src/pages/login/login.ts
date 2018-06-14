@@ -51,9 +51,11 @@ export class LoginPage {
     let inputs: any[] =
       [{
         name: 'Email',
+        id : 'Email',
         placeholder: 'Email o Nombre de Usuario'
       }, {
         name: 'Clave',
+        id : 'Clave',
         placeholder: 'Clave',
         type: 'password'
       }
