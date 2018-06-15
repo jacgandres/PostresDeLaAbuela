@@ -1,18 +1,66 @@
-<!--
-  Generated template for the RegistroUsuarioPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>RegistroUsuario</ion-title>
-  </ion-navbar>
+    <ion-navbar color="blueMenu">
+        <ion-title>Bienvenido</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <ion-list>
 
+        <h3>Registro de nuevos usuarios</h3>
+
+        <ion-item>
+            <ion-label floating>Telefono</ion-label>
+            <ion-input color="light" type="tel" [(ngModel)]="Telefono" name="Telefono"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" [(ngModel)]="Correo" name="Email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Clave</ion-label>
+            <ion-input type="password" [(ngModel)]="Clave" name="Clave1"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Confirmar Clave</ion-label>
+            <ion-input type="password" [(ngModel)]="VerificarClave" name="VerificarClave"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Nombres</ion-label>
+            <ion-input type="text" [(ngModel)]="Nombre" name="Nombres"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Apellidos</ion-label>
+            <ion-input type="text" [(ngModel)]="Apellido" name="Apellido"></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-6>
+                <button ion-button color="primary" icon-right (click)="AbrirCamara()" block>
+                <ion-icon name="ios-camera"></ion-icon>
+                &nbsp;Foto de Perfil
+             </button>
+            </ion-col>
+            <ion-col col-6>
+                <button ion-button color="primary" icon-right (click)="AbrirGaleria()" block>
+                    <ion-icon name="ios-camera"></ion-icon>
+                    &nbsp;Abrir Galeria
+             </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <hr>
+    <button ion-button color="google" icon-right (click)="Registrarse()" block>
+        <ion-icon name="md-log-in"></ion-icon>
+        &nbsp;Registrarse
+    </button>
+    <hr>
 </ion-content>

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Tabs } from 'ionic-angular';
 
 import { Usuario, Pedido, Producto } from "../../Modelo/Modelo.Export";
-import { UsuarioProvider, StorageUsuarioProvider } from '../../providers/providers.export';
+import { UsuarioProvider, StorageUsuarioProvider, CommunUtilidadesProvider } from '../../providers/providers.export';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics'; 
+import { HomePage } from '../pages.export';
  
 
 
@@ -15,31 +17,39 @@ export class ResumenPage {
   public valorTotalPedidos = 0;
   public usuarioAuthenticado: Usuario = {};
   public pedidosActivos: Pedido[] = [];
+  private Evento: any;
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private usuarioProv: UsuarioProvider,
-    private userStorage: StorageUsuarioProvider) {
+  constructor(private navCtrl: NavController,
+              private navParams: NavParams,
+              private funcionesComunes: CommunUtilidadesProvider,
+              private usuarioProv: UsuarioProvider,
+              private firebaseAnalytics: FirebaseAnalytics,
+              private userStorage: StorageUsuarioProvider,
+              private tabs: Tabs) {
 
   }
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad pagina resumen");
-    this.userStorage.obtenerUsuario().then(() => {
-      this.usuarioAuthenticado = this.userStorage.usuarioAutenticado;
+  ionViewWillEnter() {
+    this.funcionesComunes.presentarLoadingDefault(); 
+    this.IniciarPagina();
+  }
 
-      this.usuarioProv.usuario = this.usuarioAuthenticado;
-      this.usuarioProv.obtenerProductosActivos()
-        .then(() => {
-          this.pedidosActivos = this.usuarioProv.pedidosActivos;
-          console.log("pedidosActivos: " + this.pedidosActivos.length);
-          this.calcularTotalPedidos().then((result:number)=>{ 
-            this.valorTotalPedidos = result;
-          })
-        },
-          (error) => {
-            console.log("pedidosActivos Error");
-          });
+  private IniciarPagina() {
+    console.log("ionViewWillEnter pagina resumen");
+    this.firebaseAnalytics.setCurrentScreen("Resumen");
+    this.userStorage.ObtenerProductosCarrito().then((result:Pedido[]) => {
+        this.usuarioAuthenticado = this.userStorage.usuarioAutenticado;
+        this.firebaseAnalytics.logEvent("Usuario", { Usuario: this.usuarioAuthenticado });
+        this.usuarioProv.usuario = this.usuarioAuthenticado; 
+          this.pedidosActivos=result;
+          this.calcularTotalPedidos().then((result: number) => {
+              this.valorTotalPedidos = result;
+              this.funcionesComunes.LoadingView.dismiss(); 
+              if (this.Evento) {
+                this.Evento.complete();
+              }
+          }); 
+           
     });
   }
 
@@ -51,5 +61,76 @@ export class ResumenPage {
       });
       assert(valor);
     });
+  }
+
+  
+  ionViewWillUnload(){    
+    console.log("ionViewWillUnload Resumen"); 
+  }
+
+  actualizarResumen(evento)
+  {
+    this.Evento = evento;
+    this.IniciarPagina();
+  }
+
+  QuitarProducto(pedido:Pedido ){
+
+      this.funcionesComunes.MostrarMensaje("Quitar Producto!",
+                                           "Esta seguro de quitar este producto?",[],
+                                           [
+                                             {
+                                                text: 'Cancelar',
+                                                role: 'cancel',
+                                                handler: () => {
+                                                  console.log('Cancel clicked');
+                                                }
+                                              }, 
+                                              {
+                                                text: 'Aceptar',
+                                                handler: (data) => 
+                                                { 
+                                                    let tempPedidos= this.pedidosActivos.filter(ped => ped.id!=pedido.id);
+                                                    this.pedidosActivos = tempPedidos;
+
+                                                    this.userStorage.ActualizarCarritoCompras(this.pedidosActivos).then((result)=>
+                                                    {
+                                                      this.Evento = null;
+                                                      this.IniciarPagina();
+                                                    })
+                                                }
+                                            }
+                                          ]) ;
+
+  }
+
+  ConfirmarPedidos(){ 
+    this.funcionesComunes.MostrarMensaje("Confirmar Pedido!",
+          "Esta apunto de confirmar el pedido, nos comunicaremos con usted.",[],
+          [
+            {
+              text: 'Cancelar',
+              role: 'cancel',
+              handler: () => {
+                  console.log('Cancel clicked');
+              }
+            }, 
+            {
+              text: 'Aceptar',
+              handler: (data) => 
+              { 
+                 
+                 this.usuarioProv.adicionarPedidos(this.pedidosActivos).then((data)=>{
+                    this.userStorage.LimpiarCarrito();
+                    this.navCtrl.setPages([{
+                      page: HomePage
+                    }])
+                 }).then(()=>{
+                    
+                    this.tabs.select(0); 
+                 });
+              }
+          }
+        ]);
   }
 }

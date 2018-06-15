@@ -1,17 +1,22 @@
 <ion-header>
-
     <ion-navbar color="blueMenu">
         <ion-title>Resumen de Pedidos</ion-title>
     </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
+
+    <ion-refresher (ionRefresh)="actualizarResumen($event)">
+        <ion-refresher-content color="primary">
+            <h1>Actualizando</h1>
+        </ion-refresher-content>
+    </ion-refresher>
+
     <ion-item-group>
-        <ion-item-divider color="dark">Valor Total: <strong>{{valorTotalPedidos| currency}} pesos</strong></ion-item-divider>
+        <ion-item-divider color="item-divider"><strong>Valor Total: {{valorTotalPedidos| currency}} pesos</strong></ion-item-divider>
         <ion-item>
-            <button ion-button color="facebook" icon-left block>
+            <button ion-button color="facebook" icon-left block (click)="ConfirmarPedidos()">
                     <ion-icon name="logo-usd"></ion-icon>
                     Confirmar Pedido
             </button>
@@ -19,7 +24,7 @@
     </ion-item-group>
     <ion-list *ngFor="let pedido of pedidosActivos; let i=index">
         <ion-item-group>
-            <ion-item-divider color="light">{{pedido.producto[0].Nombre}}: {{pedido.valor| currency}} pesos</ion-item-divider>
+            <ion-item-divider color="item-divider"><strong>{{pedido.producto[0].Nombre}}: {{pedido.valor| currency}} pesos</strong></ion-item-divider>
             <ion-avatar item-start text-center>
                 <img [src]="pedido.producto[0].Url">
             </ion-avatar>
@@ -36,7 +41,7 @@
                     {{pedido.fechaEntrega|date:'fullDate'}}
                 </ion-item>
             </ion-list>
-            <button ion-button color="danger" icon-left block>
+            <button ion-button color="danger" icon-left block (click)="QuitarProducto(pedido)">
                     <ion-icon name="ios-trash"></ion-icon>
                     Quitar Productos
             </button>

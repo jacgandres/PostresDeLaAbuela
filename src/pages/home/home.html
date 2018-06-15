@@ -26,18 +26,25 @@
     <ion-slides no-margin no-padding pager loop paginationType="progress" effect="flip">
         <ion-slide *ngFor="let producto of Productos; let i=index">
             <ion-list>
-                <ion-list-header class="marginTop">
-                    <h1>
-                        <font face="font_family"><strong> {{producto.Nombre}}</strong> </font>
-                    </h1>
-                    <button ion-button left [navPush]="detalleProductoPage" [navParams]="{producto: producto}">
+                <ion-list-header>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <ion-item>
+                        <h1>
+                            <strong> {{producto.Nombre}}</strong>
+                        </h1>
+                    </ion-item>
+                    <button ion-button icon-left [navPush]="detalleProductoPage" [navParams]="{producto: producto}">
+                        <ion-icon name="md-checkbox-outline"></ion-icon>
                         Seleccionar
                     </button>
                 </ion-list-header>
                 <ion-item text-center>
                     <img [src]="producto.Url">
                 </ion-item>
-                <p>{{producto.Valor | currency }} pesos</p>
+                <p><strong>{{producto.Valor | currency }} pesos</strong></p>
                 <p color="light">{{producto.Descripcion}}</p>
             </ion-list>
         </ion-slide>

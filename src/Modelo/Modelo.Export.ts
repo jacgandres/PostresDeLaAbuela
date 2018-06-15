@@ -1,5 +1,7 @@
-
+  
 export { Credenciales } from './Credenciales';
 export { Pedido } from './Pedido';
 export { Producto } from './Producto';
-export { Usuario } from "./Usuario"; 
+export { Usuario } from "./Usuario";  
+export { Dispositivo } from "./Dispositivo";
+export { BASE64Image } from "./Configuracion";
