@@ -3,8 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { DeviceServiceProvider, StorageUsuarioProvider } from '../../providers/providers.export';
 import { Dispositivo, Usuario} from '../../Modelo/Modelo.Export'; 
-import { Credenciales } from '../../Modelo/Credenciales';
- 
+import { AppVersion } from '@ionic-native/app-version';
+
 
 @IonicPage()
 @Component({
@@ -15,7 +15,7 @@ export class PerfilPage {
 
   public Dispositivo:Dispositivo;
   public UsuarioAutenticado:Usuario
-
+  public AppVer?="";
   public nombre?:string; 
   public email?:string;  
   public imagen?:string;  
@@ -26,6 +26,7 @@ export class PerfilPage {
   constructor(private navCtrl: NavController, 
               private firebaseAnalytics: FirebaseAnalytics,
               private navParams: NavParams,
+              private appVersion: AppVersion,
               private deviceProvider: DeviceServiceProvider,
               private usuarioStorage:StorageUsuarioProvider
   ) 
@@ -49,6 +50,9 @@ export class PerfilPage {
     this.numeroTelefonico = this.UsuarioAutenticado.credenciales.numeroTelefonico;
     this.FechaRegistro = this.UsuarioAutenticado.credenciales.FechaRegistro; 
     this.imagen = this.UsuarioAutenticado.credenciales.imagen;
+    this.appVersion.getVersionNumber().then((version)=>{ 
+      this.AppVer = version;
+    });
   }
 
 }

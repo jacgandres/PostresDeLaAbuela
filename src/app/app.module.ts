@@ -39,6 +39,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { Camera } from '@ionic-native/camera';
 import { IonicStorageModule } from '@ionic/storage'; 
 import { OneSignal } from '@ionic-native/onesignal';  
+import { AppVersion } from '@ionic-native/app-version';
 
 
 import { HttpModule } from '@angular/http'; 
@@ -84,7 +85,7 @@ export const firebaseConfig = {
     AngularFireDatabase, DatePicker, Facebook, Camera,
     ProductosProvider, UsuarioProvider, StorageUsuarioProvider,
     ConfiguracionServiciosProvider,FirebaseAnalytics,OneSignal,
-    CommunUtilidadesProvider, Device, 
+    CommunUtilidadesProvider, Device, AppVersion,
     PushNotificationProvider,  ImagePicker, 
     DeviceServiceProvider 
   ]

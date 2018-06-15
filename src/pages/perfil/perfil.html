@@ -18,16 +18,20 @@
             </ion-item>
             <ion-item color="none">
                 <ion-icon name="ios-call" item-left></ion-icon>
-                {{provider | titlecase}}
+                {{numeroTelefonico}}
             </ion-item>
             <ion-item color="none">
                 <ion-icon name="md-analytics" item-left></ion-icon>
-                {{numeroTelefonico}}
+                {{provider | titlecase}}
             </ion-item>
             <ion-item color="none">
                 <ion-icon name="md-calendar" item-left></ion-icon>
                 <ion-label>Fecha de Registro:</ion-label>
                 <ion-label>{{FechaRegistro |date:'shortDate'}}</ion-label>
+            </ion-item>
+            <ion-item color="none">
+                <ion-icon name="md-barcode" item-left></ion-icon>
+                <ion-label>Version APP: {{AppVer}}</ion-label>
             </ion-item>
         </ion-list>
     </div>

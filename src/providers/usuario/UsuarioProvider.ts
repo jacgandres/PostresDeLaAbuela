@@ -166,23 +166,19 @@ export class UsuarioProvider {
     });
   }
 
-  obtenerUsuarioPorClave(data) {
+  obtenerUsuarioPorClave( ) {
     return new Promise((assert) =>  {
         
       console.log("Entrando a promesa obtenerProductosActivos"); 
       this.suscripcionClave =
-          this._afDB.list('/Usuarios/')
+          this._afDB.object('/Usuarios/'+ this.usuario.credenciales.uid)
             .valueChanges()
-            .subscribe((Usuarios:Usuario[]) =>  { 
-                console.log("Promesa busqueda usuarios: " + Usuarios.length); 
-                let claveEncriptada = this.funcionesComunes.Encriptar(data.Clave).toString(); 
-                let usuarioLogeado:any = 
-                  Usuarios.filter(item => item.credenciales.clave == claveEncriptada && item.credenciales.email == data.Email); 
+            .subscribe((UsuariosResult:Usuario ) =>  { 
                 
-                this.suscripcionClave.unsubscribe();
-                
-                if (usuarioLogeado != null && usuarioLogeado[0]  && usuarioLogeado[0].credenciales) {
-                  this.usuario = usuarioLogeado[0]; 
+                console.log("Promesa busqueda usuarios: "  ); 
+                this.suscripcionClave.unsubscribe(); 
+                if (UsuariosResult) {
+                  this.usuario = UsuariosResult; 
                   assert(true); 
                 }
                 else {

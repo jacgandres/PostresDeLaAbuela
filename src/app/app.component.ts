@@ -24,11 +24,13 @@ export class MyApp {
 
     platform.ready().then(() => {
       storageProv.obtenerUsuario().then(result => {
+        
         console.log("storageProv.obtenerUsuario: " );
         statusBar.styleDefault();
         splashScreen.hide();
         let id = "Usuario No Autenticado";
         if (result) {
+          
           this.firebaseAnalytics.logEvent("confirmo pedido al carrito de compras",
             { Usuario: this.storageProv.usuarioAutenticado.credenciales.uid });
           id = this.storageProv.usuarioAutenticado.credenciales.uid;

@@ -71,27 +71,43 @@ export class LoginPage {
       }, {
         text: 'Ingresar',
         handler: (data) => {
-          this.funcionesComunes.presentarLoadingDefault();
            
-          this.usuarioProv.obtenerUsuarioPorClave(data).then((result) => {
-
-            if (result) {
-              console.log("entro a la  promesa firebase");
-              this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario).then(()=>{ 
-                  this.navCtrl.setRoot(TabsPage);
-              });
+          this.funcionesComunes.presentarLoadingDefault();
+          let claveEncriptada =
+                  this.funcionesComunes.Encriptar(data.Clave.toLocaleLowerCase().trim()).toString(); 
+          this.usuarioProv.usuario={};
+          this.usuarioProv.usuario.credenciales={};
+          this.usuarioProv.usuario.credenciales.email = data.Email.toLowerCase().trim();
+          this.usuarioProv.usuario.credenciales.clave = claveEncriptada;
+           
+          this.usuarioProv.LogInUsuarioContrasena().then((result:any) => { 
+                 
+                if (result) {
+                    this.usuarioProv.usuario.credenciales.uid = result.uid; 
+                    console.log("entro a la  promesa firebase");
+                    this.usuarioProv.obtenerUsuarioPorClave().then((result)=>{
+                         
+                        this.usuarioStorage.guardarUsuario(this.usuarioProv.usuario).then(()=>{ 
+                           
+                            this.navCtrl.setRoot(TabsPage);
+                            this.funcionesComunes.LoadingView.dismiss();
+                        }); 
+                    })
+                } 
+            },
+            (error)=>{
+                 
+                console.log(JSON.stringify(error));
+                this.funcionesComunes.LoadingView.dismiss();
+                this.funcionesComunes.MostrarMensaje('Usuario/Clave Erroneas',
+                  'Verifique la informacion, no se encontro ningun usuario con los datos ingresados.',
+                  [],
+                  [{
+                    text: 'Aceptar',
+                    role: 'cancel'
+                  }]);
             }
-            else {
-              this.funcionesComunes.MostrarMensaje('Usuario/Clave Erroneas',
-                'Verifique la informacion, no se encontro ningun usuario con los datos ingresados.',
-                [],
-                [{
-                  text: 'Aceptar',
-                  role: 'cancel'
-                }]);
-            }
-            this.funcionesComunes.LoadingView.dismiss();
-          });
+          );
         }
       }
       ]
